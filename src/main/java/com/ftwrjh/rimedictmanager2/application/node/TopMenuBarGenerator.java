@@ -7,7 +7,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.stage.Stage;
 
-public class TopMenuBarGenerator implements NodeGenerator{
+public class TopMenuBarGenerator implements NodeGenerator {
     @Override
     public Node getNode(Stage primaryStage) {
         // 1. 创建一个菜单栏
@@ -38,5 +38,6 @@ public class TopMenuBarGenerator implements NodeGenerator{
         // 将菜单添加到菜单栏
         menuBar.getMenus().addAll(menuFile, menuHelp);
 
-        return menuBar;    }
+        return menuBar;
+    }
 }

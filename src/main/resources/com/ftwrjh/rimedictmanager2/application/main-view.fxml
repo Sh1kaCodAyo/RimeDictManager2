@@ -4,8 +4,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.ftwrjh.rimedictmanager2.controller.MainController">
+    <top>
+        <MenuBar fx:id="topMenuBar">
+            <Menu fx:id="menuFile" text="文件(_F)" />
+        </MenuBar>
+    </top>
 
     <left>
         <VBox fx:id="sidebarContainer" styleClass="sidebar" prefWidth="220" spacing="2">
@@ -15,7 +24,10 @@
         </VBox>
     </left>
 
-    <center>
-        <Label text="内容区域" style="-fx-font-size: 24px; -fx-padding: 20;"/>
-    </center>
+    <right>
+        <VBox>
+            <Button text="Print" onAction="#print" ></Button>
+        </VBox>
+    </right>
+
 </BorderPane>

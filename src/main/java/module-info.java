@@ -18,4 +18,5 @@ module com.ftwrjh.rimedictmanager2 {
     opens com.ftwrjh.rimedictmanager2.controller to javafx.fxml;
     opens com.ftwrjh.rimedictmanager2.data to javafx.base;
     opens com.ftwrjh.rimedictmanager2.application to javafx.base, javafx.fxml;
+//    opens com.ftwrjh.rimedictmanager2.controller to javafx.fxml;
 }
