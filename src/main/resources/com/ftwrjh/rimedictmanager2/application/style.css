@@ -79,6 +79,7 @@
 }
 
 
+/*右侧工具栏*/
 
 /* 右侧操作按钮 - 现代化圆角风格 */
 .action-button {
@@ -99,7 +100,8 @@
 
 /* 悬停效果：轻微上浮 + 阴影加深 */
 .action-button:hover {
-    -fx-background-color: #dbdee3;
+    -fx-background-color: #5a739a;
+    -fx-text-fill: #b9bec6;                /* ⭐ 添加：悬停时文本变白 */
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
     -fx-translate-y: -1;
 }
@@ -108,4 +110,209 @@
 .action-button:pressed {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 2, 0, 0, 0);
     -fx-translate-y: 0;
+}
+
+
+/* ========================================
+   表格样式 - 与侧边栏风格一致
+   ======================================== */
+
+/* 表格整体 */
+.dict-table {
+    -fx-background-color: white;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 0;
+}
+
+/* 表头 */
+.dict-table .column-header-background {
+    -fx-background-color: #f7f8fa;
+    -fx-background-radius: 8 8 0 0;
+}
+
+.dict-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10 12 10 12;
+}
+
+.dict-table .column-header .label {
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* 表格行 - 交替颜色 */
+.dict-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: #f3f4f6;
+    -fx-border-width: 0 0 1 0;
+}
+
+.dict-table .table-row-cell:odd {
+    -fx-background-color: #fafbfc;
+}
+
+/* 悬停效果 - 和侧边栏按钮风格一致 */
+.dict-table .table-row-cell:hover {
+    -fx-background-color: #edf2f7;
+}
+
+/* 选中行 - 和侧边栏选中风格一致 */
+.dict-table .table-row-cell:selected {
+    -fx-background-color: #e8edfc;
+    -fx-border-color: #2962ff;
+    -fx-border-width: 0 0 0 3;
+}
+
+.dict-table .table-row-cell:selected .text {
+    -fx-fill: #2962ff;
+    -fx-font-weight: 500;
+}
+
+/* 单元格内边距 */
+.dict-table .table-cell {
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #1f2937;
+    -fx-border-color: transparent;
+}
+
+/* 表格滚动条（保持整体风格） */
+.dict-table .scroll-bar:vertical .track,
+.dict-table .scroll-bar:horizontal .track {
+    -fx-background-color: #f1f3f5;
+}
+
+.dict-table .scroll-bar .thumb {
+    -fx-background-color: #d1d5db;
+    -fx-background-radius: 4;
+}
+
+.dict-table .scroll-bar .thumb:hover {
+    -fx-background-color: #9ca3af;
+}
+
+
+
+/*menubar*/
+
+/* ========================================
+   菜单栏样式 - 现代清爽风格
+   ======================================== */
+
+/* ---------- 菜单栏整体 ---------- */
+.menu-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 2 8 2 8;
+}
+
+/* ---------- 一级菜单按钮 ---------- */
+.menu-bar .menu {
+    -fx-background-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+    -fx-padding: 6 12 6 12;
+    -fx-background-radius: 4;
+}
+
+/* 一级菜单悬停效果 */
+.menu-bar .menu:hover {
+    -fx-background-color: #294f88;
+}
+
+/* 一级菜单按下/展开状态 */
+.menu-bar .menu:showing {
+    -fx-background-color: #172f77;
+    -fx-text-fill: #2962ff;
+}
+
+/* ---------- 菜单弹出窗（下拉列表） ---------- */
+.menu-bar .context-menu {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-padding: 6 0 6 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 12, 0, 0, 4);
+}
+
+/* 菜单项 */
+.menu-bar .context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-padding: 8 32 8 20;
+    -fx-background-radius: 0;
+}
+
+/* 菜单项悬停 */
+.menu-bar .context-menu .menu-item:hover {
+    -fx-background-color: #294f88;
+    /*-fx-text-fill: #bdc0c8;*/
+}
+
+/* 菜单项被禁用 */
+.menu-bar .context-menu .menu-item:disabled {
+    -fx-opacity: 0.5;
+}
+
+/* ---------- 菜单项中的标签（文字） ---------- */
+.menu-bar .context-menu .menu-item .label {
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+}
+
+/* 菜单项悬停时文字颜色不变 */
+.menu-bar .context-menu .menu-item:hover .label {
+    -fx-text-fill: #bdc0c8;
+}
+
+/* ---------- 加速键（快捷键） ---------- */
+.menu-bar .context-menu .menu-item .accelerator-text {
+    -fx-text-fill: #9ca3af;
+    -fx-font-size: 12px;
+}
+
+/* ---------- 分隔线 ---------- */
+.menu-bar .context-menu .separator .line {
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* ---------- 子菜单箭头 ---------- */
+.menu-bar .context-menu .menu-item .arrow {
+    -fx-background-color: #9ca3af;
+}
+
+.menu-bar .context-menu .menu-item:hover .arrow {
+    -fx-background-color: #6b7280;
+}
+
+/* ---------- 复选框/单选菜单项 ---------- */
+.menu-bar .context-menu .check-menu-item,
+.menu-bar .context-menu .radio-menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-padding: 8 32 8 20;
+}
+
+.menu-bar .context-menu .check-menu-item:hover,
+.menu-bar .context-menu .radio-menu-item:hover {
+    -fx-background-color: #f0f2f5;
+}
+
+.menu-bar .context-menu .check-menu-item:checked .left-container,
+.menu-bar .context-menu .radio-menu-item:checked .left-container {
+    -fx-text-fill: #2962ff;
 }

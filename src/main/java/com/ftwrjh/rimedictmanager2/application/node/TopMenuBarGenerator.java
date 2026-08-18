@@ -68,7 +68,7 @@ public class TopMenuBarGenerator implements NodeGenerator {
 
         // 将菜单添加到菜单栏
         menuBar.getMenus().addAll(menuFile, menuHelp);
-
+        menuBar.getStyleClass().add("menu-bar");
         return menuBar;
     }
 }

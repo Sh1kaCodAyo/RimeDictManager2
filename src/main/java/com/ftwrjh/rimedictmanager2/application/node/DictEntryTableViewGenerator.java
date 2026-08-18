@@ -47,6 +47,14 @@ public class DictEntryTableViewGenerator implements NodeGenerator {
         TableView<DictEntry> tableView = new TableView<>(data);
         tableView.getColumns().addAll(colWord, colCode, colWeight, colDictType, colLineNumber);
 //        tableView.setPadding(new Insets(21, 0, 12, 0));
+        tableView.getStyleClass().add("dict-table");
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        // 2. 为每列设置 prefWidth 作为权重比例
+        colWord.setPrefWidth(120);     // 词条列宽权重大
+        colCode.setPrefWidth(100);     // 编码列中等
+        colWeight.setPrefWidth(80);    // 权重列较小
+        colDictType.setPrefWidth(100);
+        colLineNumber.setPrefWidth(70);
         return tableView;
     }
 }
