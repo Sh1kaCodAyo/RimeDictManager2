@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ftwrjh.rimedictmanager2.MainApplication" prefHeight="600" prefWidth="800">
+
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="文件">
+                    <items>
+                        <MenuItem fx:id="newFileMenuItem" text="新建" onAction="#onNewFile"/>
+                        <MenuItem fx:id="openFileMenuItem" text="打开..." onAction="#onOpenFile"/>
+                        <MenuItem fx:id="saveFileMenuItem" text="保存" onAction="#onSaveFile"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="exitMenuItem" text="退出" onAction="#onExit"/>
+                    </items>
+                </Menu>
+
+                <Menu text="编辑">
+                    <items>
+                        <MenuItem fx:id="undoMenuItem" text="撤销" onAction="#onUndo"/>
+                        <MenuItem fx:id="redoMenuItem" text="重做" onAction="#onRedo"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="cutMenuItem" text="剪切" onAction="#onCut"/>
+                        <MenuItem fx:id="copyMenuItem" text="复制" onAction="#onCopy"/>
+                        <MenuItem fx:id="pasteMenuItem" text="粘贴" onAction="#onPaste"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <center>
+        <Label fx:id="statusLabel" text="欢迎使用"
+               style="-fx-font-size: 18px; -fx-alignment: center;"/>
+    </center>
+
+</BorderPane>
