@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 1. 定义变量：方便统一管理路径和格式 -->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+    <property name="LOG_PATH" value="/app/logs/my/rdm2" />
+
+    <!-- 2. 定义输出到控制台的 Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 3. 定义输出到文件的 Appender (包含滚动策略) -->
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 当前要记录的日志文件路径 -->
+        <file>${LOG_PATH}/myapp.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+        <!-- 滚动策略：按天滚动，并限制总大小 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 滚动后的文件命名格式 -->
+            <fileNamePattern>${LOG_PATH}/archived/myapp-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 单个日志文件最大大小 -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- 保留 30 天的日志历史 -->
+            <maxHistory>30</maxHistory>
+            <!-- 所有归档文件的总大小上限 -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 4. 配置特定包的日志级别（覆盖根级别） -->
+    <!-- 例如：将 Spring 框架的日志级别设为 INFO，以减少冗余信息 -->
+    <logger name="org.springframework" level="INFO"/>
+    <!-- 将你项目中某个包的日志级别设为 DEBUG -->
+    <logger name="com.ftwrjh.rimedictmanager2" level="DEBUG"/>
+
+    <!-- 5. 配置根日志记录器 (Root Logger) -->
+    <root level="INFO">
+        <!-- 将 CONSOLE 和 ROLLING_FILE 这两个 Appender 关联到根记录器 -->
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ROLLING_FILE" />
+    </root>
+
+</configuration>
