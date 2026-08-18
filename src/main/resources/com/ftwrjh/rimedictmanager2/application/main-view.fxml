@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
-
-<?import java.lang.String?>
-<BorderPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.ftwrjh.rimedictmanager2.controller.MainController">
 
-<!--    <stylesheets>-->
-<!--&lt;!&ndash;        <String fx:value="/com/ftwrjh/rimedictmanager2/application/sidebar.css"/>&ndash;&gt;-->
-<!--    </stylesheets>-->
-
     <left>
-        <!-- 侧边栏容器 -->
         <VBox fx:id="sidebarContainer" styleClass="sidebar" prefWidth="220" spacing="2">
             <padding>
                 <Insets top="12" right="12" bottom="12" left="12"/>
