@@ -13,4 +13,11 @@ public class Const {
         public static final String BTN_DIR_CHOOSER = "选择文件夹";
 
     }
+
+    public static class Emoji {
+        public static final String KEYBOARD = "⌨"; // ⌨️
+        public static final String PAPER_PEN = "📝";
+        public static final String BOOKS = "📚"; // 📚
+        public static final String OPENED_BOOK = "📖";
+    }
 }

@@ -1,6 +1,7 @@
 package com.ftwrjh.rimedictmanager2.controller;
 
 import com.ftwrjh.rimedictmanager2.env.AppConfig;
+import com.ftwrjh.rimedictmanager2.env.Const;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -10,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import lombok.extern.slf4j.Slf4j;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignM;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,10 +44,9 @@ public class MainController implements Initializable {
 
         // ⭐ 调用 createNavItem() 创建按钮
         sidebarContainer.getChildren().addAll(
-                createNavItem("📥", "收件箱"),
-                createNavItem("📤", "发件箱"),
-                createNavItem("📝", "草稿箱"),
-                createNavItem("⭐", "星标邮件")
+                createNavItem(Const.Emoji.KEYBOARD, "输入法管理"),
+                createNavItem(Const.Emoji.BOOKS, "词库管理"),
+                createNavItem(Const.Emoji.OPENED_BOOK, "词条管理")
         );
 
         // 分组标题
@@ -90,9 +92,12 @@ public class MainController implements Initializable {
             selectedButton = btn;
 
             log.info("选中: {}", text);
-            log.info("test: {}", AppConfig.getInstance().getProperty("testkey"));
+            log.info("test:{}", AppConfig.getInstance().getProperty("testkey"));
             // 切换右侧内容...
         });
+
+//        FontIcon icon1 = new FontIcon(MaterialDesignM.MAGNIFY_PLUS);
+//        btn.setGraphic(icon1);
 
         return btn;
     }
