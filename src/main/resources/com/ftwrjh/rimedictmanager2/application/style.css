@@ -1,4 +1,4 @@
-/* sidebar.css - DeepSeek 风格 */
+/* style.css - DeepSeek 风格 */
 
 /* 容器 */
 .sidebar {
@@ -25,7 +25,7 @@
 
 /* 悬停 - 淡淡的灰色 */
 .nav-item:hover {
-    -fx-background-color: #f0f2f5;
+    -fx-background-color: #b2b5ba;
 }
 
 /* 选中 - 蓝色主题 */
@@ -76,4 +76,36 @@
 .user-info .user-email {
     -fx-font-size: 12px;
     -fx-text-fill: #9ca3af;
+}
+
+
+
+/* 右侧操作按钮 - 现代化圆角风格 */
+.action-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 8;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 1);
+    -fx-min-width: 80;
+    -fx-alignment: CENTER;
+}
+
+/* 悬停效果：轻微上浮 + 阴影加深 */
+.action-button:hover {
+    -fx-background-color: #dbdee3;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
+    -fx-translate-y: -1;
+}
+
+/* 点击效果：按下时下沉 */
+.action-button:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 2, 0, 0, 0);
+    -fx-translate-y: 0;
 }

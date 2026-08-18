@@ -1,39 +1,70 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
+import com.ftwrjh.rimedictmanager2.controller.DirectoryChooser;
+import com.ftwrjh.rimedictmanager2.env.Const;
 import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+@Slf4j
 public class TopMenuBarGenerator implements NodeGenerator {
+    private TopMenuBarGenerator() {
+    }
+
+    @Getter
+    private static final TopMenuBarGenerator instance = new TopMenuBarGenerator();
+
     @Override
     public Node getNode(Stage primaryStage) {
-        // 1. 创建一个菜单栏
         MenuBar menuBar = new MenuBar();
 
-        // --- 2. 创建菜单和菜单项 ---
+        Menu menuFile = new Menu("文件(_F)");
+        MenuItem menuItemChoose = new MenuItem("选择主目录(_O)...");
+        MenuItem menuSave = new MenuItem("保存(_S)");
+        MenuItem menuItemExit = new MenuItem("退出(_Q)");
 
-        // 创建 "文件" 菜单
-        Menu menuFile = new Menu("文件");
-        MenuItem menuItemNew = new MenuItem("新建");
-        MenuItem menuItemOpen = new MenuItem("打开...");
-        MenuItem menuItemExit = new MenuItem("退出");
+        menuItemChoose.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
+        menuSave.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+        menuItemExit.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
 
-        // 为菜单项添加事件
-        menuItemNew.setOnAction(e -> System.out.println("新建文件"));
-        menuItemOpen.setOnAction(e -> System.out.println("打开文件"));
+        menuItemChoose.setOnAction(DirectoryChooser.getActionEventEventHandler(primaryStage));
+        menuSave.setOnAction(event -> log.info("save.."));
         menuItemExit.setOnAction(e -> primaryStage.close());
 
-        // 将菜单项添加到 "文件" 菜单
-        menuFile.getItems().addAll(menuItemNew, menuItemOpen, new SeparatorMenuItem(), menuItemExit);
+        menuFile.getItems().addAll(menuItemChoose, menuSave, new SeparatorMenuItem(), menuItemExit);
 
-        // 创建 "帮助" 菜单
-        Menu menuHelp = new Menu("帮助");
-        MenuItem menuItemAbout = new MenuItem("关于");
-        menuItemAbout.setOnAction(e -> System.out.println("关于本软件"));
-        menuHelp.getItems().add(menuItemAbout);
+        Menu menuHelp = new Menu("帮助(_H)");
+        MenuItem menuItemPortal = new MenuItem("主页(_P)");
+        MenuItem menuItemAbout = new MenuItem("关于(_A)");
+
+        menuItemPortal.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
+
+        menuItemAbout.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("About RimeDictManager2");
+            alert.setHeaderText("RimeDictManager2 by Ftwrjh, Version 1.0");
+            alert.setContentText("Copyright (c) 2026");
+            alert.showAndWait();  // 阻塞等待用户点击
+        });
+        menuItemPortal.setOnAction(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI(Const.WEBSITE));
+            } catch (IOException | URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        menuHelp.getItems().addAll(menuItemPortal, menuItemAbout);
 
         // 将菜单添加到菜单栏
         menuBar.getMenus().addAll(menuFile, menuHelp);

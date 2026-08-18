@@ -11,6 +11,7 @@ module com.ftwrjh.rimedictmanager2 {
     requires org.kordamp.ikonli.materialdesign2;
     requires org.yaml.snakeyaml;
     requires com.alibaba.fastjson2;
+    requires java.desktop;
 
     exports com.ftwrjh.rimedictmanager2.application;
     exports com.ftwrjh.rimedictmanager2.controller;

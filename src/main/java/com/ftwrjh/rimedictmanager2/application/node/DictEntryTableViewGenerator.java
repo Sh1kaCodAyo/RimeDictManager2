@@ -5,13 +5,18 @@ import com.ftwrjh.rimedictmanager2.env.DictType;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lombok.Getter;
 
 public class DictEntryTableViewGenerator implements NodeGenerator {
+    private DictEntryTableViewGenerator() {}
+    @Getter
+    private static final DictEntryTableViewGenerator instance = new DictEntryTableViewGenerator();
     @Override
     public Node getNode(Stage primaryStage) {
         // 2. 准备数据
@@ -41,6 +46,7 @@ public class DictEntryTableViewGenerator implements NodeGenerator {
         // 4. 创建表格并设置数据和列
         TableView<DictEntry> tableView = new TableView<>(data);
         tableView.getColumns().addAll(colWord, colCode, colWeight, colDictType, colLineNumber);
+//        tableView.setPadding(new Insets(21, 0, 12, 0));
         return tableView;
     }
 }
