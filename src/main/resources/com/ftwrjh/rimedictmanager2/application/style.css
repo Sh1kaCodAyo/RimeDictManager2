@@ -1,8 +1,11 @@
 /* style.css - DeepSeek 风格 */
-
+/* style.css */
+.root {
+    /*-fx-background-color: #66ccff;*/
+}
 /* 容器 */
 .sidebar {
-    -fx-background-color: #f7f8fa;
+    -fx-background-color: #b8bdca;
     -fx-border-color: #e5e7eb;
     -fx-border-width: 0 1 0 0;
 }
@@ -25,19 +28,22 @@
 
 /* 悬停 - 淡淡的灰色 */
 .nav-item:hover {
-    -fx-background-color: #b2b5ba;
+    -fx-background-color: #294f88;
+}
+.nav-item:hover .text {
+    -fx-fill: #b8bdca;  /* 对 Text 节点生效 */
 }
 
 /* 选中 - 蓝色主题 */
 .nav-item:selected {
-    -fx-background-color: #e8edfc;
-    -fx-text-fill: #2962ff;
+    -fx-background-color: #b8bdca;
+    -fx-text-fill: #294f88;
     -fx-font-weight: 500;
 }
 
 /* 选中时的左侧色条 */
 .nav-item:selected .left-bar {
-    -fx-background-color: #2962ff;
+    -fx-background-color: #294f88;
     -fx-min-width: 3;
     -fx-max-width: 3;
     -fx-pref-width: 3;
@@ -100,8 +106,8 @@
 
 /* 悬停效果：轻微上浮 + 阴影加深 */
 .action-button:hover {
-    -fx-background-color: #5a739a;
-    -fx-text-fill: #b9bec6;                /* ⭐ 添加：悬停时文本变白 */
+    -fx-background-color: #294f88;
+    -fx-text-fill: #b8bdca;                /* ⭐ 添加：悬停时文本变白 */
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
     -fx-translate-y: -1;
 }
@@ -166,12 +172,12 @@
 /* 选中行 - 和侧边栏选中风格一致 */
 .dict-table .table-row-cell:selected {
     -fx-background-color: #e8edfc;
-    -fx-border-color: #2962ff;
+    -fx-border-color: #294f88;
     -fx-border-width: 0 0 0 3;
 }
 
 .dict-table .table-row-cell:selected .text {
-    -fx-fill: #2962ff;
+    -fx-fill: #294f88;
     -fx-font-weight: 500;
 }
 
@@ -231,8 +237,8 @@
 
 /* 一级菜单按下/展开状态 */
 .menu-bar .menu:showing {
-    -fx-background-color: #172f77;
-    -fx-text-fill: #2962ff;
+    -fx-background-color: #294f88;
+    -fx-text-fill: #b8bdca;
 }
 
 /* ---------- 菜单弹出窗（下拉列表） ---------- */
@@ -274,7 +280,7 @@
 
 /* 菜单项悬停时文字颜色不变 */
 .menu-bar .context-menu .menu-item:hover .label {
-    -fx-text-fill: #bdc0c8;
+    -fx-text-fill: #b8bdca;
 }
 
 /* ---------- 加速键（快捷键） ---------- */

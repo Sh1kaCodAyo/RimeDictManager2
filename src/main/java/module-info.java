@@ -12,6 +12,7 @@ module com.ftwrjh.rimedictmanager2 {
     requires org.yaml.snakeyaml;
     requires com.alibaba.fastjson2;
     requires java.desktop;
+    requires org.apache.commons.lang3;
 
     exports com.ftwrjh.rimedictmanager2.application;
     exports com.ftwrjh.rimedictmanager2.controller;
