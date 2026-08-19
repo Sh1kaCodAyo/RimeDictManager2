@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" spacing="15" style="-fx-background-color: #ffffff;"
+      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ftwrjh.rimedictmanager2.service.SettingsController">
+
+    <padding>
+        <Insets bottom="30" left="30" right="30" top="30"/>
+    </padding>
+
+    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="🎨 自定义主题"/>
+
+    <Label text="悬停背景色:"/>
+    <ColorPicker fx:id="bgColorPicker" prefWidth="200"/>
+
+    <Label text="悬停文字色:"/>
+    <ColorPicker fx:id="textColorPicker" prefWidth="200"/>
+
+    <Label text="选中边框色:"/>
+    <ColorPicker fx:id="borderColorPicker" prefWidth="200"/>
+
+    <HBox spacing="10" alignment="CENTER" style="-fx-translate-y: 20px;">
+        <Button fx:id="applyBtn" styleClass="actioncenter-button" text="✅ 应用主题"/>
+        <Button fx:id="resetBtn" styleClass="actioncenter-button" text="↩️ 恢复默认"/>
+    </HBox>
+</VBox>
