@@ -25,7 +25,7 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
     @Override
     public Node getNode(Stage primaryStage) {
         // 1. 获取 AppContext 中的列表（如果为空则初始化）
-        ObservableList<DictionaryEntry> dataList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY, ObservableList.class);
+        ObservableList<DictionaryEntry> dataList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
 
         AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, dataList);
 

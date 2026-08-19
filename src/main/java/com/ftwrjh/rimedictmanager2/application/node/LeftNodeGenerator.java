@@ -3,6 +3,7 @@ package com.ftwrjh.rimedictmanager2.application.node;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.env.AppConfig;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -42,7 +43,9 @@ public class LeftNodeGenerator implements NodeGenerator {
 //        btnISManage.getStyleClass().add("selected");
         btnISManage.setOnAction(e -> {
             StackPane center = AppContext.getInstance().getTyped(AppConst.ContextKey.NODE_CENTER_STACK_PANE, StackPane.class);
-            center.getChildren().add(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage));
+            ObservableList<Node> children = center.getChildren();
+            children.clear();
+            children.add(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage));
             Label logo1 = new Label(AppConst.Emoji.KEYBOARD + " 输入法管理");
             logo1.getStyleClass().add("logo");
             sidebarContainer.getChildren().set(0, logo1);
@@ -51,7 +54,9 @@ public class LeftNodeGenerator implements NodeGenerator {
         Button btnDictManage = createNavItem(AppConst.Emoji.BOOKS, "词库管理");
         btnDictManage.setOnAction(e -> {
             StackPane center = AppContext.getInstance().getTyped(AppConst.ContextKey.NODE_CENTER_STACK_PANE, StackPane.class);
-            center.getChildren().add(DictionaryGridNodeGenerator.getInstance().getNode(primaryStage));
+            ObservableList<Node> children = center.getChildren();
+            children.clear();
+            children.add(DictionaryGridNodeGenerator.getInstance().getNode(primaryStage));
             Label logo1 = new Label(AppConst.Emoji.BOOKS + " 词库管理");
             logo1.getStyleClass().add("logo");
             sidebarContainer.getChildren().set(0, logo1);
@@ -59,7 +64,9 @@ public class LeftNodeGenerator implements NodeGenerator {
         Button btnDEManage = createNavItem(AppConst.Emoji.OPENED_BOOK, "词条管理");
         btnDEManage.setOnAction(e -> {
             StackPane center = AppContext.getInstance().getTyped(AppConst.ContextKey.NODE_CENTER_STACK_PANE, StackPane.class);
-            center.getChildren().add(DictionaryEntryGridNodeGenerator.getInstance().getNode(primaryStage));
+            ObservableList<Node> children = center.getChildren();
+            children.clear();
+            children.add(DictionaryEntryGridNodeGenerator.getInstance().getNode(primaryStage));
             Label logo1 = new Label(AppConst.Emoji.OPENED_BOOK + " 词条管理");
             logo1.getStyleClass().add("logo");
             sidebarContainer.getChildren().set(0, logo1);
