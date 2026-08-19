@@ -18,12 +18,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @Slf4j
-public class TopComponentGenerator implements NodeGenerator {
-    private TopComponentGenerator() {
+public class TopNodeGenerator implements NodeGenerator {
+    private TopNodeGenerator() {
     }
 
     @Getter
-    private static final TopComponentGenerator instance = new TopComponentGenerator();
+    private static final TopNodeGenerator instance = new TopNodeGenerator();
 
     @Override
     public Node getNode(Stage primaryStage) {

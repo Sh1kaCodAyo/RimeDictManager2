@@ -2,7 +2,7 @@ package com.ftwrjh.rimedictmanager2.service;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.ftwrjh.rimedictmanager2.application.node.BottomComponentGenerator;
+import com.ftwrjh.rimedictmanager2.application.node.BottomNodeGenerator;
 import com.ftwrjh.rimedictmanager2.data.variable.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
@@ -36,7 +36,7 @@ public class DirectoryChooser {
                 String msg = "Rime主目录: " + rimeHomeDirPath;
                 AppContext.getInstance().set(AppConst.ContextKey.ENV_RIME_HOME_DIR, rimeHomeDirPath);
                 log.info(msg);
-                BottomComponentGenerator.getInstance().setStatusLeft(msg);
+                BottomNodeGenerator.getInstance().setStatusLeft(msg);
 
                 String defaultConfigPath = rimeHomeDirPath + File.separator + AppConst.Path.YAML_DEFAULT_CUSTOM;
                 log.info("主配置文件: {}", defaultConfigPath);
@@ -46,7 +46,7 @@ public class DirectoryChooser {
                 if (mainConfigFile.exists()) {
                     String successMsg = "已加载配置目录";
                     log.info(successMsg);
-                    BottomComponentGenerator.getInstance().setStatusLeft(successMsg);
+                    BottomNodeGenerator.getInstance().setStatusLeft(successMsg);
 
                     Set<String> activeSchemaSet = null;
                     try (InputStream inputStream = new FileInputStream(mainConfigFile)) {
@@ -88,15 +88,15 @@ public class DirectoryChooser {
                             .collect(Collectors.toList());
 
 
-                    ObservableList<InputSchema> list = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_SCHEMA, ObservableList.class);
+                    ObservableList<InputSchema> list = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
                     list.clear();
                     list.addAll(collect);
-                    AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_SCHEMA, list);
+                    AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, list);
 
                 } else {
                     String warnMsg = "所选目录「" + rimeHomeDirPath + "」中没有「default.custom.yaml」文件";
                     log.warn(warnMsg);
-                    BottomComponentGenerator.getInstance().setStatusLeft(warnMsg);
+                    BottomNodeGenerator.getInstance().setStatusLeft(warnMsg);
                 }
             } else {
                 log.info("用户取消了选择");

@@ -16,12 +16,12 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class RightComponentGenerator implements NodeGenerator {
-    private RightComponentGenerator() {
+public class RightNodeGenerator implements NodeGenerator {
+    private RightNodeGenerator() {
     }
 
     @Getter
-    private static final RightComponentGenerator instance = new RightComponentGenerator();
+    private static final RightNodeGenerator instance = new RightNodeGenerator();
 
     @Override
     public Node getNode(Stage primaryStage) {

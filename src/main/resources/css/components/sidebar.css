@@ -33,8 +33,8 @@
 }
 
 .nav-item:selected {
-    -fx-background-color: #b8bdca;
-    -fx-text-fill: #294f88;
+    -fx-background-color: -item-bg-hover;
+    -fx-text-fill: -text-hover;
     -fx-font-weight: 500;
 }
 

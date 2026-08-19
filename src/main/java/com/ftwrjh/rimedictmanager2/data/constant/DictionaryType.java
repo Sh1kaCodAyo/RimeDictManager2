@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum DictType {
+public enum DictionaryType {
     BASE_DICT("基本"), USER_DCIT("用户"), EXTRA_DICT("扩展");
     private final String dictName;
 }

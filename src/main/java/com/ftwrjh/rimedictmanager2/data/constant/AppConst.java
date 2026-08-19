@@ -1,12 +1,15 @@
 package com.ftwrjh.rimedictmanager2.data.constant;
 
-public class AppConst {
+public final class AppConst {
     public static final String APP_NAME = "RimeDictManager2";
 
     public static class ContextKey {
-        public static final String TABLE_DATA_SCHEMA = "tableData:schema";
+        public static final String TABLE_DATA_INPUT_SCHEMA = "tableData:inputSchema";
+        public static final String TABLE_DATA_DICTIONARY = "tableData:dictionary";
+        public static final String TABLE_DATA_DICTIONARY_ENTRY = "tableData:dictionaryEntry";
         public static final String OBJ_YAML = "obj:yaml";
         public static final String ENV_RIME_HOME_DIR = "env:rimeHomeDir";
+        public static final String NODE_CENTER_STACK_PANE = "javafx_node:centerStackPane";
     }
 
     public static class Path {
@@ -34,7 +37,6 @@ public class AppConst {
         public static final String PAPER_PEN = "📝";
         public static final String BOOKS = "📚"; // 📚
         public static final String OPENED_BOOK = "📖";
-
     }
 
     public static class Style {

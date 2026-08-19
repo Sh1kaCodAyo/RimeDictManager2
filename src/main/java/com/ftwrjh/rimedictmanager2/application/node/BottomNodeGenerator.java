@@ -13,12 +13,12 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import lombok.Getter;
 
-public class BottomComponentGenerator implements NodeGenerator {
-    private BottomComponentGenerator() {
+public class BottomNodeGenerator implements NodeGenerator {
+    private BottomNodeGenerator() {
     }
 
     @Getter
-    private static final BottomComponentGenerator instance = new BottomComponentGenerator();
+    private static final BottomNodeGenerator instance = new BottomNodeGenerator();
 
     @Override
     public Node getNode(Stage primaryStage) {

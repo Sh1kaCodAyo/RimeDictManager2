@@ -1,7 +1,8 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
-import com.ftwrjh.rimedictmanager2.env.AppConfig;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
+import com.ftwrjh.rimedictmanager2.env.AppConfig;
+import com.ftwrjh.rimedictmanager2.env.AppContext;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -9,20 +10,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LeftComponentGenerator implements NodeGenerator {
+public class LeftNodeGenerator implements NodeGenerator {
     private Button selectedButton;
 
-    private LeftComponentGenerator() {
+    private LeftNodeGenerator() {
     }
 
     @Getter
-    private static final LeftComponentGenerator instance = new LeftComponentGenerator();
+    private static final LeftNodeGenerator instance = new LeftNodeGenerator();
 
     @Override
     public Node getNode(Stage primaryStage) {
@@ -36,13 +38,35 @@ public class LeftComponentGenerator implements NodeGenerator {
         Label labelManage = new Label("管理工具");
         labelManage.getStyleClass().add("section-title");
         sidebarContainer.getChildren().add(labelManage);
+        Button btnISManage = createNavItem(AppConst.Emoji.KEYBOARD, "输入法管理");
+//        btnISManage.getStyleClass().add("selected");
+        btnISManage.setOnAction(e -> {
+            StackPane center = AppContext.getInstance().getTyped(AppConst.ContextKey.NODE_CENTER_STACK_PANE, StackPane.class);
+            center.getChildren().add(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage));
+            Label logo1 = new Label(AppConst.Emoji.KEYBOARD + " 输入法管理");
+            logo1.getStyleClass().add("logo");
+            sidebarContainer.getChildren().set(0, logo1);
+//            btnISManage.getStyleClass().add("active-btn");
+        });
+        Button btnDictManage = createNavItem(AppConst.Emoji.BOOKS, "词库管理");
+        btnDictManage.setOnAction(e -> {
+            StackPane center = AppContext.getInstance().getTyped(AppConst.ContextKey.NODE_CENTER_STACK_PANE, StackPane.class);
+            center.getChildren().add(DictionaryGridNodeGenerator.getInstance().getNode(primaryStage));
+            Label logo1 = new Label(AppConst.Emoji.BOOKS + " 词库管理");
+            logo1.getStyleClass().add("logo");
+            sidebarContainer.getChildren().set(0, logo1);
+        });
+        Button btnDEManage = createNavItem(AppConst.Emoji.OPENED_BOOK, "词条管理");
+        btnDEManage.setOnAction(e -> {
+            StackPane center = AppContext.getInstance().getTyped(AppConst.ContextKey.NODE_CENTER_STACK_PANE, StackPane.class);
+            center.getChildren().add(DictionaryEntryGridNodeGenerator.getInstance().getNode(primaryStage));
+            Label logo1 = new Label(AppConst.Emoji.OPENED_BOOK + " 词条管理");
+            logo1.getStyleClass().add("logo");
+            sidebarContainer.getChildren().set(0, logo1);
+        });
 
         // ⭐ 调用 createNavItem() 创建按钮
-        sidebarContainer.getChildren().addAll(
-                createNavItem(AppConst.Emoji.KEYBOARD, "输入法管理"),
-                createNavItem(AppConst.Emoji.BOOKS, "词库管理"),
-                createNavItem(AppConst.Emoji.OPENED_BOOK, "词条管理")
-        );
+        sidebarContainer.getChildren().addAll(btnISManage, btnDictManage, btnDEManage);
 
         // 分组标题
         Label title2 = new Label("标签");

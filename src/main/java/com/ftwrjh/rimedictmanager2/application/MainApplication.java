@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.yaml.snakeyaml.Yaml;
 
@@ -19,7 +20,9 @@ public class MainApplication extends Application {
     public void init() throws Exception {
         super.init();
         AppContext.getInstance().set(AppConst.ContextKey.OBJ_YAML, new Yaml());
-        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_SCHEMA, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_DICTIONARY, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, new SimpleListProperty<>(FXCollections.observableArrayList()));
     }
 
     @Override
@@ -29,11 +32,14 @@ public class MainApplication extends Application {
         BorderPane root = loader.load();
         AppContext.getInstance().set("root", root);
 
-        root.setTop(TopComponentGenerator.getInstance().getNode(primaryStage));
-        root.setLeft(LeftComponentGenerator.getInstance().getNode(primaryStage));
-        root.setCenter(CenterComponentGenerator.getInstance().getNode(primaryStage));
-        root.setRight(RightComponentGenerator.getInstance().getNode(primaryStage));
-        root.setBottom(BottomComponentGenerator.getInstance().getNode(primaryStage));
+        root.setTop(TopNodeGenerator.getInstance().getNode(primaryStage));
+        root.setLeft(LeftNodeGenerator.getInstance().getNode(primaryStage));
+        StackPane center = new StackPane();
+        root.setCenter(center);
+        center.getChildren().add(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage));
+        AppContext.getInstance().set(AppConst.ContextKey.NODE_CENTER_STACK_PANE, center);
+        root.setRight(RightNodeGenerator.getInstance().getNode(primaryStage));
+        root.setBottom(BottomNodeGenerator.getInstance().getNode(primaryStage));
 
         Scene scene = new Scene(root, 900, 700);
         scene.getStylesheets().add(getClass().getResource(AppConst.Path.CSS_MAIN).toExternalForm());
