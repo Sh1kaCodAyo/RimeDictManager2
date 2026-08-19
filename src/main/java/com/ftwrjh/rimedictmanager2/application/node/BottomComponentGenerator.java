@@ -1,7 +1,7 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
 import com.ftwrjh.rimedictmanager2.env.AppContext;
-import com.ftwrjh.rimedictmanager2.env.AppConst;
+import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;

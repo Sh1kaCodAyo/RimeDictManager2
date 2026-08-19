@@ -1,4 +1,4 @@
-package com.ftwrjh.rimedictmanager2.data;
+package com.ftwrjh.rimedictmanager2.data.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

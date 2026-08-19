@@ -1,5 +1,6 @@
 package com.ftwrjh.rimedictmanager2.env;
 
+import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import javafx.application.Platform;
 import org.yaml.snakeyaml.Yaml;
 

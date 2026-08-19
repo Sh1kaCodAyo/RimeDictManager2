@@ -1,7 +1,7 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
+import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.service.DirectoryChooser;
-import com.ftwrjh.rimedictmanager2.env.AppConst;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
@@ -52,8 +52,6 @@ public class TopComponentGenerator implements NodeGenerator {
         menuHelpPage.getItems().addAll(menuItemPortal, menuItemRdh, new SeparatorMenuItem(), menuItemRimePortal);
         MenuItem menuItemAbout = new MenuItem("关于(_A)");
 
-//        menuItemPortal.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
-
         menuItemPortal.setOnAction(e -> {
             try {
                 Desktop.getDesktop().browse(new URI(AppConst.Link.WEBSITE_HOME));
@@ -77,10 +75,10 @@ public class TopComponentGenerator implements NodeGenerator {
         });
         menuItemAbout.setOnAction(e -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("About RimeDictManager2");
-            alert.setHeaderText("RimeDictManager2 by Ftwrjh, Version 1.0");
-            alert.setContentText("Copyright (c) 2026");
-            alert.showAndWait();  // 阻塞等待用户点击
+            alert.setTitle(AppConst.About.TITLE);
+            alert.setHeaderText(AppConst.About.HEADER);
+            alert.setContentText(AppConst.About.CONTENT);
+            alert.showAndWait();
         });
         menuHelp.getItems().addAll(menuHelpPage, new SeparatorMenuItem(), menuItemAbout);
 

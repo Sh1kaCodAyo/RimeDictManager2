@@ -1,5 +1,6 @@
-package com.ftwrjh.rimedictmanager2.data;
+package com.ftwrjh.rimedictmanager2.data.variable;
 
+import com.ftwrjh.rimedictmanager2.data.constant.DictType;
 import javafx.beans.property.*;
 
 public class DictEntry {

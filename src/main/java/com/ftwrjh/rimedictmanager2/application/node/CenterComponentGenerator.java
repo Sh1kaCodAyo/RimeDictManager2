@@ -1,8 +1,8 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
-import com.ftwrjh.rimedictmanager2.data.InputSchema;
+import com.ftwrjh.rimedictmanager2.data.variable.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
-import com.ftwrjh.rimedictmanager2.env.AppConst;
+import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;

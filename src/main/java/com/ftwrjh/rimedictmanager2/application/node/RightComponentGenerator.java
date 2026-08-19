@@ -1,10 +1,10 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
 import com.ftwrjh.rimedictmanager2.application.Test;
-import com.ftwrjh.rimedictmanager2.env.AppConst;
+import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.service.DirectoryChooser;
 import com.ftwrjh.rimedictmanager2.service.PersistenceService;
-import com.ftwrjh.rimedictmanager2.service.ServiceResult;
+import com.ftwrjh.rimedictmanager2.data.constant.ServiceResult;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -44,7 +44,7 @@ public class RightComponentGenerator implements NodeGenerator {
             alert.setTitle("保存结果");
             alert.setHeaderText(saveResult.getTitle());
             alert.setContentText(saveResult.getMessage());
-            alert.showAndWait();  // 阻塞等待用户点击
+            alert.showAndWait();
         });
 //
 //        Button btn1 = new Button("📄 新建词条");

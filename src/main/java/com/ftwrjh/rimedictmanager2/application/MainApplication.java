@@ -2,7 +2,7 @@ package com.ftwrjh.rimedictmanager2.application;
 
 import com.ftwrjh.rimedictmanager2.application.node.*;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
-import com.ftwrjh.rimedictmanager2.env.AppConst;
+import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import javafx.application.Application;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;

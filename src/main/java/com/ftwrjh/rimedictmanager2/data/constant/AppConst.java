@@ -1,4 +1,4 @@
-package com.ftwrjh.rimedictmanager2.env;
+package com.ftwrjh.rimedictmanager2.data.constant;
 
 public class AppConst {
     public static final String APP_NAME = "RimeDictManager2";
@@ -21,6 +21,12 @@ public class AppConst {
         public static final String WEBSITE_HOME = "https://github.com/Sh1kaCodAyo/RimeDictManager2";
         public static final String WEBSITE_RDH = "https://github.com/Sh1kaCodAyo/RimeDictHelper2";
         public static final String WEBSITE_RIME = "https://rime.im/";
+    }
+
+    public static class About {
+        public static final String TITLE = "About RimeDictManager2";
+        public static final String HEADER = "RimeDictManager2 by Ftwrjh, Version 1.0";
+        public static final String CONTENT = "Copyright (c) 2026";
     }
 
     public static class Emoji {
