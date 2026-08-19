@@ -19,11 +19,11 @@ public class MainApplication extends Application {
         BorderPane root = loader.load();
         GlobalContext.Global.getContext().put("root", root);
 
-        root.setTop(TopMenuBarGenerator.getInstance().getNode(primaryStage));
-        root.setLeft(LeftMenuBarGenerator.getInstance().getNode(primaryStage));
-        root.setCenter(DictEntryTableViewGenerator.getInstance().getNode(primaryStage));
-        root.setRight(RightMenuBarGenerator.getInstance().getNode(primaryStage));
-        root.setBottom(BottomStatusBarGenerator.getInstance().getNode(primaryStage));
+        root.setTop(TopComponentGenerator.getInstance().getNode(primaryStage));
+        root.setLeft(LeftComponentGenerator.getInstance().getNode(primaryStage));
+        root.setCenter(CenterComponentGenerator.getInstance().getNode(primaryStage));
+        root.setRight(RightComponentGenerator.getInstance().getNode(primaryStage));
+        root.setBottom(BottomComponentGenerator.getInstance().getNode(primaryStage));
 
         Scene scene = new Scene(root, 900, 700);
         scene.getStylesheets().add(getClass().getResource(Const.Path.CSS_MAIN).toExternalForm());

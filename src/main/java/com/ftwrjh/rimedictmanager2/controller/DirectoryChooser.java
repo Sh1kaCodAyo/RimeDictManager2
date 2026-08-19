@@ -2,7 +2,7 @@ package com.ftwrjh.rimedictmanager2.controller;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.ftwrjh.rimedictmanager2.application.node.BottomStatusBarGenerator;
+import com.ftwrjh.rimedictmanager2.application.node.BottomComponentGenerator;
 import com.ftwrjh.rimedictmanager2.data.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import com.ftwrjh.rimedictmanager2.env.Const;
@@ -36,7 +36,7 @@ public class DirectoryChooser {
                 String rimeHomeDirPath = selectedDirectory.getAbsolutePath();
                 String msg = "Rime主目录: " + rimeHomeDirPath;
                 log.info(msg);
-                BottomStatusBarGenerator.getInstance().setStatusLeft(msg);
+                BottomComponentGenerator.getInstance().setStatusLeft(msg);
 
                 String defaultConfigPath = rimeHomeDirPath + File.separator + Const.Path.DEFAULT_CUSTOM_YAML;
                 log.info("主配置文件: {}", defaultConfigPath);
@@ -46,13 +46,12 @@ public class DirectoryChooser {
                 if (mainConfigFile.exists()) {
                     String successMsg = "已加载配置目录";
                     log.info(successMsg);
-                    BottomStatusBarGenerator.getInstance().setStatusLeft(successMsg);
+                    BottomComponentGenerator.getInstance().setStatusLeft(successMsg);
 
                     Set<String> activeSchemaSet = null;
                     try (InputStream inputStream = new FileInputStream(mainConfigFile)) {
                         Map<String, Object> yaml = AppContext.getYAML().load(inputStream);
                         JSONObject mainConfig = new JSONObject(yaml);
-                        GlobalContext.Global.getContext().put("mainConfig", mainConfig);
                         JSONArray jsonArray = mainConfig.getJSONObject("patch").getJSONArray("schema_list");
                          activeSchemaSet = jsonArray.stream()
                                 .filter(item -> item instanceof Map<?, ?>)
@@ -109,7 +108,7 @@ public class DirectoryChooser {
                 } else {
                     String warnMsg = "所选目录「" + rimeHomeDirPath + "」中没有「default.custom.yaml」文件";
                     log.warn(warnMsg);
-                    BottomStatusBarGenerator.getInstance().setStatusLeft(warnMsg);
+                    BottomComponentGenerator.getInstance().setStatusLeft(warnMsg);
                 }
 
 //                btn.setText("已选择: " + selectedDirectory.getName());

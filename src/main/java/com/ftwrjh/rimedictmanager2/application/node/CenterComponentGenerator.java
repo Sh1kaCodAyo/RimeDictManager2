@@ -12,12 +12,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Getter;
 
-public class DictEntryTableViewGenerator implements NodeGenerator {
-    private DictEntryTableViewGenerator() {
+public class CenterComponentGenerator implements NodeGenerator {
+    private CenterComponentGenerator() {
     }
 
     @Getter
-    private static final DictEntryTableViewGenerator instance = new DictEntryTableViewGenerator();
+    private static final CenterComponentGenerator instance = new CenterComponentGenerator();
 
     @Override
     public Node getNode(Stage primaryStage) {

@@ -3,12 +3,7 @@ package com.ftwrjh.rimedictmanager2.application.node;
 import com.ftwrjh.rimedictmanager2.controller.DirectoryChooser;
 import com.ftwrjh.rimedictmanager2.data.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
-import com.ftwrjh.rimedictmanager2.env.Const;
-import com.ftwrjh.rimedictmanager2.env.GlobalContext;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -17,20 +12,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.yaml.snakeyaml.Yaml;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Map;
 
 @Slf4j
-public class RightMenuBarGenerator implements NodeGenerator {
-    private RightMenuBarGenerator() {
+public class RightComponentGenerator implements NodeGenerator {
+    private RightComponentGenerator() {
     }
 
     @Getter
-    private static final RightMenuBarGenerator instance = new RightMenuBarGenerator();
+    private static final RightComponentGenerator instance = new RightComponentGenerator();
 
     @Override
     public Node getNode(Stage primaryStage) {

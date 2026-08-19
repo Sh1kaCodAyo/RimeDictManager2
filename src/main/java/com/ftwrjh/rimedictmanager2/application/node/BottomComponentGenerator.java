@@ -10,12 +10,12 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import lombok.Getter;
 
-public class BottomStatusBarGenerator implements NodeGenerator {
-    private BottomStatusBarGenerator() {
+public class BottomComponentGenerator implements NodeGenerator {
+    private BottomComponentGenerator() {
     }
 
     @Getter
-    private static final BottomStatusBarGenerator instance = new BottomStatusBarGenerator();
+    private static final BottomComponentGenerator instance = new BottomComponentGenerator();
 
     @Override
     public Node getNode(Stage primaryStage) {

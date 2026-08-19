@@ -15,14 +15,14 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LeftMenuBarGenerator implements NodeGenerator {
+public class LeftComponentGenerator implements NodeGenerator {
     private Button selectedButton;
 
-    private LeftMenuBarGenerator() {
+    private LeftComponentGenerator() {
     }
 
     @Getter
-    private static final LeftMenuBarGenerator instance = new LeftMenuBarGenerator();
+    private static final LeftComponentGenerator instance = new LeftComponentGenerator();
 
     @Override
     public Node getNode(Stage primaryStage) {
