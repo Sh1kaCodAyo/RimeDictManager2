@@ -1,5 +1,5 @@
 /* ========================================
-   侧边栏导航样式
+   侧边栏导航样式 - 修复版
    ======================================== */
 
 /* 侧边栏容器 */
@@ -22,9 +22,9 @@
     -fx-border-width: 0;
     -fx-min-height: 36;
     -fx-max-width: Infinity;
-    -fx-graphic-text-gap: 12;
 }
 
+/* 悬停效果 */
 .nav-item:hover {
     -fx-background-color: -item-bg-hover;
 }
@@ -32,10 +32,17 @@
     -fx-fill: -text-hover;
 }
 
-.nav-item:selected {
+/* ⭐ 选中效果 */
+.button.nav-item:selected {
     -fx-background-color: -item-bg-hover;
+    -fx-border-color: #294f88;
+    -fx-border-width: 0 0 0 3;
+    -fx-background-radius: 6 0 0 6;
+}
+
+.button.nav-item:selected .label {
     -fx-text-fill: -text-hover;
-    -fx-font-weight: 500;
+    -fx-font-weight: 600;
 }
 
 /* 选中时的左侧色条 */
@@ -60,23 +67,4 @@
     -fx-text-fill: #9ca3af;
     -fx-font-weight: 600;
     -fx-padding: 16 12 8 12;
-    -fx-underline: false;
-    -fx-letter-spacing: 0.5;
-}
-
-/* ---------- 底部用户信息 ---------- */
-.user-info {
-    -fx-padding: 12;
-    -fx-background-color: #f0f2f5;
-    -fx-background-radius: 8;
-}
-
-.user-info .user-name {
-    -fx-font-weight: 600;
-    -fx-text-fill: #1f2937;
-}
-
-.user-info .user-email {
-    -fx-font-size: 12px;
-    -fx-text-fill: #9ca3af;
 }

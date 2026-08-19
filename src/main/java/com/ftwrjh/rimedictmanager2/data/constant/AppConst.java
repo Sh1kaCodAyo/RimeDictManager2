@@ -14,6 +14,10 @@ public final class AppConst {
         public static final String OBJ_YAML = "obj:yaml";
         public static final String ENV_RIME_HOME_DIR = "env:rimeHomeDir";
         public static final String NODE_CENTER_STACK_PANE = "javafx_node:centerStackPane";
+        public static final String NODE_LEFT_SIDEBAR = "javafx_node:leftSidebar";
+        public static final String BTN_INPUT_SCHEMA_MANAGE = "btn:inputSchemaManage";
+        public static final String BTN_DICTIONARY_MANAGE = "btn:dictionaryManage";
+        public static final String BTN_DICTIONARY_ENTRY_MANAGE = "btn:dictionaryEntryManage";
     }
 
     public static class Path {

@@ -27,7 +27,7 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
         // 1. 获取 AppContext 中的列表（如果为空则初始化）
         ObservableList<DictionaryEntry> dataList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
 
-        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, dataList);
+        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, dataList);
 
         // 3. 定义列（使用 PropertyValueFactory 自动匹配属性）
         TableColumn<DictionaryEntry, String> tcWord = new TableColumn<>("词条");

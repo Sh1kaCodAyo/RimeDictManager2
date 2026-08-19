@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 public class MainApplication extends Application {
@@ -52,7 +53,15 @@ public class MainApplication extends Application {
         primaryStage.setTitle(AppConst.APP_NAME);
         primaryStage.show();
 
-        WorkspaceService.load(AppConfig.getInstance().getProperty(AppConst.ConfigKey.RIME_HOME_DIR));
+        String property = AppConfig.getInstance().getProperty(AppConst.ConfigKey.RIME_HOME_DIR);
+        if (StringUtils.isNotEmpty(property)) {
+            WorkspaceService.load(property);
+        }
+        // 验证 CSS 文件是否加载
+//        Scene scene = primaryStage.getScene();
+        System.out.println("已加载的 CSS: " + scene.getStylesheets());
+
+// 验证颜色变量是否生效
     }
 
 }

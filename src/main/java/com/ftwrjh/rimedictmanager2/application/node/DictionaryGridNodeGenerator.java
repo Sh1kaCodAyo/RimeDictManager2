@@ -27,7 +27,7 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
         // 1. 获取 AppContext 中的列表（如果为空则初始化）
         ObservableList<Dictionary> dataList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY, ObservableList.class);
 
-        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, dataList);
+        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_DICTIONARY, dataList);
 
         // 3. 定义列（使用 PropertyValueFactory 自动匹配属性）
         TableColumn<Dictionary, String> tcInputSchemaId = new TableColumn<>("输入法ID");

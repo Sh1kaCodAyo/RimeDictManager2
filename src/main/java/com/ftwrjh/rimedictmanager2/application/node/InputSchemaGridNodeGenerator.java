@@ -5,10 +5,7 @@ import com.ftwrjh.rimedictmanager2.data.variable.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -52,6 +49,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
                 }
                 if (!row.isEmpty() && event.getClickCount() == 2) {
                     log.info("double click");
+                    AppContext.getInstance().getTyped(AppConst.ContextKey.BTN_DICTIONARY_MANAGE, Button.class).fire();
                 }
             });
             return row;
