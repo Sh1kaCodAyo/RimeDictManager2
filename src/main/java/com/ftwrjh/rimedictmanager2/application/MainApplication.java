@@ -1,8 +1,10 @@
 package com.ftwrjh.rimedictmanager2.application;
 
 import com.ftwrjh.rimedictmanager2.application.node.*;
-import com.ftwrjh.rimedictmanager2.env.AppContext;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
+import com.ftwrjh.rimedictmanager2.env.AppConfig;
+import com.ftwrjh.rimedictmanager2.env.AppContext;
+import com.ftwrjh.rimedictmanager2.service.InputSchemaService;
 import javafx.application.Application;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -49,6 +51,8 @@ public class MainApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle(AppConst.APP_NAME);
         primaryStage.show();
+
+        InputSchemaService.load(AppConfig.getInstance().getProperty(AppConst.ConfigKey.RIME_HOME_DIR));
     }
 
 }

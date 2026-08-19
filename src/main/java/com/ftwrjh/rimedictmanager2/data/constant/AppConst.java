@@ -3,6 +3,10 @@ package com.ftwrjh.rimedictmanager2.data.constant;
 public final class AppConst {
     public static final String APP_NAME = "RimeDictManager2";
 
+    public static class ConfigKey {
+        public static final String RIME_HOME_DIR = "rimeHomeDir";
+    }
+
     public static class ContextKey {
         public static final String TABLE_DATA_INPUT_SCHEMA = "tableData:inputSchema";
         public static final String TABLE_DATA_DICTIONARY = "tableData:dictionary";

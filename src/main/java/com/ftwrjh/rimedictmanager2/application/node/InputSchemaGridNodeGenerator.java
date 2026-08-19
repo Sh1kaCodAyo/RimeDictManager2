@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -42,6 +43,19 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
 
         // 4. 创建表格并设置数据和列
         TableView<InputSchema> tableView = new TableView<>(dataList);
+
+        tableView.setRowFactory(tv -> {
+            TableRow<InputSchema> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 1) {
+                    log.info("click");
+                }
+                if (!row.isEmpty() && event.getClickCount() == 2) {
+                    log.info("double click");
+                }
+            });
+            return row;
+        });
 
         // ⭐ 自定义空数据提示
         Label placeholder = new Label("请关联Rime用户文件夹");
