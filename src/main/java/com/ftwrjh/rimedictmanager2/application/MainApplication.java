@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
@@ -53,15 +54,30 @@ public class MainApplication extends Application {
         primaryStage.setTitle(AppConst.APP_NAME);
         primaryStage.show();
 
+        this.initSettings(root);
+    }
+
+    private void initSettings(Pane root) {
         String property = AppConfig.getInstance().getProperty(AppConst.ConfigKey.RIME_HOME_DIR);
         if (StringUtils.isNotEmpty(property)) {
             WorkspaceService.load(property);
         }
-        // 验证 CSS 文件是否加载
-//        Scene scene = primaryStage.getScene();
-        System.out.println("已加载的 CSS: " + scene.getStylesheets());
 
-// 验证颜色变量是否生效
+
+        AppConfig config = AppConfig.getInstance();
+        String bgHex = config.getProperty("theme.bg");
+        String textHex = config.getProperty("theme.text");
+        String borderHex = config.getProperty("theme.border");
+
+        // 应用样式
+        if (root != null && StringUtils.isNoneEmpty(bgHex, textHex, borderHex)) {
+            root.setStyle(String.format("""
+                -item-bg-hover: %s;
+                -text-hover: %s;
+                -border-color: %s;
+            """, bgHex, textHex, borderHex));
+        }
+
     }
 
 }
