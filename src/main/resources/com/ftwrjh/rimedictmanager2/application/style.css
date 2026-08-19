@@ -322,3 +322,37 @@
 .menu-bar .context-menu .radio-menu-item:checked .left-container {
     -fx-text-fill: #2962ff;
 }
+
+/* 让 CheckBox 在单元格中居左显示 */
+.check-box-table-cell .check-box {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 5px;  /* 左内边距5像素，可根据需要调整 */
+}
+
+/* 或者更精确地控制，针对 TableCell 中的 CheckBox */
+.table-cell .check-box {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 5px;
+}
+
+/* 自定义 CheckBox 样式（可选） */
+.check-box {
+    -fx-font-size: 14px;
+}
+
+/* 自定义选中状态的样式 */
+.check-box:selected .mark {
+    -fx-background-color: #2196F3;  /* 改变勾选标记颜色 */
+}
+
+/* 自定义边框样式 */
+.check-box .box {
+    -fx-border-color: #888;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.check-box:selected .box {
+    -fx-border-color: #2196F3;
+    -fx-background-color: #E3F2FD;
+}

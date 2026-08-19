@@ -30,7 +30,7 @@ public class TopMenuBarGenerator implements NodeGenerator {
         MenuBar menuBar = new MenuBar();
 
         Menu menuFile = new Menu("文件(_F)");
-        MenuItem menuItemChoose = new MenuItem("选择主目录(_O)...");
+        MenuItem menuItemChoose = new MenuItem("关联Rime用户文件夹(_O)...");
         MenuItem menuSave = new MenuItem("保存(_S)");
         MenuItem menuItemExit = new MenuItem("退出(_Q)");
 
@@ -45,11 +45,36 @@ public class TopMenuBarGenerator implements NodeGenerator {
         menuFile.getItems().addAll(menuItemChoose, menuSave, new SeparatorMenuItem(), menuItemExit);
 
         Menu menuHelp = new Menu("帮助(_H)");
-        MenuItem menuItemPortal = new MenuItem("主页(_P)");
+        Menu menuHelpPage = new Menu("相关网页(_W)");
+        MenuItem menuItemPortal = new MenuItem("RimeDictManager2(_M)");
+        MenuItem menuItemRdh = new MenuItem("RimeDictHelper2(_H)");
+        MenuItem menuItemRimePortal = new MenuItem("Rime输入法主页(_R)");
+        menuHelpPage.getItems().addAll(menuItemPortal, menuItemRdh, new SeparatorMenuItem(), menuItemRimePortal);
         MenuItem menuItemAbout = new MenuItem("关于(_A)");
 
-        menuItemPortal.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
+//        menuItemPortal.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
 
+        menuItemPortal.setOnAction(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI(Const.WEBSITE_HOME));
+            } catch (IOException | URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        menuItemRdh.setOnAction(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI(Const.WEBSITE_RDH));
+            } catch (IOException | URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        menuItemRimePortal.setOnAction(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI(Const.WEBSITE_RIME));
+            } catch (IOException | URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         menuItemAbout.setOnAction(e -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("About RimeDictManager2");
@@ -57,14 +82,7 @@ public class TopMenuBarGenerator implements NodeGenerator {
             alert.setContentText("Copyright (c) 2026");
             alert.showAndWait();  // 阻塞等待用户点击
         });
-        menuItemPortal.setOnAction(e -> {
-            try {
-                Desktop.getDesktop().browse(new URI(Const.WEBSITE));
-            } catch (IOException | URISyntaxException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-        menuHelp.getItems().addAll(menuItemPortal, menuItemAbout);
+        menuHelp.getItems().addAll(menuHelpPage, new SeparatorMenuItem(), menuItemAbout);
 
         // 将菜单添加到菜单栏
         menuBar.getMenus().addAll(menuFile, menuHelp);

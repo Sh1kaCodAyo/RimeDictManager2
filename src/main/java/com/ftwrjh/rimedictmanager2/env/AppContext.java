@@ -8,13 +8,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Getter;
+import org.yaml.snakeyaml.Yaml;
 
 /**
  * 应用全局上下文 - 单例模式
  * 存储当前用户、全局配置、共享数据等
  */
 public class AppContext {
-    
+
+    @Getter
+    private static final Yaml YAML = new Yaml();
     // 单例实例
     private static final AppContext INSTANCE = new AppContext();
     

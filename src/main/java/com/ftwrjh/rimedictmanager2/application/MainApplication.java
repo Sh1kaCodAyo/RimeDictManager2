@@ -34,10 +34,9 @@ public class MainApplication extends Application {
 
 
         Scene scene = new Scene(root, 900, 700);
-        URL cssUrl = getClass().getResource(Const.Path.CSS_SIDEBAR);
-        if (cssUrl != null) {
-            scene.getStylesheets().add(cssUrl.toExternalForm());
-        }
+        scene.getStylesheets().addAll(
+                getClass().getResource(Const.Path.CSS_SIDEBAR).toExternalForm()
+        );
 
         Image icon = new Image(getClass().getResourceAsStream(Const.Path.ICON));
         primaryStage.getIcons().add(icon);

@@ -1,5 +1,6 @@
 package com.ftwrjh.rimedictmanager2.controller;
 
+import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.ftwrjh.rimedictmanager2.application.node.BottomStatusBarGenerator;
 import com.ftwrjh.rimedictmanager2.data.InputSchema;
@@ -11,15 +12,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Strings;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -43,25 +44,30 @@ public class DirectoryChooser {
                 File mainConfigFile = new File(defaultConfigPath);
 
                 if (mainConfigFile.exists()) {
-
                     String successMsg = "已加载配置目录";
                     log.info(successMsg);
                     BottomStatusBarGenerator.getInstance().setStatusLeft(successMsg);
 
+                    Set<String> activeSchemaSet = null;
+                    try (InputStream inputStream = new FileInputStream(mainConfigFile)) {
+                        Map<String, Object> yaml = AppContext.getYAML().load(inputStream);
+                        JSONObject mainConfig = new JSONObject(yaml);
+                        GlobalContext.Global.getContext().put("mainConfig", mainConfig);
+                        JSONArray jsonArray = mainConfig.getJSONObject("patch").getJSONArray("schema_list");
+                         activeSchemaSet = jsonArray.stream()
+                                .filter(item -> item instanceof Map<?, ?>)
+                                .map(item -> ((Map) item).get("schema"))
+                                .filter(Objects::nonNull)
+                                .map(String::valueOf)
+                                .collect(Collectors.toSet());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        log.error("exception.e:{}", e);
+                    }
                     File rimeHomeDir = new File(rimeHomeDirPath);
-                    if (!rimeHomeDir.isDirectory()) {
-                        // impossible
-                        return;
-                    }
-
                     File[] files = rimeHomeDir.listFiles();
-                    if (ArrayUtils.isEmpty(files)) {
-                        // impossible
-                        return;
-                    }
 
-
-//                    Arrays.stream(files).filter(File::isFile).filter(file -> Strings.CS.endsWith(file.getName(), ".schema.yaml"));
+                    Set<String> finalActiveSchemaSet = ObjectUtils.getIfNull(activeSchemaSet, new HashSet<>());
                     List<InputSchema> collect = Arrays.stream(files)
                             .filter(File::isFile)
                             .map(File::getName)
@@ -71,11 +77,11 @@ public class DirectoryChooser {
                             .map(is -> {
                                 String filePath = rimeHomeDirPath + File.separator + is.getInputSchemaId() + Const.Path.DICT_FILENAME_SUFFIX;
                                 try (FileInputStream fis = new FileInputStream(filePath)) {
-                                    Yaml yaml = new Yaml();
-                                    Map<String, Object> data = yaml.load(fis);
+                                    Map<String, Object> data = AppContext.getYAML().load(fis);
                                     JSONObject json = new JSONObject(data);
                                     String name = json.getJSONObject("schema").getString("name");
                                     is.setInputSchemaName(name);
+                                    is.setAvailable(CollectionUtils.containsAny(finalActiveSchemaSet, is.getInputSchemaId()));
                                     return is;
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);

@@ -2,7 +2,9 @@ package com.ftwrjh.rimedictmanager2.env;
 
 public class Const {
     public static final String APP_NAME = "RimeDictManager2";
-    public static final String WEBSITE = "https://github.com/Sh1kaCodAyo/RimeDictManager2";
+    public static final String WEBSITE_HOME = "https://github.com/Sh1kaCodAyo/RimeDictManager2";
+    public static final String WEBSITE_RDH = "https://github.com/Sh1kaCodAyo/RimeDictHelper2";
+    public static final String WEBSITE_RIME = "https://rime.im/";
 
     public static class Path {
         public static final String FXML_MAIN = "main-view.fxml";
