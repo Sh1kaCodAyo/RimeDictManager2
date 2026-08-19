@@ -1,11 +1,11 @@
-package com.ftwrjh.rimedictmanager2.controller;
+package com.ftwrjh.rimedictmanager2.service;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.ftwrjh.rimedictmanager2.application.node.BottomComponentGenerator;
 import com.ftwrjh.rimedictmanager2.data.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
-import com.ftwrjh.rimedictmanager2.env.Const;
+import com.ftwrjh.rimedictmanager2.env.AppConst;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -34,10 +34,11 @@ public class DirectoryChooser {
             if (selectedDirectory != null) {
                 String rimeHomeDirPath = selectedDirectory.getAbsolutePath();
                 String msg = "Rime主目录: " + rimeHomeDirPath;
+                AppContext.getInstance().set(AppConst.ContextKey.ENV_RIME_HOME_DIR, rimeHomeDirPath);
                 log.info(msg);
                 BottomComponentGenerator.getInstance().setStatusLeft(msg);
 
-                String defaultConfigPath = rimeHomeDirPath + File.separator + Const.Path.DEFAULT_CUSTOM_YAML;
+                String defaultConfigPath = rimeHomeDirPath + File.separator + AppConst.Path.YAML_DEFAULT_CUSTOM;
                 log.info("主配置文件: {}", defaultConfigPath);
 
                 File mainConfigFile = new File(defaultConfigPath);
@@ -68,11 +69,11 @@ public class DirectoryChooser {
                     List<InputSchema> collect = Arrays.stream(files)
                             .filter(File::isFile)
                             .map(File::getName)
-                            .filter(filename -> Strings.CS.endsWith(filename, Const.Path.DICT_FILENAME_SUFFIX))
-                            .map(str -> Strings.CS.replace(str, Const.Path.DICT_FILENAME_SUFFIX, ""))
+                            .filter(filename -> Strings.CS.endsWith(filename, AppConst.Path.DICT_FILENAME_SUFFIX))
+                            .map(str -> Strings.CS.replace(str, AppConst.Path.DICT_FILENAME_SUFFIX, ""))
                             .map(InputSchema::new)
                             .map(is -> {
-                                String filePath = rimeHomeDirPath + File.separator + is.getInputSchemaId() + Const.Path.DICT_FILENAME_SUFFIX;
+                                String filePath = rimeHomeDirPath + File.separator + is.getInputSchemaId() + AppConst.Path.DICT_FILENAME_SUFFIX;
                                 try (FileInputStream fis = new FileInputStream(filePath)) {
                                     Map<String, Object> data = AppContext.getYamlInstance().load(fis);
                                     JSONObject json = new JSONObject(data);
@@ -87,10 +88,10 @@ public class DirectoryChooser {
                             .collect(Collectors.toList());
 
 
-                    ObservableList<InputSchema> list = AppContext.getInstance().getTyped(Const.ContextKey.TABLE_DATA_SCHEMA, ObservableList.class);
+                    ObservableList<InputSchema> list = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_SCHEMA, ObservableList.class);
                     list.clear();
                     list.addAll(collect);
-                    AppContext.getInstance().set(Const.ContextKey.TABLE_DATA_SCHEMA, list);
+                    AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_SCHEMA, list);
 
                 } else {
                     String warnMsg = "所选目录「" + rimeHomeDirPath + "」中没有「default.custom.yaml」文件";

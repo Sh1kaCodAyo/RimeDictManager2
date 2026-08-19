@@ -2,7 +2,7 @@ package com.ftwrjh.rimedictmanager2.application.node;
 
 import com.ftwrjh.rimedictmanager2.data.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
-import com.ftwrjh.rimedictmanager2.env.Const;
+import com.ftwrjh.rimedictmanager2.env.AppConst;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -23,9 +23,9 @@ public class CenterComponentGenerator implements NodeGenerator {
     @Override
     public Node getNode(Stage primaryStage) {
         // 1. 获取 AppContext 中的列表（如果为空则初始化）
-        ObservableList<InputSchema> dataList = AppContext.getInstance().getTyped(Const.ContextKey.TABLE_DATA_SCHEMA, ObservableList.class);
+        ObservableList<InputSchema> dataList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_SCHEMA, ObservableList.class);
 
-        AppContext.getInstance().set(Const.ContextKey.TABLE_DATA_SCHEMA, dataList);
+        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_SCHEMA, dataList);
 
         // 3. 定义列（使用 PropertyValueFactory 自动匹配属性）
         TableColumn<InputSchema, String> colId = new TableColumn<>("ID");
@@ -43,13 +43,7 @@ public class CenterComponentGenerator implements NodeGenerator {
 
         // ⭐ 自定义空数据提示
         Label placeholder = new Label("请关联Rime用户文件夹");
-        placeholder.setStyle("""
-                    -fx-font-size: 16px;
-                    -fx-text-fill: #9ca3af;
-                    -fx-font-weight: 500;
-                    -fx-padding: 0 0 100 0;
-                    -fx-alignment: CENTER;
-                """);
+        placeholder.setStyle(AppConst.Style.CENTER_TABLE_PLACEHOLDER);
         tableView.setPlaceholder(placeholder);
         tableView.setEditable(true);
 

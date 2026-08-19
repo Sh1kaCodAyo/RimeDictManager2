@@ -1,7 +1,7 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
 import com.ftwrjh.rimedictmanager2.env.AppConfig;
-import com.ftwrjh.rimedictmanager2.env.Const;
+import com.ftwrjh.rimedictmanager2.env.AppConst;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -39,9 +39,9 @@ public class LeftComponentGenerator implements NodeGenerator {
 
         // ⭐ 调用 createNavItem() 创建按钮
         sidebarContainer.getChildren().addAll(
-                createNavItem(Const.Emoji.KEYBOARD, "输入法管理"),
-                createNavItem(Const.Emoji.BOOKS, "词库管理"),
-                createNavItem(Const.Emoji.OPENED_BOOK, "词条管理")
+                createNavItem(AppConst.Emoji.KEYBOARD, "输入法管理"),
+                createNavItem(AppConst.Emoji.BOOKS, "词库管理"),
+                createNavItem(AppConst.Emoji.OPENED_BOOK, "词条管理")
         );
 
         // 分组标题

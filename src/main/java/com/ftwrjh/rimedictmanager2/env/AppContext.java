@@ -27,7 +27,7 @@ public class AppContext {
     // ========== 常用缓存对象 ==========
 
     public static Yaml getYamlInstance() {
-        return AppContext.getInstance().getTyped(Const.ContextKey.OBJ_YAML, Yaml.class);
+        return AppContext.getInstance().getTyped(AppConst.ContextKey.OBJ_YAML, Yaml.class);
     }
 
     // ========== 基础存取方法 ==========

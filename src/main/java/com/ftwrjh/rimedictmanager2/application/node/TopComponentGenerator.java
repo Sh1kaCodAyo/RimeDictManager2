@@ -1,7 +1,7 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
-import com.ftwrjh.rimedictmanager2.controller.DirectoryChooser;
-import com.ftwrjh.rimedictmanager2.env.Const;
+import com.ftwrjh.rimedictmanager2.service.DirectoryChooser;
+import com.ftwrjh.rimedictmanager2.env.AppConst;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
@@ -56,21 +56,21 @@ public class TopComponentGenerator implements NodeGenerator {
 
         menuItemPortal.setOnAction(e -> {
             try {
-                Desktop.getDesktop().browse(new URI(Const.WEBSITE_HOME));
+                Desktop.getDesktop().browse(new URI(AppConst.Link.WEBSITE_HOME));
             } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }
         });
         menuItemRdh.setOnAction(e -> {
             try {
-                Desktop.getDesktop().browse(new URI(Const.WEBSITE_RDH));
+                Desktop.getDesktop().browse(new URI(AppConst.Link.WEBSITE_RDH));
             } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }
         });
         menuItemRimePortal.setOnAction(e -> {
             try {
-                Desktop.getDesktop().browse(new URI(Const.WEBSITE_RIME));
+                Desktop.getDesktop().browse(new URI(AppConst.Link.WEBSITE_RIME));
             } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }

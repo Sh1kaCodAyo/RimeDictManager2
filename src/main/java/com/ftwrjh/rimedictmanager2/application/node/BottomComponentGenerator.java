@@ -1,13 +1,15 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
 import com.ftwrjh.rimedictmanager2.env.AppContext;
-import com.ftwrjh.rimedictmanager2.env.Const;
-import com.ftwrjh.rimedictmanager2.env.GlobalContext;
+import com.ftwrjh.rimedictmanager2.env.AppConst;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import lombok.Getter;
 
@@ -23,7 +25,7 @@ public class BottomComponentGenerator implements NodeGenerator {
         HBox statusBar = new HBox(10);
         statusBar.setPadding(new Insets(5, 10, 5, 10));
         statusBar.setAlignment(Pos.CENTER_LEFT);
-        statusBar.setStyle(Const.Style.BOTTOM_STATUS_BAR);
+        statusBar.setStyle(AppConst.Style.BOTTOM_STATUS_BAR);
 
         Label leftStatus = new Label("请先选择Rime用户文件夹");
         Region spacer = new Region();
@@ -35,14 +37,12 @@ public class BottomComponentGenerator implements NodeGenerator {
     }
 
     public void setStatusLeft(String msg) {
-//        BorderPane root = GlobalContext.Global.getContext().getObject("root", BorderPane.class);
         BorderPane root = AppContext.getInstance().getTyped("root", BorderPane.class);
         HBox statusBar = (HBox) root.getBottom();
         statusBar.getChildren().set(0, new Label(msg));
     }
 
     public void setStatusRight(String msg) {
-//        BorderPane root = GlobalContext.Global.getContext().getObject("root", BorderPane.class);
         BorderPane root = AppContext.getInstance().getTyped("root", BorderPane.class);
         HBox statusBar = (HBox) root.getBottom();
         statusBar.getChildren().set(2, new Label(msg));

@@ -16,10 +16,10 @@ module com.ftwrjh.rimedictmanager2 {
     requires org.apache.commons.collections4;
 
     exports com.ftwrjh.rimedictmanager2.application;
-    exports com.ftwrjh.rimedictmanager2.controller;
+    exports com.ftwrjh.rimedictmanager2.service;
 
-    opens com.ftwrjh.rimedictmanager2.controller to javafx.fxml;
     opens com.ftwrjh.rimedictmanager2.data to javafx.base;
     opens com.ftwrjh.rimedictmanager2.application to javafx.base, javafx.fxml;
-//    opens com.ftwrjh.rimedictmanager2.controller to javafx.fxml;
+    opens com.ftwrjh.rimedictmanager2.service to javafx.base, javafx.fxml;
+//    opens com.ftwrjh.rimedictmanager2.service to javafx.fxml;
 }
