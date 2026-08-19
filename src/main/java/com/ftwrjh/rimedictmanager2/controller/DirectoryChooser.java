@@ -6,7 +6,6 @@ import com.ftwrjh.rimedictmanager2.application.node.BottomComponentGenerator;
 import com.ftwrjh.rimedictmanager2.data.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import com.ftwrjh.rimedictmanager2.env.Const;
-import com.ftwrjh.rimedictmanager2.env.GlobalContext;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -50,17 +49,16 @@ public class DirectoryChooser {
 
                     Set<String> activeSchemaSet = null;
                     try (InputStream inputStream = new FileInputStream(mainConfigFile)) {
-                        Map<String, Object> yaml = AppContext.getYAML().load(inputStream);
+                        Map<String, Object> yaml = AppContext.getYamlInstance().load(inputStream);
                         JSONObject mainConfig = new JSONObject(yaml);
                         JSONArray jsonArray = mainConfig.getJSONObject("patch").getJSONArray("schema_list");
-                         activeSchemaSet = jsonArray.stream()
+                        activeSchemaSet = jsonArray.stream()
                                 .filter(item -> item instanceof Map<?, ?>)
                                 .map(item -> ((Map) item).get("schema"))
                                 .filter(Objects::nonNull)
                                 .map(String::valueOf)
                                 .collect(Collectors.toSet());
                     } catch (Exception e) {
-                        e.printStackTrace();
                         log.error("exception.e:{}", e);
                     }
                     File rimeHomeDir = new File(rimeHomeDirPath);
@@ -76,7 +74,7 @@ public class DirectoryChooser {
                             .map(is -> {
                                 String filePath = rimeHomeDirPath + File.separator + is.getInputSchemaId() + Const.Path.DICT_FILENAME_SUFFIX;
                                 try (FileInputStream fis = new FileInputStream(filePath)) {
-                                    Map<String, Object> data = AppContext.getYAML().load(fis);
+                                    Map<String, Object> data = AppContext.getYamlInstance().load(fis);
                                     JSONObject json = new JSONObject(data);
                                     String name = json.getJSONObject("schema").getString("name");
                                     is.setInputSchemaName(name);
@@ -89,29 +87,16 @@ public class DirectoryChooser {
                             .collect(Collectors.toList());
 
 
-                    log.info("save000");
-                    ObservableList<InputSchema> list = AppContext.getInstance().getInputSchemaObservableList();
+                    ObservableList<InputSchema> list = AppContext.getInstance().getTyped(Const.ContextKey.TABLE_DATA_SCHEMA, ObservableList.class);
                     list.clear();
-//                    list.add(new InputSchema("新输入法"));
                     list.addAll(collect);
-                    AppContext.getInstance().setInputSchemaObservableList(list);
+                    AppContext.getInstance().set(Const.ContextKey.TABLE_DATA_SCHEMA, list);
 
-                    // todo parse yaml
-//                    Yaml yaml = new Yaml();
-                    // 解析为通用的 Map 对象
-//                    Map<String, Object> data = yaml.load(inputStream);
-//                    GlobalContext.Global.getContext().put("mainConfig", data);
-//                    try (InputStream inputStream = new FileInputStream(mainConfigFile)) {
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
                 } else {
                     String warnMsg = "所选目录「" + rimeHomeDirPath + "」中没有「default.custom.yaml」文件";
                     log.warn(warnMsg);
                     BottomComponentGenerator.getInstance().setStatusLeft(warnMsg);
                 }
-
-//                btn.setText("已选择: " + selectedDirectory.getName());
             } else {
                 log.info("用户取消了选择");
             }

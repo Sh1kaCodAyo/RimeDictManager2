@@ -28,4 +28,8 @@ public class Const {
     public static class Style {
         public static final String BOTTOM_STATUS_BAR = "-fx-background-color: #e9ecef; -fx-border-color: #ced4da; -fx-border-width: 1 0 0 0;";
     }
+    public static class ContextKey {
+        public static final String TABLE_DATA_SCHEMA = "tableData:schema";
+        public static final String OBJ_YAML = "obj:yaml";
+    }
 }

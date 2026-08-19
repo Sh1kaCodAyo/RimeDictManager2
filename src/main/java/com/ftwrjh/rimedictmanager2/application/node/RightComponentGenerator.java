@@ -3,11 +3,12 @@ package com.ftwrjh.rimedictmanager2.application.node;
 import com.ftwrjh.rimedictmanager2.controller.DirectoryChooser;
 import com.ftwrjh.rimedictmanager2.data.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
+import com.ftwrjh.rimedictmanager2.env.Const;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -37,10 +38,10 @@ public class RightComponentGenerator implements NodeGenerator {
         btnSave.setMaxWidth(Double.MAX_VALUE);
         btnSave.setOnAction(event -> {
             log.info("save000");
-            ObservableList<InputSchema> list = AppContext.getInstance().getInputSchemaObservableList();
+            ObservableList<InputSchema> list = AppContext.getInstance().getTyped(Const.ContextKey.TABLE_DATA_SCHEMA, ObservableList.class);
             list.clear();
             list.add(new InputSchema("1", "新输入法"));
-            AppContext.getInstance().setInputSchemaObservableList(list);
+            AppContext.getInstance().set(Const.ContextKey.TABLE_DATA_SCHEMA, list);
         });
 //
 //        Button btn1 = new Button("📄 新建词条");

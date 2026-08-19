@@ -2,6 +2,7 @@ package com.ftwrjh.rimedictmanager2.application.node;
 
 import com.ftwrjh.rimedictmanager2.data.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
+import com.ftwrjh.rimedictmanager2.env.Const;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -22,9 +23,9 @@ public class CenterComponentGenerator implements NodeGenerator {
     @Override
     public Node getNode(Stage primaryStage) {
         // 1. 获取 AppContext 中的列表（如果为空则初始化）
-        ObservableList<InputSchema> dataList = AppContext.getInstance().getInputSchemaObservableList();
+        ObservableList<InputSchema> dataList = AppContext.getInstance().getTyped(Const.ContextKey.TABLE_DATA_SCHEMA, ObservableList.class);
 
-        AppContext.getInstance().setInputSchemaObservableList(dataList);
+        AppContext.getInstance().set(Const.ContextKey.TABLE_DATA_SCHEMA, dataList);
 
         // 3. 定义列（使用 PropertyValueFactory 自动匹配属性）
         TableColumn<InputSchema, String> colId = new TableColumn<>("ID");

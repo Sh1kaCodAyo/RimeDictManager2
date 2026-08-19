@@ -1,5 +1,6 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
+import com.ftwrjh.rimedictmanager2.env.AppContext;
 import com.ftwrjh.rimedictmanager2.env.Const;
 import com.ftwrjh.rimedictmanager2.env.GlobalContext;
 import javafx.geometry.Insets;
@@ -34,13 +35,15 @@ public class BottomComponentGenerator implements NodeGenerator {
     }
 
     public void setStatusLeft(String msg) {
-        BorderPane root = GlobalContext.Global.getContext().getObject("root", BorderPane.class);
+//        BorderPane root = GlobalContext.Global.getContext().getObject("root", BorderPane.class);
+        BorderPane root = AppContext.getInstance().getTyped("root", BorderPane.class);
         HBox statusBar = (HBox) root.getBottom();
         statusBar.getChildren().set(0, new Label(msg));
     }
 
     public void setStatusRight(String msg) {
-        BorderPane root = GlobalContext.Global.getContext().getObject("root", BorderPane.class);
+//        BorderPane root = GlobalContext.Global.getContext().getObject("root", BorderPane.class);
+        BorderPane root = AppContext.getInstance().getTyped("root", BorderPane.class);
         HBox statusBar = (HBox) root.getBottom();
         statusBar.getChildren().set(2, new Label(msg));
     }
