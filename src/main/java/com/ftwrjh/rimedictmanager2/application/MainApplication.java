@@ -5,16 +5,10 @@ import com.ftwrjh.rimedictmanager2.env.Const;
 import com.ftwrjh.rimedictmanager2.env.GlobalContext;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.net.URL;
 
 public class MainApplication extends Application {
 
@@ -35,7 +29,7 @@ public class MainApplication extends Application {
 
         Scene scene = new Scene(root, 900, 700);
         scene.getStylesheets().addAll(
-                getClass().getResource(Const.Path.CSS_SIDEBAR).toExternalForm()
+                getClass().getResource(Const.Path.CSS_MAIN).toExternalForm()
         );
 
         Image icon = new Image(getClass().getResourceAsStream(Const.Path.ICON));

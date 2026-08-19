@@ -1,0 +1,107 @@
+/* ========================================
+   菜单栏样式 - 现代清爽风格
+   ======================================== */
+
+/* ---------- 菜单栏整体 ---------- */
+.menu-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 2 8 2 8;
+}
+
+/* ---------- 一级菜单 ---------- */
+.menu-bar .menu {
+    -fx-background-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+    -fx-padding: 6 12 6 12;
+    -fx-background-radius: 4;
+}
+
+.menu-bar .menu:hover {
+    -fx-background-color: #294f88;
+}
+
+.menu-bar .menu:showing {
+    -fx-background-color: #294f88;
+    -fx-text-fill: #b8bdca;
+}
+
+/* ---------- 弹出菜单 ---------- */
+.menu-bar .context-menu {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-padding: 6 0 6 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 12, 0, 0, 4);
+}
+
+/* ---------- 菜单项 ---------- */
+.menu-bar .context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-padding: 8 32 8 20;
+    -fx-background-radius: 0;
+}
+
+.menu-bar .context-menu .menu-item:hover {
+    -fx-background-color: #294f88;
+}
+
+.menu-bar .context-menu .menu-item:disabled {
+    -fx-opacity: 0.5;
+}
+
+.menu-bar .context-menu .menu-item .label {
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+}
+
+.menu-bar .context-menu .menu-item:hover .label {
+    -fx-text-fill: #b8bdca;
+}
+
+/* 快捷键 */
+.menu-bar .context-menu .menu-item .accelerator-text {
+    -fx-text-fill: #9ca3af;
+    -fx-font-size: 12px;
+}
+
+/* 分隔线 */
+.menu-bar .context-menu .separator .line {
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* 子菜单箭头 */
+.menu-bar .context-menu .menu-item .arrow {
+    -fx-background-color: #9ca3af;
+}
+
+.menu-bar .context-menu .menu-item:hover .arrow {
+    -fx-background-color: #6b7280;
+}
+
+/* ---------- 复选框/单选菜单项 ---------- */
+.menu-bar .context-menu .check-menu-item,
+.menu-bar .context-menu .radio-menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-padding: 8 32 8 20;
+}
+
+.menu-bar .context-menu .check-menu-item:hover,
+.menu-bar .context-menu .radio-menu-item:hover {
+    -fx-background-color: #f0f2f5;
+}
+
+.menu-bar .context-menu .check-menu-item:checked .left-container,
+.menu-bar .context-menu .radio-menu-item:checked .left-container {
+    -fx-text-fill: #2962ff;
+}

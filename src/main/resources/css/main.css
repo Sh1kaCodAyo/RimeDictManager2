@@ -1,0 +1,14 @@
+/* ========================================
+   DeepSeek 风格 - 主样式入口
+   导入所有组件样式
+   ======================================== */
+
+/* 基础样式 */
+@import url("base/root.css");
+
+/* 组件样式 */
+@import url("components/sidebar.css");
+@import url("components/toolbar.css");
+@import url("components/table.css");
+@import url("components/menu-bar.css");
+@import url("components/checkbox.css");

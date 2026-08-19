@@ -1,0 +1,31 @@
+/* ========================================
+   右侧工具栏按钮样式
+   ======================================== */
+
+.action-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 8;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 1);
+    -fx-min-width: 80;
+    -fx-alignment: CENTER;
+}
+
+.action-button:hover {
+    -fx-background-color: #294f88;
+    -fx-text-fill: #b8bdca;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
+    -fx-translate-y: -1;
+}
+
+.action-button:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 2, 0, 0, 0);
+    -fx-translate-y: 0;
+}

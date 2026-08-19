@@ -8,7 +8,7 @@ public class Const {
 
     public static class Path {
         public static final String FXML_MAIN = "main-view.fxml";
-        public static final String CSS_SIDEBAR = "style.css";
+        public static final String CSS_MAIN = "/css/main.css";
         public static final String ICON = "/images/RimeDictManager2.png";
         public static final String DEFAULT_CUSTOM_YAML = "default.custom.yaml";
         public static final String DICT_FILENAME_SUFFIX = ".schema.yaml";

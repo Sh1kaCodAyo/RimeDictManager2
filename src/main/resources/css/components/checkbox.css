@@ -1,0 +1,32 @@
+/* ========================================
+   复选框样式
+   ======================================== */
+
+.check-box-table-cell .check-box {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 5px;
+}
+
+.table-cell .check-box {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 5px;
+}
+
+.check-box {
+    -fx-font-size: 14px;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #2196F3;
+}
+
+.check-box .box {
+    -fx-border-color: #888;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.check-box:selected .box {
+    -fx-border-color: #2196F3;
+    -fx-background-color: #E3F2FD;
+}

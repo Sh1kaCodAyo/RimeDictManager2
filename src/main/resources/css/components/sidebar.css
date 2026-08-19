@@ -1,0 +1,82 @@
+/* ========================================
+   侧边栏导航样式
+   ======================================== */
+
+/* 侧边栏容器 */
+.sidebar {
+    -fx-background-color: #b8bdca;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 1 0 0;
+}
+
+/* ---------- 导航项 ---------- */
+.nav-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 14px;
+    -fx-font-weight: 400;
+    -fx-padding: 8 12 8 12;
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+    -fx-background-radius: 6;
+    -fx-border-width: 0;
+    -fx-min-height: 36;
+    -fx-max-width: Infinity;
+    -fx-graphic-text-gap: 12;
+}
+
+.nav-item:hover {
+    -fx-background-color: -bg-blue;
+}
+.nav-item:hover .text {
+    -fx-fill: #b8bdca;
+}
+
+.nav-item:selected {
+    -fx-background-color: #b8bdca;
+    -fx-text-fill: #294f88;
+    -fx-font-weight: 500;
+}
+
+/* 选中时的左侧色条 */
+.nav-item:selected .left-bar {
+    -fx-background-color: #294f88;
+    -fx-min-width: 3;
+    -fx-max-width: 3;
+    -fx-pref-width: 3;
+    -fx-min-height: 20;
+}
+
+/* 导航图标 */
+.nav-item .icon-label {
+    -fx-font-size: 18px;
+    -fx-min-width: 28;
+    -fx-alignment: CENTER;
+}
+
+/* ---------- 分组标题 ---------- */
+.section-title {
+    -fx-font-size: 12px;
+    -fx-text-fill: #9ca3af;
+    -fx-font-weight: 600;
+    -fx-padding: 16 12 8 12;
+    -fx-underline: false;
+    -fx-letter-spacing: 0.5;
+}
+
+/* ---------- 底部用户信息 ---------- */
+.user-info {
+    -fx-padding: 12;
+    -fx-background-color: #f0f2f5;
+    -fx-background-radius: 8;
+}
+
+.user-info .user-name {
+    -fx-font-weight: 600;
+    -fx-text-fill: #1f2937;
+}
+
+.user-info .user-email {
+    -fx-font-size: 12px;
+    -fx-text-fill: #9ca3af;
+}
