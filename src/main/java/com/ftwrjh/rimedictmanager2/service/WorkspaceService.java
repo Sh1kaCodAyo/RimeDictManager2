@@ -21,44 +21,62 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class InputSchemaService {
-
-    public static void load(File selectedDirectory) {
-        load(selectedDirectory.getAbsolutePath());
+public class WorkspaceService {
+    /**
+     * 从指定路径加载工作主目录
+     * 读取 `*.schema.yaml` 文件以获取安装了哪些输入法
+     * 读取 `default.custom.yaml` 文件内容以获取启用了哪些输入法
+     *
+     * @param workspacePath 工作目录路径
+     */
+    public static void load(String workspacePath) {
+        File workspace = new File(workspacePath);
+        if (workspace.isDirectory()) {
+            load(workspace);
+        } else {
+            throw new RuntimeException("加载工作主目录异常");
+        }
     }
 
-    public static void load(String rimeHomeDirPath) {
-        String msg = "Rime主目录: " + rimeHomeDirPath;
-        AppContext.getInstance().set(AppConst.ContextKey.ENV_RIME_HOME_DIR, rimeHomeDirPath);
+    /**
+     * 从指定路径加载工作主目录
+     * 读取 `*.schema.yaml` 文件以获取安装了哪些输入法
+     * 读取 `default.custom.yaml` 文件内容以获取启用了哪些输入法
+     *
+     * @param workspace 工作目录的 {@link java.io.File} 类对象
+     */
+    public static void load(File workspace) {
+        String workspacePath = workspace.getAbsolutePath();
+        String msg = "Rime主目录: " + workspacePath;
+        AppContext.getInstance().set(AppConst.ContextKey.ENV_RIME_HOME_DIR, workspacePath);
         log.info(msg);
         BottomNodeGenerator.getInstance().setStatusLeft(msg);
 
-        String defaultConfigPath = rimeHomeDirPath + File.separator + AppConst.Path.YAML_DEFAULT_CUSTOM;
-        log.info("主配置文件: {}", defaultConfigPath);
+        String defaultCustomYamlPath = workspacePath + File.separator + AppConst.Path.YAML_DEFAULT_CUSTOM;
+        log.info("主配置文件: {}", defaultCustomYamlPath);
 
-        File mainConfigFile = new File(defaultConfigPath);
+        File defaultCustomYamlFile = new File(defaultCustomYamlPath);
 
-        if (mainConfigFile.exists()) {
-            String successMsg = "已加载配置目录";
+        if (defaultCustomYamlFile.exists()) {
+            String successMsg = "已加载配置目录「" + workspacePath + "」";
             log.info(successMsg);
             BottomNodeGenerator.getInstance().setStatusLeft(successMsg);
 
             Set<String> activeSchemaSet = null;
-            try (InputStream inputStream = new FileInputStream(mainConfigFile)) {
+            try (InputStream inputStream = new FileInputStream(defaultCustomYamlFile)) {
                 Map<String, Object> yaml = AppContext.getYamlInstance().load(inputStream);
                 JSONObject mainConfig = new JSONObject(yaml);
                 JSONArray jsonArray = mainConfig.getJSONObject("patch").getJSONArray("schema_list");
                 activeSchemaSet = jsonArray.stream()
                         .filter(item -> item instanceof Map<?, ?>)
-                        .map(item -> ((Map) item).get("schema"))
+                        .map(item -> ((Map<?, ?>) item).get("schema"))
                         .filter(Objects::nonNull)
                         .map(String::valueOf)
                         .collect(Collectors.toSet());
             } catch (Exception e) {
-                log.error("exception.e:{}", e);
+                log.error("加载主配置文件失败", e);
             }
-            File rimeHomeDir = new File(rimeHomeDirPath);
-            File[] files = rimeHomeDir.listFiles();
+            File[] files = workspace.listFiles(); // defaultCustomYamlFile.exists() 则files一定非空
 
             Set<String> finalActiveSchemaSet = ObjectUtils.getIfNull(activeSchemaSet, new HashSet<>());
             List<InputSchema> collect = Arrays.stream(files)
@@ -68,7 +86,7 @@ public class InputSchemaService {
                     .map(str -> Strings.CS.replace(str, AppConst.Path.DICT_FILENAME_SUFFIX, ""))
                     .map(InputSchema::new)
                     .map(is -> {
-                        String filePath = rimeHomeDirPath + File.separator + is.getInputSchemaId() + AppConst.Path.DICT_FILENAME_SUFFIX;
+                        String filePath = workspacePath + File.separator + is.getInputSchemaId() + AppConst.Path.DICT_FILENAME_SUFFIX;
                         try (FileInputStream fis = new FileInputStream(filePath)) {
                             Map<String, Object> data = AppContext.getYamlInstance().load(fis);
                             JSONObject json = new JSONObject(data);
@@ -82,17 +100,16 @@ public class InputSchemaService {
                     })
                     .collect(Collectors.toList());
 
-
             ObservableList<InputSchema> list = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
             list.clear();
             list.addAll(collect);
             AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, list);
 
-            AppConfig.getInstance().setProperty(AppConst.ConfigKey.RIME_HOME_DIR, rimeHomeDirPath);
+            // update user config
+            AppConfig.getInstance().setProperty(AppConst.ConfigKey.RIME_HOME_DIR, workspacePath);
             AppConfig.getInstance().saveAndReload();
-
         } else {
-            String warnMsg = "所选目录「" + rimeHomeDirPath + "」中没有「default.custom.yaml」文件";
+            String warnMsg = "所选目录「" + workspacePath + "」中没有「default.custom.yaml」文件";
             log.warn(warnMsg);
             BottomNodeGenerator.getInstance().setStatusLeft(warnMsg);
         }
