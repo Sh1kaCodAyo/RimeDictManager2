@@ -5,22 +5,28 @@
 .root {
     /*-fx-background-color: #66ccff;*/
     /* 颜色变量定义 */
-    -primary-color: #2196F3;
-    -primary-dark: #1976D2;
-    -primary-light: #BBDEFB;
+    /*-primary-color: #2196F3;*/
+    /*-primary-dark: #1976D2;*/
+    /*-primary-light: #BBDEFB;*/
 
-    -success-color: #4CAF50;
-    -warning-color: #FF9800;
-    -danger-color: #f44336;
+    /*-success-color: #4CAF50;*/
+    /*-warning-color: #FF9800;*/
+    /*-danger-color: #f44336;*/
 
-    -text-primary: #333333;
-    -text-secondary: #666666;
+    /*-text-primary: #333333;*/
+    /*-text-secondary: #666666;*/
 
-    -bg-white: #FFFFFF;
-    -bg-gray: #f5f5f5;
-    -bg-hover: #E3F2FD;
-    -bg-blue: #294f88;
+    /*-bg-white: #FFFFFF;*/
+    /*-bg-gray: #f5f5f5;*/
+    /*-bg-hover: #E3F2FD;*/
+    /*-border-color: #e0e0e0;*/
 
-    -border-color: #e0e0e0;
+    /* 菜单项背景色-悬浮 */
+    /*-item-bg-hover: #294f88;*/
+    -item-bg-hover: #3d6e87;
+    /* 文字-悬浮 */
+    /*-text-hover: #d52323;*/
+    -text-hover: #ececec;
+
     -shadow-color: rgba(0, 0, 0, 0.1);
 }

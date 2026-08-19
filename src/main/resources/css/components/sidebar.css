@@ -26,10 +26,10 @@
 }
 
 .nav-item:hover {
-    -fx-background-color: -bg-blue;
+    -fx-background-color: -item-bg-hover;
 }
 .nav-item:hover .text {
-    -fx-fill: #b8bdca;
+    -fx-fill: -text-hover;
 }
 
 .nav-item:selected {

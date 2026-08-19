@@ -19,8 +19,8 @@
 }
 
 .action-button:hover {
-    -fx-background-color: #294f88;
-    -fx-text-fill: #b8bdca;
+    -fx-background-color: -item-bg-hover;
+    -fx-text-fill: -text-hover;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
     -fx-translate-y: -1;
 }

@@ -21,12 +21,16 @@
 }
 
 .menu-bar .menu:hover {
-    -fx-background-color: #294f88;
+    -fx-background-color: -item-bg-hover;
+}
+
+.menu-bar .menu:hover .text {
+    -fx-fill: -text-hover;
 }
 
 .menu-bar .menu:showing {
-    -fx-background-color: #294f88;
-    -fx-text-fill: #b8bdca;
+    -fx-background-color: -item-bg-hover;
+    -fx-text-fill: -text-hover;
 }
 
 /* ---------- 弹出菜单 ---------- */
@@ -50,7 +54,7 @@
 }
 
 .menu-bar .context-menu .menu-item:hover {
-    -fx-background-color: #294f88;
+    -fx-background-color: -item-bg-hover;
 }
 
 .menu-bar .context-menu .menu-item:disabled {
@@ -63,7 +67,7 @@
 }
 
 .menu-bar .context-menu .menu-item:hover .label {
-    -fx-text-fill: #b8bdca;
+    -fx-text-fill: -text-hover;
 }
 
 /* 快捷键 */
@@ -98,7 +102,7 @@
 
 .menu-bar .context-menu .check-menu-item:hover,
 .menu-bar .context-menu .radio-menu-item:hover {
-    -fx-background-color: #f0f2f5;
+    -fx-background-color: -text-hover;
 }
 
 .menu-bar .context-menu .check-menu-item:checked .left-container,

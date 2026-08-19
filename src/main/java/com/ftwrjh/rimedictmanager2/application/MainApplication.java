@@ -22,28 +22,17 @@ public class MainApplication extends Application {
         root.setTop(TopMenuBarGenerator.getInstance().getNode(primaryStage));
         root.setLeft(LeftMenuBarGenerator.getInstance().getNode(primaryStage));
         root.setCenter(DictEntryTableViewGenerator.getInstance().getNode(primaryStage));
-//        ((VBox) root.getRight()).getChildren().add(BtnDirChooserGenerator.getInstance().getNode(primaryStage));
         root.setRight(RightMenuBarGenerator.getInstance().getNode(primaryStage));
         root.setBottom(BottomStatusBarGenerator.getInstance().getNode(primaryStage));
 
-
         Scene scene = new Scene(root, 900, 700);
-        scene.getStylesheets().addAll(
-                getClass().getResource(Const.Path.CSS_MAIN).toExternalForm()
-        );
+        scene.getStylesheets().add(getClass().getResource(Const.Path.CSS_MAIN).toExternalForm());
 
         Image icon = new Image(getClass().getResourceAsStream(Const.Path.ICON));
         primaryStage.getIcons().add(icon);
-
         primaryStage.setScene(scene);
         primaryStage.setTitle(Const.APP_NAME);
         primaryStage.show();
-
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//        alert.setTitle("信息");
-//        alert.setHeaderText("标题内容（可选）");
-//        alert.setContentText("这是提示框的具体内容。");
-//        alert.showAndWait();  // 阻塞等待用户点击
     }
 
 
