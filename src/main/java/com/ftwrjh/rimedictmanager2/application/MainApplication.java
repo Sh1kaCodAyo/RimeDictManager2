@@ -63,21 +63,25 @@ public class MainApplication extends Application {
             WorkspaceService.load(property);
         }
 
-
         AppConfig config = AppConfig.getInstance();
-        String bgHex = config.getProperty("theme.bg");
-        String textHex = config.getProperty("theme.text");
-        String borderHex = config.getProperty("theme.border");
+        String bgHex = config.getProperty(AppConst.ConfigKey.COLOR_BG_HEX);
+        String textHex = config.getProperty(AppConst.ConfigKey.COLOR_TEXT_HEX);
+        String borderHex = config.getProperty(AppConst.ConfigKey.COLOR_BORDER_HEX);
 
         // 应用样式
-        if (root != null && StringUtils.isNoneEmpty(bgHex, textHex, borderHex)) {
-            root.setStyle(String.format("""
-                -item-bg-hover: %s;
-                -text-hover: %s;
-                -border-color: %s;
-            """, bgHex, textHex, borderHex));
+        if (root != null) {
+            StringBuilder sb = new StringBuilder();
+            if (StringUtils.isNotEmpty(bgHex)) {
+                sb.append(String.format("-item-bg-hover: %s;", bgHex));
+            }
+            if (StringUtils.isNotEmpty(textHex)) {
+                sb.append(String.format("-text-hover: %s;", textHex));
+            }
+            if (StringUtils.isNotEmpty(borderHex)) {
+                sb.append(String.format("-border-color: %s;", borderHex));
+            }
+            root.setStyle(sb.toString());
         }
-
     }
 
 }

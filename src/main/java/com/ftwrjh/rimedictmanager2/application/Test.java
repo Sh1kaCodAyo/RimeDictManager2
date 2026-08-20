@@ -9,4 +9,14 @@ public class Test {
         AppContext instance = AppContext.getInstance();
         log.debug("debug:{}", instance);
     }
+
+    public static void main(String[] args) {
+        String format = String.format("""
+                    -item-bg-hover: %s;
+                    -text-hover: %s;
+                    -border-color: %s;
+                """, "#dd", "rr", "ff");
+        System.out.println(format);
+
+    }
 }

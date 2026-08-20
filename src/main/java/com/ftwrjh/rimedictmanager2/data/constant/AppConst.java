@@ -5,6 +5,9 @@ public final class AppConst {
 
     public static class ConfigKey {
         public static final String RIME_HOME_DIR = "rimeHomeDir";
+        public static final String COLOR_BG_HEX = "theme.bg";
+        public static final String COLOR_TEXT_HEX = "theme.text";
+        public static final String COLOR_BORDER_HEX = "theme.border";
     }
 
     public static class ContextKey {

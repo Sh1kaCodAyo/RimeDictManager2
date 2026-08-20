@@ -1,19 +1,25 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
+import com.ftwrjh.rimedictmanager2.data.constant.DictionaryType;
 import com.ftwrjh.rimedictmanager2.data.variable.Dictionary;
 import com.ftwrjh.rimedictmanager2.data.variable.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
