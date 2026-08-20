@@ -30,10 +30,10 @@ public class RightNodeGenerator implements NodeGenerator {
         rightPanel.setPadding(new Insets(20));
         rightPanel.setAlignment(Pos.TOP_CENTER);
         rightPanel.setStyle(AppConst.Style.RIGHT_VBOX);
-        Button btnChooseRimeHomeDir = new Button("📂 选择目录");
-        btnChooseRimeHomeDir.getStyleClass().add("action-button");
-        btnChooseRimeHomeDir.setMaxWidth(Double.MAX_VALUE);
-        btnChooseRimeHomeDir.setOnAction(DirectoryChooser.getActionEventEventHandler(primaryStage));
+//        Button btnChooseRimeHomeDir = new Button("📂 选择目录");
+//        btnChooseRimeHomeDir.getStyleClass().add("action-button");
+//        btnChooseRimeHomeDir.setMaxWidth(Double.MAX_VALUE);
+//        btnChooseRimeHomeDir.setOnAction(DirectoryChooser.getActionEventEventHandler(primaryStage));
 
         Button btnSave = new Button("💾 全部保存"); // 💾
         btnSave.getStyleClass().add("action-button");
@@ -62,7 +62,7 @@ public class RightNodeGenerator implements NodeGenerator {
 //        btn2.setMaxWidth(Double.MAX_VALUE);
 //        btn3.setMaxWidth(Double.MAX_VALUE);
 
-        rightPanel.getChildren().addAll(btnChooseRimeHomeDir, btnSave);
+        rightPanel.getChildren().addAll(btnSave);
 
         return rightPanel;
     }

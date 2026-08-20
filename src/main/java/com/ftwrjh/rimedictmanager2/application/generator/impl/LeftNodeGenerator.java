@@ -3,6 +3,7 @@ package com.ftwrjh.rimedictmanager2.application.generator.impl;
 import com.ftwrjh.rimedictmanager2.application.generator.NodeGenerator;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
+import com.ftwrjh.rimedictmanager2.service.DirectoryChooser;
 import com.ftwrjh.rimedictmanager2.service.SettingsController;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
@@ -44,14 +45,11 @@ public class LeftNodeGenerator implements NodeGenerator {
         sidebarContainer.getChildren().add(labelManage);
 
         Button btnISManage = createNavItem(AppConst.Emoji.KEYBOARD, AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE,
-                () -> this.switchTab(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage),
-                        AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE));
+                () -> switchTabBtn(primaryStage, InputSchemaGridNodeGenerator.getInstance()));
         Button btnDictManage = createNavItem(AppConst.Emoji.BOOKS, AppConst.UserInterface.LEFT_BTN_DICTIONARY_MANAGE,
-                () -> this.switchTab(DictionaryGridNodeGenerator.getInstance().getNode(primaryStage),
-                        AppConst.UserInterface.LEFT_BTN_DICTIONARY_MANAGE));
+                () -> switchTabBtn(primaryStage, DictionaryGridNodeGenerator.getInstance()));
         Button btnDEManage = createNavItem(AppConst.Emoji.OPENED_BOOK, AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE,
-                () -> this.switchTab(DictionaryEntryGridNodeGenerator.getInstance().getNode(primaryStage),
-                        AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE));
+                () -> switchTabBtn(primaryStage, DictionaryEntryGridNodeGenerator.getInstance()));
 
         AppContext.getInstance().set(AppConst.AppContextConst.BTN_INPUT_SCHEMA_MANAGE, btnISManage);
         AppContext.getInstance().set(AppConst.AppContextConst.BTN_DICTIONARY_MANAGE, btnDictManage);
@@ -65,19 +63,21 @@ public class LeftNodeGenerator implements NodeGenerator {
         title2.getStyleClass().add("section-title");
         sidebarContainer.getChildren().add(title2);
 
-        // 中部留白
-//        VBox spacer = new VBox();
-//        VBox.setVgrow(spacer, Priority.ALWAYS);
-//        sidebarContainer.getChildren().add(spacer);
-
         // 底部设置
         Button themeBtn = createNavItem("🎨", "自定义主题", () -> openThemeSettings(primaryStage));
-        sidebarContainer.getChildren().addAll(themeBtn, createNavItem("⚙", "设置", null)); // ⚙️
+        Button btnChooseRimeHomeDir = createNavItem("📂", "选择主目录", () -> DirectoryChooser.getActionEventEventHandler(primaryStage));
+        btnChooseRimeHomeDir.setOnAction(DirectoryChooser.getActionEventEventHandler(primaryStage));
+        sidebarContainer.getChildren().addAll(btnChooseRimeHomeDir, themeBtn);
+//        sidebarContainer.getChildren().addAll(themeBtn, createNavItem("⚙", "设置", null)); // ⚙️
         sidebarContainer.setPrefWidth(220);
         sidebarContainer.setSpacing(2);
         sidebarContainer.setPadding(new Insets(0, 12, 12, 12));
         AppContext.getInstance().set(AppConst.AppContextConst.NODE_LEFT_SIDEBAR, sidebarContainer);
         return sidebarContainer;
+    }
+
+    private void switchTabBtn(Stage primaryStage, CenterNodeGenerator generator) {
+        this.switchTab(generator.getNode(primaryStage), generator.getTableName());
     }
 
     private void openThemeSettings(Stage primaryStage) {
