@@ -1,4 +1,4 @@
-<img src="src/main/resources/images/RimeDictManager2.png" width="300"  alt="RimeDictManager2.png"/>
+<!-- <img src="src/main/resources/images/RimeDictManager2.png" width="300"  alt="RimeDictManager2.png"/> -->
 
 # RimeDictManager2
 [<span style="color: #6aab73;">下载地址</span>](https://github.com/Sh1kaCodAyo/RimeDictHelper2) 的姊妹篇，致力于以更强大、更完善的功能打造不同的使用体验：
