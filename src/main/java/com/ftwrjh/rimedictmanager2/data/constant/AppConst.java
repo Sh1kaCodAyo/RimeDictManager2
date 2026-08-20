@@ -25,6 +25,7 @@ public final class AppConst {
         public static final String BTN_INPUT_SCHEMA_MANAGE = "btn:inputSchemaManage";
         public static final String BTN_DICTIONARY_MANAGE = "btn:dictionaryManage";
         public static final String BTN_DICTIONARY_ENTRY_MANAGE = "btn:dictionaryEntryManage";
+        public static final String NODE_LEFT_TOP_TITLE = "javafx_node:leftTopTitle";
     }
 
     public static class UserInterface {

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" spacing="15" style="-fx-background-color: #ffffff;"
+<VBox alignment="TOP_CENTER" spacing="15"
       xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.ftwrjh.rimedictmanager2.service.SettingsController">
 
@@ -13,7 +13,7 @@
     </padding>
 
 <!--    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="🎨 自定义主题"/>-->
-    <Label style="-fx-font-size: 20px; -fx-text-fill: #636363" text="🎨 自定义主题"/>
+    <Label style="-fx-font-size: 20px; -fx-text-fill: #636363"/>
 
     <Label text="悬停背景色:"/>
     <ColorPicker fx:id="bgColorPicker" prefWidth="200"/>

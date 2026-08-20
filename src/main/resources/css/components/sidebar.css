@@ -1,7 +1,20 @@
 /* ========================================
    侧边栏导航样式 - 修复版
    ======================================== */
-
+.tabtitle {
+    -fx-background-color: -item-bg-hover;
+    -fx-text-fill: -text-hover;
+    -fx-font-size: 20;
+    -fx-font-weight: 400;
+    /*-fx-padding: 8 12 8 12;*/
+    -fx-alignment: CENTER;
+    -fx-padding: 8 12 8 12;            /* 上 右 下 左 = 8px 12px 8px 12px */
+    /*-fx-cursor: hand;*/
+    /*-fx-background-radius: 6;*/
+    /*-fx-border-width: 0;*/
+    /*-fx-min-height: 36;*/
+    -fx-max-width: Infinity;
+}
 /* 侧边栏容器 */
 .sidebar {
     -fx-background-color: #b8bdca;
@@ -34,14 +47,14 @@
 
 /* ⭐ 选中效果 */
 .button.nav-item:selected {
-    -fx-background-color: -item-bg-hover;
-    -fx-border-color: #294f88;
+    /*-fx-background-color: -item-bg-hover;*/
+    -fx-border-color: -item-bg-hover;
     -fx-border-width: 0 0 0 3;
     -fx-background-radius: 6 0 0 6;
 }
 
 .button.nav-item:selected .label {
-    -fx-text-fill: -text-hover;
+    /*-fx-text-fill: -text-hover;*/
     -fx-font-weight: 600;
 }
 

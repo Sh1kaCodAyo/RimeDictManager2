@@ -10,10 +10,13 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
@@ -42,7 +45,14 @@ public class MainApplication extends Application {
         AppContext.getInstance().set("root", root);
 
         root.setTop(TopNodeGenerator.getInstance().getNode(primaryStage));
-        root.setLeft(LeftNodeGenerator.getInstance().getNode(primaryStage));
+        VBox left = new VBox();
+//        root.setLeft(LeftNodeGenerator.getInstance().getNode(primaryStage));
+        root.setLeft(left);
+        AppContext.getInstance().set(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, left);
+        Label tabTitle = new Label();
+        tabTitle.getStyleClass().add("tabtitle");
+//        sidebarContainer.getChildren().add(tabTitle);
+        left.getChildren().addAll(tabTitle, LeftNodeGenerator.getInstance().getNode(primaryStage));
         StackPane center = new StackPane();
         root.setCenter(center);
         center.getChildren().add(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage));
@@ -91,5 +101,6 @@ public class MainApplication extends Application {
             sb.append(String.format("-border-color: %s;", borderHex));
         }
         root.setStyle(sb.toString());
+        AppContext.getInstance().getTyped(AppConst.AppContextConst.BTN_INPUT_SCHEMA_MANAGE, Button.class).fire();
     }
 }

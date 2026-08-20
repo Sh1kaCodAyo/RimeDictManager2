@@ -34,11 +34,10 @@ public class LeftNodeGenerator implements NodeGenerator {
 
     @Override
     public Node getNode(Stage primaryStage) {
-        // Logo
         VBox sidebarContainer = new VBox();
-        Label logo = new Label("RimeDictManager2");
-        logo.getStyleClass().add("logo");
-        sidebarContainer.getChildren().add(logo);
+//        Label tabTitle = new Label("RimeDictManager2");
+//        tabTitle.getStyleClass().add("tabtitle");
+//        sidebarContainer.getChildren().add(tabTitle);
 
         // 分组标题
         Label labelManage = new Label("管理工具");
@@ -47,13 +46,13 @@ public class LeftNodeGenerator implements NodeGenerator {
 
         Button btnISManage = createNavItem(AppConst.Emoji.KEYBOARD, AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE,
                 () -> this.switchTab(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage),
-                        AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE, sidebarContainer));
+                        AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE));
         Button btnDictManage = createNavItem(AppConst.Emoji.BOOKS, AppConst.UserInterface.LEFT_BTN_DICTIONARY_MANAGE,
                 () -> this.switchTab(DictionaryGridNodeGenerator.getInstance().getNode(primaryStage),
-                        AppConst.UserInterface.LEFT_BTN_DICTIONARY_MANAGE, sidebarContainer));
+                        AppConst.UserInterface.LEFT_BTN_DICTIONARY_MANAGE));
         Button btnDEManage = createNavItem(AppConst.Emoji.OPENED_BOOK, AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE,
                 () -> this.switchTab(DictionaryEntryGridNodeGenerator.getInstance().getNode(primaryStage),
-                        AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE, sidebarContainer));
+                        AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE));
 
         AppContext.getInstance().set(AppConst.AppContextConst.BTN_INPUT_SCHEMA_MANAGE, btnISManage);
         AppContext.getInstance().set(AppConst.AppContextConst.BTN_DICTIONARY_MANAGE, btnDictManage);
@@ -63,32 +62,26 @@ public class LeftNodeGenerator implements NodeGenerator {
         sidebarContainer.getChildren().addAll(btnISManage, btnDictManage, btnDEManage);
 
         // 分组标题
-        Label title2 = new Label("标签");
+        Label title2 = new Label("设置");
         title2.getStyleClass().add("section-title");
         sidebarContainer.getChildren().add(title2);
 
-        sidebarContainer.getChildren().addAll(
-                createNavItem("💼", "工作", null),
-                createNavItem("👤", "个人", null),
-                createNavItem("📬", "订阅", null)
-        );
-
         // 中部留白
-        VBox spacer = new VBox();
-        VBox.setVgrow(spacer, Priority.ALWAYS);
-        sidebarContainer.getChildren().add(spacer);
+//        VBox spacer = new VBox();
+//        VBox.setVgrow(spacer, Priority.ALWAYS);
+//        sidebarContainer.getChildren().add(spacer);
 
         // 底部设置
-        Button themeBtn = createNavItem("🎨", "自定义主题", () -> openThemeSettings(primaryStage, sidebarContainer));
-        sidebarContainer.getChildren().addAll(themeBtn, createNavItem("⚙️", "设置", null));
+        Button themeBtn = createNavItem("🎨", "自定义主题", () -> openThemeSettings(primaryStage));
+        sidebarContainer.getChildren().addAll(themeBtn, createNavItem("⚙", "设置", null)); // ⚙️
         sidebarContainer.setPrefWidth(220);
         sidebarContainer.setSpacing(2);
-        sidebarContainer.setPadding(new Insets(12, 12, 12, 12));
+        sidebarContainer.setPadding(new Insets(0, 12, 12, 12));
         AppContext.getInstance().set(AppConst.AppContextConst.NODE_LEFT_SIDEBAR, sidebarContainer);
         return sidebarContainer;
     }
 
-    private void openThemeSettings(Stage primaryStage, VBox sidebarContainer) {
+    private void openThemeSettings(Stage primaryStage) {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ftwrjh/rimedictmanager2/application/settings-view.fxml"));
@@ -102,20 +95,25 @@ public class LeftNodeGenerator implements NodeGenerator {
             ObservableList<Node> children = center.getChildren();
             children.clear();
             children.add(root);
-            Label logo1 = new Label("自定义主题");
-            sidebarContainer.getChildren().set(0, logo1);
+            root.getStyleClass().add("dict-table");
+            Label tabTitle = new Label("自定义主题");
+            tabTitle.getStyleClass().add("tabtitle");
+            VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
+            left.getChildren().set(0, tabTitle);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void switchTab(Node node, String tabName, VBox sidebarContainer) {
+    private void switchTab(Node node, String tabName) {
         StackPane center = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
         ObservableList<Node> children = center.getChildren();
         children.clear();
         children.add(node);
-        Label logo1 = new Label(tabName);
-        sidebarContainer.getChildren().set(0, logo1);
+        Label tabTitle = new Label(tabName);
+        tabTitle.getStyleClass().add("tabtitle");
+        VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
+        left.getChildren().set(0, tabTitle);
     }
 
     private Button createNavItem(String icon, String text, Runnable onAction) {
