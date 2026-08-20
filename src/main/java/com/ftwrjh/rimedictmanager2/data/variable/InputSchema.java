@@ -5,7 +5,16 @@ import javafx.beans.property.*;
 public class InputSchema {
     private final StringProperty inputSchemaId = new SimpleStringProperty();
     private final StringProperty inputSchemaName = new SimpleStringProperty();
-    private final BooleanProperty available = new SimpleBooleanProperty();
+    private final BooleanProperty active = new SimpleBooleanProperty();
+
+    @Override
+    public String toString() {
+        return "InputSchema{" +
+                "inputSchemaId=" + inputSchemaId +
+                ", inputSchemaName=" + inputSchemaName +
+                ", active=" + active +
+                '}';
+    }
 
     public InputSchema() {
     }
@@ -17,10 +26,10 @@ public class InputSchema {
         this.inputSchemaId.set(inputSchemaId);
         this.inputSchemaName.set(inputSchemaName);
     }
-    public InputSchema(String inputSchemaId, String inputSchemaName, Boolean available) {
+    public InputSchema(String inputSchemaId, String inputSchemaName, Boolean active) {
         this.inputSchemaId.set(inputSchemaId);
         this.inputSchemaName.set(inputSchemaName);
-        this.available.set(available);
+        this.active.set(active);
     }
 
     public String getInputSchemaId() {
@@ -47,15 +56,15 @@ public class InputSchema {
         this.inputSchemaName.set(inputSchemaName);
     }
 
-    public boolean isAvailable() {
-        return available.get();
+    public boolean getActive() {
+        return active.get();
     }
 
-    public BooleanProperty availableProperty() {
-        return available;
+    public BooleanProperty activeProperty() {
+        return active;
     }
 
-    public void setAvailable(boolean available) {
-        this.available.set(available);
+    public void setActive(boolean active) {
+        this.active.set(active);
     }
 }

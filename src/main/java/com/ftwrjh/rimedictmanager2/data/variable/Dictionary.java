@@ -1,50 +1,53 @@
 package com.ftwrjh.rimedictmanager2.data.variable;
 
-import javafx.beans.property.MapProperty;
-import javafx.beans.property.SimpleMapProperty;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Dictionary {
-    private final StringProperty inputSchemaId = new SimpleStringProperty();
-    private final StringProperty inputSchemaName = new SimpleStringProperty();
-    private final MapProperty<String, Boolean> extraDicts = new SimpleMapProperty<>(FXCollections.observableHashMap());
+    private final StringProperty dictionaryId = new SimpleStringProperty();
+    private final StringProperty dictionaryName = new SimpleStringProperty();
+    private BooleanProperty active = new SimpleBooleanProperty();
 
-    public String getInputSchemaId() {
-        return inputSchemaId.get();
+    public String getDictionaryId() {
+        return dictionaryId.get();
     }
 
-    public StringProperty inputSchemaIdProperty() {
-        return inputSchemaId;
+    public StringProperty dictionaryIdProperty() {
+        return dictionaryId;
     }
 
-    public void setInputSchemaId(String inputSchemaId) {
-        this.inputSchemaId.set(inputSchemaId);
+    public void setDictionaryId(String dictionaryId) {
+        this.dictionaryId.set(dictionaryId);
     }
 
-    public String getInputSchemaName() {
-        return inputSchemaName.get();
+    public String getDictionaryName() {
+        return dictionaryName.get();
     }
 
-    public StringProperty inputSchemaNameProperty() {
-        return inputSchemaName;
+    public StringProperty dictionaryNameProperty() {
+        return dictionaryName;
     }
 
-    public void setInputSchemaName(String inputSchemaName) {
-        this.inputSchemaName.set(inputSchemaName);
+    public void setDictionaryName(String dictionaryName) {
+        this.dictionaryName.set(dictionaryName);
     }
 
-    public ObservableMap<String, Boolean> getExtraDicts() {
-        return extraDicts.get();
+    public boolean isActive() {
+        return active.get();
     }
 
-    public MapProperty<String, Boolean> extraDictsProperty() {
-        return extraDicts;
+    public BooleanProperty activeProperty() {
+        return active;
     }
 
-    public void setExtraDicts(ObservableMap<String, Boolean> extraDicts) {
-        this.extraDicts.set(extraDicts);
+    public void setActive(boolean active) {
+        this.active.set(active);
     }
+
 }

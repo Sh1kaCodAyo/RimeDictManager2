@@ -20,12 +20,19 @@ public final class AppConst {
         public static final String BTN_DICTIONARY_ENTRY_MANAGE = "btn:dictionaryEntryManage";
     }
 
+    public static class UserInterface {
+        public static final String LEFT_BTN_INPUT_SCHAMA_MANAGE = "输入法管理";
+        public static final String LEFT_BTN_DICTIONARY_MANAGE = "词库管理";
+        public static final String LEFT_BTN_DICTIONARY_ENTRY_MANAGE = "词条管理";
+    }
+
     public static class Path {
         public static final String FXML_MAIN = "main-view.fxml";
         public static final String CSS_MAIN = "/css/main.css";
         public static final String ICON_MAIN = "/images/RimeDictManager2.png";
         public static final String YAML_DEFAULT_CUSTOM = "default.custom.yaml";
         public static final String DICT_FILENAME_SUFFIX = ".schema.yaml";
+        public static final String DICT_FILE_PATH_SUFFIX = ".dict.yaml";
     }
 
     public static class Link {

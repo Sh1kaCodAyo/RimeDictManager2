@@ -92,13 +92,13 @@ public class WorkspaceService {
                             JSONObject json = new JSONObject(data);
                             String name = json.getJSONObject("schema").getString("name");
                             is.setInputSchemaName(name);
-                            is.setAvailable(CollectionUtils.containsAny(finalActiveSchemaSet, is.getInputSchemaId()));
+                            is.setActive(CollectionUtils.containsAny(finalActiveSchemaSet, is.getInputSchemaId()));
                             return is;
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     })
-                    .collect(Collectors.toList());
+                    .toList();
 
             ObservableList<InputSchema> list = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
             list.clear();
