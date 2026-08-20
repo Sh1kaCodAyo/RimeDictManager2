@@ -123,7 +123,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         }).toList());
 
         try {
-            this.checkIsActive(observableList); // todo 判断是否生效：基本词库必生效，其他词库是否生效则需要从基本词库里读取
+            this.checkIsActive(observableList);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

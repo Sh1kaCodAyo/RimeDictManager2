@@ -16,7 +16,6 @@ public class Test {
                     -text-hover: %s;
                     -border-color: %s;
                 """, "#dd", "rr", "ff");
-        System.out.println(format);
-
+        log.info(format);
     }
 }

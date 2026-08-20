@@ -20,6 +20,11 @@ import org.yaml.snakeyaml.Yaml;
 
 public class MainApplication extends Application {
 
+    /**
+     * 初级初始化，时机较早
+     *
+     * @throws Exception
+     */
     @Override
     public void init() throws Exception {
         super.init();
@@ -57,31 +62,34 @@ public class MainApplication extends Application {
         this.initSettings(root);
     }
 
+    /**
+     * 次级初始化，时机靠后
+     *
+     * @param root
+     */
     private void initSettings(Pane root) {
+        // 初始化工作主目录
         String property = AppConfig.getInstance().getProperty(AppConst.ConfigKey.RIME_HOME_DIR);
         if (StringUtils.isNotEmpty(property)) {
             WorkspaceService.load(property);
         }
 
+        // 初始化主题色
         AppConfig config = AppConfig.getInstance();
         String bgHex = config.getProperty(AppConst.ConfigKey.COLOR_BG_HEX);
         String textHex = config.getProperty(AppConst.ConfigKey.COLOR_TEXT_HEX);
         String borderHex = config.getProperty(AppConst.ConfigKey.COLOR_BORDER_HEX);
 
-        // 应用样式
-        if (root != null) {
-            StringBuilder sb = new StringBuilder();
-            if (StringUtils.isNotEmpty(bgHex)) {
-                sb.append(String.format("-item-bg-hover: %s;", bgHex));
-            }
-            if (StringUtils.isNotEmpty(textHex)) {
-                sb.append(String.format("-text-hover: %s;", textHex));
-            }
-            if (StringUtils.isNotEmpty(borderHex)) {
-                sb.append(String.format("-border-color: %s;", borderHex));
-            }
-            root.setStyle(sb.toString());
+        StringBuilder sb = new StringBuilder();
+        if (StringUtils.isNotEmpty(bgHex)) {
+            sb.append(String.format("-item-bg-hover: %s;", bgHex));
         }
+        if (StringUtils.isNotEmpty(textHex)) {
+            sb.append(String.format("-text-hover: %s;", textHex));
+        }
+        if (StringUtils.isNotEmpty(borderHex)) {
+            sb.append(String.format("-border-color: %s;", borderHex));
+        }
+        root.setStyle(sb.toString());
     }
-
 }

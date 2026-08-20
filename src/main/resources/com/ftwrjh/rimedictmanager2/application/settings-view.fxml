@@ -12,7 +12,8 @@
         <Insets bottom="30" left="30" right="30" top="30"/>
     </padding>
 
-    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="🎨 自定义主题"/>
+<!--    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="🎨 自定义主题"/>-->
+    <Label style="-fx-font-size: 20px; -fx-text-fill: #636363" text="🎨 自定义主题"/>
 
     <Label text="悬停背景色:"/>
     <ColorPicker fx:id="bgColorPicker" prefWidth="200"/>

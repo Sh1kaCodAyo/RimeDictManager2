@@ -1,15 +1,18 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
+import com.ftwrjh.rimedictmanager2.application.node.custom.ActionHyperlinkTableCell;
+import com.ftwrjh.rimedictmanager2.application.node.custom.LineNumberTableCell;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.data.variable.DictionaryEntry;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import javafx.util.converter.IntegerStringConverter;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +44,9 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
         TableColumn<DictionaryEntry, Integer> tcWeight = new TableColumn<>("权重");
         tcWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
         tcWeight.setEditable(true);
-        TableColumn<DictionaryEntry, String> tcSource = new TableColumn<>("来源");
-        tcSource.setCellValueFactory(new PropertyValueFactory<>("source"));
         TableColumn<DictionaryEntry, Integer> tcLineNumber = new TableColumn<>("行号");
         tcLineNumber.setCellValueFactory(new PropertyValueFactory<>("lineNumber"));
+        TableColumn<DictionaryEntry, Void> actionCol = new TableColumn<>("操作");
 
         // 4. 创建表格并设置数据和列
         TableView<DictionaryEntry> tableView = new TableView<>(dataList);
@@ -63,32 +65,8 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
             entry.setWeight(newValue);
             log.info("词条「{}」权重已更新为「{}」", entry.getWord(), newValue);
         });
-
-
-        tcLineNumber.setCellFactory(column -> new TableCell<>() {
-            @Override
-            protected void updateItem(Integer lineNumber, boolean empty) {
-                super.updateItem(lineNumber, empty);
-
-                if (empty || lineNumber == null) {
-                    setText(null);
-                    setTooltip(null);
-                } else {
-                    // 显示文件名
-                    setText(lineNumber.toString());
-
-                    // 获取当前行的完整数据对象
-                    DictionaryEntry entry = getTableRow().getItem();
-                    if (entry != null) {
-                        String fullPath = entry.getFullPath();  // 获取完整路径
-                        // 创建 Tooltip 并设置
-                        Tooltip tooltip = new Tooltip(fullPath + ": 第" + lineNumber + "行");
-                        tooltip.setShowDelay(Duration.millis(300));
-                        setTooltip(tooltip);
-                    }
-                }
-            }
-        });
+        actionCol.setCellFactory(col -> new ActionHyperlinkTableCell());
+        tcLineNumber.setCellFactory(column -> new LineNumberTableCell());
 
         // ⭐ 自定义空数据提示
         Label placeholder = new Label("当前未选择输入法词库或词库无词条");
@@ -96,7 +74,7 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
         tableView.setPlaceholder(placeholder);
         tableView.setEditable(true);
 
-        tableView.getColumns().addAll(tcWord, tcCode, tcWeight/*, tcSource*/, tcLineNumber);
+        tableView.getColumns().addAll(tcWord, tcCode, tcWeight, tcLineNumber, actionCol);
 //        tableView.setPadding(new Insets(21, 0, 12, 0));
         tableView.getStyleClass().add("dict-table");
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -106,6 +84,7 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
         tcWeight.setPrefWidth(50);
 //        tcSource.setPrefWidth(200);
         tcLineNumber.setPrefWidth(50);
+        actionCol.setPrefWidth(30);
         return tableView;
     }
 }

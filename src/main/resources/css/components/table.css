@@ -79,3 +79,8 @@
 .dict-table .scroll-bar .thumb:hover {
     -fx-background-color: #9ca3af;
 }
+
+.hyperlink,
+.hyperlink:visited {
+    -fx-text-fill: #0066cc;
+}
