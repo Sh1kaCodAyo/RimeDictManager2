@@ -14,7 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -101,7 +100,7 @@ public class LeftNodeGenerator implements NodeGenerator {
             VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
             left.getChildren().set(0, tabTitle);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("页面加载异常", e);
         }
     }
 
