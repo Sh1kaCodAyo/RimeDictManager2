@@ -35,7 +35,7 @@ public class LeftNodeGenerator implements NodeGenerator {
     public Node getNode(Stage primaryStage) {
         VBox sidebarContainer = new VBox();
 //        Label tabTitle = new Label("RimeDictManager2");
-//        tabTitle.getStyleClass().add("tabtitle");
+//        tabTitle.getStyleClass().add("tab-title");
 //        sidebarContainer.getChildren().add(tabTitle);
 
         // 分组标题
@@ -96,7 +96,7 @@ public class LeftNodeGenerator implements NodeGenerator {
             children.add(root);
             root.getStyleClass().add("dict-table");
             Label tabTitle = new Label("自定义主题");
-            tabTitle.getStyleClass().add("tabtitle");
+            tabTitle.getStyleClass().add("tab-title");
             VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
             left.getChildren().set(0, tabTitle);
         } catch (Exception e) {
@@ -110,7 +110,7 @@ public class LeftNodeGenerator implements NodeGenerator {
         children.clear();
         children.add(node);
         Label tabTitle = new Label(tabName);
-        tabTitle.getStyleClass().add("tabtitle");
+        tabTitle.getStyleClass().add("tab-title");
         VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
         left.getChildren().set(0, tabTitle);
     }

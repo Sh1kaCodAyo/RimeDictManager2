@@ -1,7 +1,7 @@
 /* ========================================
    侧边栏导航样式 - 修复版
    ======================================== */
-.tabtitle {
+.tab-title {
     -fx-background-color: -item-bg-hover;
     -fx-text-fill: -text-hover;
     -fx-font-size: 20;

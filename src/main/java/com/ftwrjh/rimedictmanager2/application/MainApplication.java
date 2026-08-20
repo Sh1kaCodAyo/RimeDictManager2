@@ -50,7 +50,7 @@ public class MainApplication extends Application {
         root.setLeft(left);
         AppContext.getInstance().set(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, left);
         Label tabTitle = new Label();
-        tabTitle.getStyleClass().add("tabtitle");
+        tabTitle.getStyleClass().add("tab-title");
 //        sidebarContainer.getChildren().add(tabTitle);
         left.getChildren().addAll(tabTitle, LeftNodeGenerator.getInstance().getNode(primaryStage));
         StackPane center = new StackPane();
