@@ -1,6 +1,6 @@
 package com.ftwrjh.rimedictmanager2.application;
 
-import com.ftwrjh.rimedictmanager2.application.node.*;
+import com.ftwrjh.rimedictmanager2.application.generator.impl.*;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.env.AppConfig;
 import com.ftwrjh.rimedictmanager2.env.AppContext;

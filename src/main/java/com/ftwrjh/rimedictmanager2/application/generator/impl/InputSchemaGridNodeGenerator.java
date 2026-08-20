@@ -1,4 +1,4 @@
-package com.ftwrjh.rimedictmanager2.application.node;
+package com.ftwrjh.rimedictmanager2.application.generator.impl;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;

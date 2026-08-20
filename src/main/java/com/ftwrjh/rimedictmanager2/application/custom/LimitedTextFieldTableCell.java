@@ -1,4 +1,4 @@
-package com.ftwrjh.rimedictmanager2.application.node;
+package com.ftwrjh.rimedictmanager2.application.custom;
 
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;

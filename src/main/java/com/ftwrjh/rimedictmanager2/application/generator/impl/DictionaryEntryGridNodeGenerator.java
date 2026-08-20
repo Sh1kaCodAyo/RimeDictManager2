@@ -1,7 +1,8 @@
-package com.ftwrjh.rimedictmanager2.application.node;
+package com.ftwrjh.rimedictmanager2.application.generator.impl;
 
-import com.ftwrjh.rimedictmanager2.application.node.custom.ActionHyperlinkTableCell;
-import com.ftwrjh.rimedictmanager2.application.node.custom.LineNumberTableCell;
+import com.ftwrjh.rimedictmanager2.application.custom.ActionHyperlinkTableCell;
+import com.ftwrjh.rimedictmanager2.application.custom.LimitedTextFieldTableCell;
+import com.ftwrjh.rimedictmanager2.application.custom.LineNumberTableCell;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.data.variable.DictionaryEntry;
 import com.ftwrjh.rimedictmanager2.env.AppContext;

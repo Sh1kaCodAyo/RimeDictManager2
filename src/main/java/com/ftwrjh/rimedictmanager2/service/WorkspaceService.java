@@ -2,7 +2,7 @@ package com.ftwrjh.rimedictmanager2.service;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.ftwrjh.rimedictmanager2.application.node.BottomNodeGenerator;
+import com.ftwrjh.rimedictmanager2.application.generator.impl.BottomNodeGenerator;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.data.variable.InputSchema;
 import com.ftwrjh.rimedictmanager2.env.AppContext;

@@ -1,4 +1,4 @@
-package com.ftwrjh.rimedictmanager2.application.node.custom;
+package com.ftwrjh.rimedictmanager2.application.custom;
 
 import com.ftwrjh.rimedictmanager2.data.variable.DictionaryEntry;
 import javafx.scene.control.Hyperlink;
