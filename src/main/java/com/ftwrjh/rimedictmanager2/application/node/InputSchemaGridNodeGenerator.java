@@ -31,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * tab1 - 输入法管理
+ */
 @Slf4j
 public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
     private InputSchemaGridNodeGenerator() {
@@ -60,53 +63,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         // 4. 创建表格并设置数据和列
         TableView<InputSchema> tableView = new TableView<>(dataList);
 
-        tableView.setRowFactory(tv -> {
-            TableRow<InputSchema> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty() && event.getClickCount() == 1) {
-                    log.info("click");
-                }
-                if (!row.isEmpty() && event.getClickCount() == 2) {
-                    InputSchema item = row.getItem();
-                    String inputSchemaId = item.getInputSchemaId();
-                    String patternStr = "^" + inputSchemaId + ".*\\.dict\\.yaml$";
-//                    String suffix = ".dict.yaml";
-
-                    ObservableList<Dictionary> taList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY, ObservableList.class);
-                    taList.clear();
-
-                    String workspacePath = AppContext.getInstance().getTyped(AppConst.ContextKey.ENV_RIME_HOME_DIR, String.class);
-                    File workspace = new File(workspacePath);
-                    File[] files = workspace.listFiles();
-                    List<String> dictionarysByInputSchema = Arrays.stream(files).map(File::getName).filter(name -> name.matches(patternStr)).toList();
-                    log.info("dictionarysByInputSchema:{}", dictionarysByInputSchema);
-
-                    taList.addAll(dictionarysByInputSchema.stream().map(dictionaryId -> {
-                        Dictionary dictionary = new Dictionary();
-                        dictionary.setDictionaryId(dictionaryId);
-                        String section = this.removePrefixSuffix(dictionaryId, inputSchemaId, AppConst.Path.DICT_FILE_PATH_SUFFIX);
-                        if (StringUtils.isEmpty(section)) {
-                            dictionary.setDictionaryName(DictionaryType.BASE_DICT.getDictName());
-                        } else if (Strings.CI.contains(section, "user")) {
-                            dictionary.setDictionaryName(DictionaryType.USER_DCIT.getDictName());
-                        } else if (Strings.CI.contains(section, "extra")) {
-                            dictionary.setDictionaryName(DictionaryType.EXTRA_DICT.getDictName());
-                        }
-                        return dictionary;
-                    }).toList());
-
-                    try {
-                        this.checkIsActive(taList); // todo 判断是否生效：基本词库必生效，其他词库是否生效则需要从基本词库里读取
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                    // fire按钮2
-                    AppContext.getInstance().getTyped(AppConst.ContextKey.BTN_DICTIONARY_MANAGE, Button.class).fire();
-                }
-            });
-            return row;
-        });
+        tableView.setRowFactory(tv -> this.rowClickEvent());
 
         // ⭐ 自定义空数据提示
         Label placeholder = new Label("请关联Rime用户文件夹");
@@ -122,6 +79,57 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         colId.setPrefWidth(100);     // 词条列宽权重大
         colName.setPrefWidth(120);     // 词条列宽权重大
         return tableView;
+    }
+
+    private TableRow<InputSchema> rowClickEvent() {
+        TableRow<InputSchema> row = new TableRow<>();
+        row.setOnMouseClicked(event -> {
+            if (!row.isEmpty() && event.getClickCount() == 1) {
+                log.info("click once, no action");
+            }
+            if (!row.isEmpty() && event.getClickCount() == 2) {
+                this.loadDictionaryListByInputSchema(row);
+            }
+        });
+        return row;
+    }
+
+    private void loadDictionaryListByInputSchema(TableRow<InputSchema> row) {
+        InputSchema inputSchema = row.getItem();
+        String inputSchemaId = inputSchema.getInputSchemaId();
+        String patternStr = "^" + inputSchemaId + ".*\\.dict\\.yaml$";
+
+        ObservableList<Dictionary> observableList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY, ObservableList.class);
+        observableList.clear();
+
+        String workspacePath = AppContext.getInstance().getTyped(AppConst.ContextKey.ENV_RIME_HOME_DIR, String.class);
+        File workspace = new File(workspacePath);
+        File[] files = workspace.listFiles();
+        List<String> dictionarysByInputSchema = Arrays.stream(files).map(File::getName).filter(name -> name.matches(patternStr)).toList();
+        log.info("dictionarysByInputSchema:{}", dictionarysByInputSchema);
+
+        observableList.addAll(dictionarysByInputSchema.stream().map(dictionaryId -> {
+            Dictionary dictionary = new Dictionary();
+            dictionary.setDictionaryId(dictionaryId);
+            String section = this.removePrefixSuffix(dictionaryId, inputSchemaId, AppConst.Path.DICT_FILE_PATH_SUFFIX);
+            if (StringUtils.isEmpty(section)) {
+                dictionary.setDictionaryName(DictionaryType.BASE_DICT.getDictName());
+            } else if (Strings.CI.contains(section, "user")) {
+                dictionary.setDictionaryName(DictionaryType.USER_DCIT.getDictName());
+            } else if (Strings.CI.contains(section, "extra")) {
+                dictionary.setDictionaryName(DictionaryType.EXTRA_DICT.getDictName());
+            }
+            return dictionary;
+        }).toList());
+
+        try {
+            this.checkIsActive(observableList); // todo 判断是否生效：基本词库必生效，其他词库是否生效则需要从基本词库里读取
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // fire按钮2
+        AppContext.getInstance().getTyped(AppConst.ContextKey.BTN_DICTIONARY_MANAGE, Button.class).fire();
     }
 
     private String removePrefixSuffix(String str, String prefix, String suffix) {

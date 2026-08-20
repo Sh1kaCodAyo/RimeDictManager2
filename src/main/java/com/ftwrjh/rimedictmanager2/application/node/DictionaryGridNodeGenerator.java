@@ -1,9 +1,8 @@
 package com.ftwrjh.rimedictmanager2.application.node;
 
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
-import com.ftwrjh.rimedictmanager2.data.constant.DictionaryType;
 import com.ftwrjh.rimedictmanager2.data.variable.Dictionary;
-import com.ftwrjh.rimedictmanager2.data.variable.InputSchema;
+import com.ftwrjh.rimedictmanager2.data.variable.DictionaryEntry;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -13,14 +12,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * tab2 - 词库管理
+ */
 @Slf4j
 public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
     private DictionaryGridNodeGenerator() {
@@ -49,8 +52,10 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
         // 4. 创建表格并设置数据和列
         TableView<Dictionary> tableView = new TableView<>(dataList);
 
+        tableView.setRowFactory(tv -> this.rowClickEvent());
+
         // ⭐ 自定义空数据提示
-        Label placeholder = new Label("请关联Rime用户文件夹");
+        Label placeholder = new Label("当前未选择输入法");
         placeholder.setStyle(AppConst.Style.CENTER_TABLE_PLACEHOLDER);
         tableView.setPlaceholder(placeholder);
         tableView.setEditable(true);
@@ -63,5 +68,68 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
         colName.setPrefWidth(100);
         colActive.setPrefWidth(100);
         return tableView;
+    }
+
+    private TableRow<Dictionary> rowClickEvent() {
+        TableRow<Dictionary> row = new TableRow<>();
+        row.setOnMouseClicked(event -> {
+            if (!row.isEmpty() && event.getClickCount() == 1) {
+                log.info("click once, no action");
+            }
+            if (!row.isEmpty() && event.getClickCount() == 2) {
+                try {
+                    this.loadDictionaryListByInputSchema(row);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        return row;
+    }
+
+    private void loadDictionaryListByInputSchema(TableRow<Dictionary> row) throws IOException {
+        Dictionary dictionary = row.getItem();
+        ObservableList<DictionaryEntry> observableList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
+        observableList.clear();
+
+
+        log.info(dictionary.toString()); // id = wubi86_jidian_user.dict.yaml
+
+        String workspacePath = AppContext.getInstance().getTyped(AppConst.ContextKey.ENV_RIME_HOME_DIR, String.class);
+        String dictionaryId = dictionary.getDictionaryId();
+        String dictionaryFilePathStr = workspacePath + File.separator + dictionaryId;
+
+        Path baseDictPath = Paths.get(dictionaryFilePathStr);
+        List<String> lines = Files.readAllLines(baseDictPath, java.nio.charset.StandardCharsets.UTF_8);
+        if (CollectionUtils.isNotEmpty(lines)) {
+            String firstLine = lines.get(0);
+            if (firstLine.startsWith("\uFEFF")) {
+                lines.set(0, firstLine.substring(1));
+            }
+        }
+
+        // 1.3 找到 YAML 部分的开始和结束
+        int startLine = -1;  // "---" 的位置
+
+        boolean start = false;
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i).trim();
+            if (line.startsWith("#")) {
+                continue;
+            }
+            if (start) {
+                DictionaryEntry dictionaryEntry = new DictionaryEntry(line);
+                dictionaryEntry.setSource(dictionaryId);
+                dictionaryEntry.setLineNumber(i + 1);
+                dictionaryEntry.setFullPath(dictionaryFilePathStr);
+                observableList.addAll(dictionaryEntry);
+            } else if (line.equals("...") && startLine == -1) {
+                start = true;
+            }
+        }
+
+
+        // fire按钮2
+        AppContext.getInstance().getTyped(AppConst.ContextKey.BTN_DICTIONARY_ENTRY_MANAGE, Button.class).fire();
     }
 }

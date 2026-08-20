@@ -14,6 +14,7 @@ module com.ftwrjh.rimedictmanager2 {
     requires java.desktop;
     requires org.apache.commons.lang3;
     requires org.apache.commons.collections4;
+    requires ch.qos.logback.core;
 
     exports com.ftwrjh.rimedictmanager2.application;
     exports com.ftwrjh.rimedictmanager2.service;
