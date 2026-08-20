@@ -88,4 +88,9 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
         actionCol.setPrefWidth(30);
         return tableView;
     }
+
+    @Override
+    public String getTableName() {
+        return AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE;
+    }
 }

@@ -136,4 +136,9 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
         // fire按钮3
         AppContext.getInstance().getTyped(AppConst.AppContextConst.BTN_DICTIONARY_ENTRY_MANAGE, Button.class).fire();
     }
+
+    @Override
+    public String getTableName() {
+        return AppConst.UserInterface.LEFT_BTN_DICTIONARY_MANAGE;
+    }
 }

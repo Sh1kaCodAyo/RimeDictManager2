@@ -205,4 +205,9 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
             dictionary.setActive(jsonArray.contains(dictFileName));
         }
     }
+
+    @Override
+    public String getTableName() {
+        return AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE;
+    }
 }
