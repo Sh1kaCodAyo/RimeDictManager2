@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
     @Override
     public Node getNode(Stage primaryStage) {
         // 1. 获取 AppContext 中的列表（如果为空则初始化）
-        ObservableList<Dictionary> dataList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY, ObservableList.class);
+        ObservableList<Dictionary> dataList = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY, ObservableList.class);
 
 //        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_DICTIONARY, dataList);
 
@@ -52,7 +53,7 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
         // 4. 创建表格并设置数据和列
         TableView<Dictionary> tableView = new TableView<>(dataList);
 
-        tableView.setRowFactory(tv -> this.rowClickEvent());
+        tableView.setRowFactory(tv -> this.clickableTableRow());
 
         // ⭐ 自定义空数据提示
         Label placeholder = new Label("当前未选择输入法");
@@ -63,39 +64,43 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
         tableView.getColumns().addAll(colId, colName, colActive);
 //        tableView.setPadding(new Insets(21, 0, 12, 0));
         tableView.getStyleClass().add("dict-table");
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         colId.setPrefWidth(300);
         colName.setPrefWidth(100);
         colActive.setPrefWidth(100);
         return tableView;
     }
 
-    private TableRow<Dictionary> rowClickEvent() {
+    private TableRow<Dictionary> clickableTableRow() {
         TableRow<Dictionary> row = new TableRow<>();
-        row.setOnMouseClicked(event -> {
-            if (!row.isEmpty() && event.getClickCount() == 1) {
-                log.info("click once, no action");
-            }
-            if (!row.isEmpty() && event.getClickCount() == 2) {
-                try {
-                    this.loadDictionaryListByInputSchema(row);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+        row.setOnMouseClicked(event -> this.mouseClickedEvent(event, row));
         return row;
     }
 
-    private void loadDictionaryListByInputSchema(TableRow<Dictionary> row) throws IOException {
+    private void mouseClickedEvent(MouseEvent event, TableRow<Dictionary> row) {
+        if (row.isEmpty()) {
+            return;
+        }
+        if (event.getClickCount() == 1) {
+            log.info("click once, no action");
+        } else if (event.getClickCount() == 2) {
+            try {
+                this.loadDictionaryEntryListByDictionary(row);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void loadDictionaryEntryListByDictionary(TableRow<Dictionary> row) throws IOException {
         Dictionary dictionary = row.getItem();
-        ObservableList<DictionaryEntry> observableList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
+        ObservableList<DictionaryEntry> observableList = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
         observableList.clear();
 
 
         log.info(dictionary.toString()); // id = wubi86_jidian_user.dict.yaml
 
-        String workspacePath = AppContext.getInstance().getTyped(AppConst.ContextKey.ENV_RIME_HOME_DIR, String.class);
+        String workspacePath = AppContext.getInstance().getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
         String dictionaryId = dictionary.getDictionaryId();
         String dictionaryFilePathStr = workspacePath + File.separator + dictionaryId;
 
@@ -128,8 +133,7 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
             }
         }
 
-
-        // fire按钮2
-        AppContext.getInstance().getTyped(AppConst.ContextKey.BTN_DICTIONARY_ENTRY_MANAGE, Button.class).fire();
+        // fire按钮3
+        AppContext.getInstance().getTyped(AppConst.AppContextConst.BTN_DICTIONARY_ENTRY_MANAGE, Button.class).fire();
     }
 }

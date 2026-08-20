@@ -54,9 +54,9 @@ public class LeftNodeGenerator implements NodeGenerator {
                 () -> this.switchTab(DictionaryEntryGridNodeGenerator.getInstance().getNode(primaryStage),
                         AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE, sidebarContainer));
 
-        AppContext.getInstance().set(AppConst.ContextKey.BTN_INPUT_SCHEMA_MANAGE, btnISManage);
-        AppContext.getInstance().set(AppConst.ContextKey.BTN_DICTIONARY_MANAGE, btnDictManage);
-        AppContext.getInstance().set(AppConst.ContextKey.BTN_DICTIONARY_ENTRY_MANAGE, btnDEManage);
+        AppContext.getInstance().set(AppConst.AppContextConst.BTN_INPUT_SCHEMA_MANAGE, btnISManage);
+        AppContext.getInstance().set(AppConst.AppContextConst.BTN_DICTIONARY_MANAGE, btnDictManage);
+        AppContext.getInstance().set(AppConst.AppContextConst.BTN_DICTIONARY_ENTRY_MANAGE, btnDEManage);
 
         // ⭐ 调用 createNavItem() 创建按钮
         sidebarContainer.getChildren().addAll(btnISManage, btnDictManage, btnDEManage);
@@ -83,7 +83,7 @@ public class LeftNodeGenerator implements NodeGenerator {
         sidebarContainer.setPrefWidth(220);
         sidebarContainer.setSpacing(2);
         sidebarContainer.setPadding(new Insets(12, 12, 12, 12));
-        AppContext.getInstance().set(AppConst.ContextKey.NODE_LEFT_SIDEBAR, sidebarContainer);
+        AppContext.getInstance().set(AppConst.AppContextConst.NODE_LEFT_SIDEBAR, sidebarContainer);
         return sidebarContainer;
     }
 
@@ -97,7 +97,7 @@ public class LeftNodeGenerator implements NodeGenerator {
             SettingsController controller = loader.getController();
             controller.setRoot(primaryStage.getScene().getRoot());
 
-            StackPane center = AppContext.getInstance().getTyped(AppConst.ContextKey.NODE_CENTER_STACK_PANE, StackPane.class);
+            StackPane center = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
             ObservableList<Node> children = center.getChildren();
             children.clear();
             children.add(root);
@@ -109,7 +109,7 @@ public class LeftNodeGenerator implements NodeGenerator {
     }
 
     private void switchTab(Node node, String tabName, VBox sidebarContainer) {
-        StackPane center = AppContext.getInstance().getTyped(AppConst.ContextKey.NODE_CENTER_STACK_PANE, StackPane.class);
+        StackPane center = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
         ObservableList<Node> children = center.getChildren();
         children.clear();
         children.add(node);

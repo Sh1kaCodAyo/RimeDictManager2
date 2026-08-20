@@ -28,10 +28,10 @@ public class MainApplication extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        AppContext.getInstance().set(AppConst.ContextKey.OBJ_YAML, new Yaml());
-        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, new SimpleListProperty<>(FXCollections.observableArrayList()));
-        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_DICTIONARY, new SimpleListProperty<>(FXCollections.observableArrayList()));
-        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        AppContext.getInstance().set(AppConst.AppContextConst.OBJ_YAML, new Yaml());
+        AppContext.getInstance().set(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        AppContext.getInstance().set(AppConst.AppContextConst.TABLE_DATA_DICTIONARY, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        AppContext.getInstance().set(AppConst.AppContextConst.TABLE_DATA_DICTIONARY_ENTRY, new SimpleListProperty<>(FXCollections.observableArrayList()));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MainApplication extends Application {
         StackPane center = new StackPane();
         root.setCenter(center);
         center.getChildren().add(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage));
-        AppContext.getInstance().set(AppConst.ContextKey.NODE_CENTER_STACK_PANE, center);
+        AppContext.getInstance().set(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, center);
         root.setRight(RightNodeGenerator.getInstance().getNode(primaryStage));
         root.setBottom(BottomNodeGenerator.getInstance().getNode(primaryStage));
 
@@ -69,16 +69,16 @@ public class MainApplication extends Application {
      */
     private void initSettings(Pane root) {
         // 初始化工作主目录
-        String property = AppConfig.getInstance().getProperty(AppConst.ConfigKey.RIME_HOME_DIR);
+        String property = com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().getProperty(AppConst.AppConfigConst.RIME_HOME_DIR);
         if (StringUtils.isNotEmpty(property)) {
             WorkspaceService.load(property);
         }
 
         // 初始化主题色
-        AppConfig config = AppConfig.getInstance();
-        String bgHex = config.getProperty(AppConst.ConfigKey.COLOR_BG_HEX);
-        String textHex = config.getProperty(AppConst.ConfigKey.COLOR_TEXT_HEX);
-        String borderHex = config.getProperty(AppConst.ConfigKey.COLOR_BORDER_HEX);
+        AppConfig config = com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance();
+        String bgHex = config.getProperty(AppConst.AppConfigConst.COLOR_BG_HEX);
+        String textHex = config.getProperty(AppConst.AppConfigConst.COLOR_TEXT_HEX);
+        String borderHex = config.getProperty(AppConst.AppConfigConst.COLOR_BORDER_HEX);
 
         StringBuilder sb = new StringBuilder();
         if (StringUtils.isNotEmpty(bgHex)) {

@@ -31,7 +31,7 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
     @Override
     public Node getNode(Stage primaryStage) {
         // 1. 获取 AppContext 中的列表（如果为空则初始化）
-        ObservableList<DictionaryEntry> dataList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
+        ObservableList<DictionaryEntry> dataList = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
 
 //        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_DICTIONARY_ENTRY, dataList);
 
@@ -77,7 +77,7 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
         tableView.getColumns().addAll(tcWord, tcCode, tcWeight, tcLineNumber, actionCol);
 //        tableView.setPadding(new Insets(21, 0, 12, 0));
         tableView.getStyleClass().add("dict-table");
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         // 2. 为每列设置 prefWidth 作为权重比例
         tcWord.setPrefWidth(50);
         tcCode.setPrefWidth(50);

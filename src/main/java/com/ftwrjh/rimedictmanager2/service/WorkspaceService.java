@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONObject;
 import com.ftwrjh.rimedictmanager2.application.node.BottomNodeGenerator;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.data.variable.InputSchema;
-import com.ftwrjh.rimedictmanager2.env.AppConfig;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import javafx.collections.ObservableList;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +47,7 @@ public class WorkspaceService {
     public static void load(File workspace) {
         String workspacePath = workspace.getAbsolutePath();
         String msg = "Rime主目录: " + workspacePath;
-        AppContext.getInstance().set(AppConst.ContextKey.ENV_RIME_HOME_DIR, workspacePath);
+        AppContext.getInstance().set(AppConst.AppContextConst.ENV_RIME_HOME_DIR, workspacePath);
         log.info(msg);
         BottomNodeGenerator.getInstance().setStatusLeft(msg);
 
@@ -100,14 +99,14 @@ public class WorkspaceService {
                     })
                     .toList();
 
-            ObservableList<InputSchema> list = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
+            ObservableList<InputSchema> list = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
             list.clear();
             list.addAll(collect);
-            AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, list);
+            AppContext.getInstance().set(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, list);
 
             // update user config
-            AppConfig.getInstance().setProperty(AppConst.ConfigKey.RIME_HOME_DIR, workspacePath);
-            AppConfig.getInstance().saveAndReload();
+            com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().setProperty(AppConst.AppConfigConst.RIME_HOME_DIR, workspacePath);
+            com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().saveAndReload();
         } else {
             String warnMsg = "所选目录「" + workspacePath + "」中没有「default.custom.yaml」文件";
             log.warn(warnMsg);

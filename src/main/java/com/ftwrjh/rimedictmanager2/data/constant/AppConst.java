@@ -3,14 +3,18 @@ package com.ftwrjh.rimedictmanager2.data.constant;
 public final class AppConst {
     public static final String APP_NAME = "RimeDictManager2";
 
-    public static class ConfigKey {
+    public static class AppConfigConst {
         public static final String RIME_HOME_DIR = "rimeHomeDir";
         public static final String COLOR_BG_HEX = "theme.bg";
         public static final String COLOR_TEXT_HEX = "theme.text";
         public static final String COLOR_BORDER_HEX = "theme.border";
+        public static final String USER_HOME = "user.home";
+        public static final String USER_CONFIG_HOME = ".rdm2";
+        public static final String CONFIG_FILE = "rdm2.properties";
+
     }
 
-    public static class ContextKey {
+    public static class AppContextConst {
         public static final String TABLE_DATA_INPUT_SCHEMA = "tableData:inputSchema";
         public static final String TABLE_DATA_DICTIONARY = "tableData:dictionary";
         public static final String TABLE_DATA_DICTIONARY_ENTRY = "tableData:dictionaryEntry";

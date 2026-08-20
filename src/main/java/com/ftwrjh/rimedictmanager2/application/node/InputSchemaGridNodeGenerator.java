@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +46,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
     @Override
     public Node getNode(Stage primaryStage) {
         // 1. 获取 AppContext 中的列表（如果为空则初始化）
-        ObservableList<InputSchema> dataList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
+        ObservableList<InputSchema> dataList = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
 
 //        AppContext.getInstance().set(AppConst.ContextKey.TABLE_DATA_INPUT_SCHEMA, dataList);
 
@@ -63,7 +64,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         // 4. 创建表格并设置数据和列
         TableView<InputSchema> tableView = new TableView<>(dataList);
 
-        tableView.setRowFactory(tv -> this.rowClickEvent());
+        tableView.setRowFactory(tv -> this.clickableTableRow());
 
         // ⭐ 自定义空数据提示
         Label placeholder = new Label("请关联Rime用户文件夹");
@@ -74,35 +75,42 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         tableView.getColumns().addAll(colId, colName, colActive);
 //        tableView.setPadding(new Insets(21, 0, 12, 0));
         tableView.getStyleClass().add("dict-table");
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         // 2. 为每列设置 prefWidth 作为权重比例
-        colId.setPrefWidth(100);     // 词条列宽权重大
-        colName.setPrefWidth(120);     // 词条列宽权重大
+        colId.setPrefWidth(100);
+        colName.setPrefWidth(120);
         return tableView;
     }
 
-    private TableRow<InputSchema> rowClickEvent() {
+    private TableRow<InputSchema> clickableTableRow() {
         TableRow<InputSchema> row = new TableRow<>();
-        row.setOnMouseClicked(event -> {
-            if (!row.isEmpty() && event.getClickCount() == 1) {
-                log.info("click once, no action");
-            }
-            if (!row.isEmpty() && event.getClickCount() == 2) {
-                this.loadDictionaryListByInputSchema(row);
-            }
-        });
+        row.setOnMouseClicked(event -> mouseClickedEvent(event, row));
         return row;
     }
+    private void mouseClickedEvent(MouseEvent event, TableRow<InputSchema> row) {
+        if (row.isEmpty()) {
+            return;
+        }
+        if (event.getClickCount() == 1) {
+            log.info("click once, no action");
+        } else if (event.getClickCount() == 2) {
+            try {
+                this.loadDictionaryListByInputSchema(row);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
-    private void loadDictionaryListByInputSchema(TableRow<InputSchema> row) {
+    private void loadDictionaryListByInputSchema(TableRow<InputSchema> row) throws IOException {
         InputSchema inputSchema = row.getItem();
         String inputSchemaId = inputSchema.getInputSchemaId();
         String patternStr = "^" + inputSchemaId + ".*\\.dict\\.yaml$";
 
-        ObservableList<Dictionary> observableList = AppContext.getInstance().getTyped(AppConst.ContextKey.TABLE_DATA_DICTIONARY, ObservableList.class);
+        ObservableList<Dictionary> observableList = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY, ObservableList.class);
         observableList.clear();
 
-        String workspacePath = AppContext.getInstance().getTyped(AppConst.ContextKey.ENV_RIME_HOME_DIR, String.class);
+        String workspacePath = AppContext.getInstance().getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
         File workspace = new File(workspacePath);
         File[] files = workspace.listFiles();
         List<String> dictionarysByInputSchema = Arrays.stream(files).map(File::getName).filter(name -> name.matches(patternStr)).toList();
@@ -122,14 +130,10 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
             return dictionary;
         }).toList());
 
-        try {
-            this.checkIsActive(observableList);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        this.checkIsActive(observableList);
 
         // fire按钮2
-        AppContext.getInstance().getTyped(AppConst.ContextKey.BTN_DICTIONARY_MANAGE, Button.class).fire();
+        AppContext.getInstance().getTyped(AppConst.AppContextConst.BTN_DICTIONARY_MANAGE, Button.class).fire();
     }
 
     private String removePrefixSuffix(String str, String prefix, String suffix) {
@@ -156,7 +160,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         );
         Dictionary baseDict = dictionaryList.get(0);
         baseDict.setActive(true);
-        final String rimeHomeDir = AppContext.getInstance().getTyped(AppConst.ContextKey.ENV_RIME_HOME_DIR, String.class);
+        final String rimeHomeDir = AppContext.getInstance().getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
         final String fileFullPath = rimeHomeDir + File.separator + baseDict.getDictionaryId();
         Path baseDictPath = Paths.get(fileFullPath);
 
@@ -188,7 +192,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         String content = Files.lines(baseDictPath).skip(startLine).limit(endLine - startLine - 1).collect(Collectors.joining(System.lineSeparator()));
 
         // 1.5 读取截取到的yaml配置
-        Yaml yaml = AppContext.getInstance().getTyped(AppConst.ContextKey.OBJ_YAML, Yaml.class);
+        Yaml yaml = AppContext.getInstance().getTyped(AppConst.AppContextConst.OBJ_YAML, Yaml.class);
         Map<String, Object> load = yaml.load(content);
         JSONObject json = new JSONObject(load);
         JSONArray jsonArray = json.getJSONArray("import_tables");
