@@ -65,24 +65,24 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
         });
 
 
-        tcSource.setCellFactory(column -> new TableCell<>() {
+        tcLineNumber.setCellFactory(column -> new TableCell<>() {
             @Override
-            protected void updateItem(String fileName, boolean empty) {
-                super.updateItem(fileName, empty);
+            protected void updateItem(Integer lineNumber, boolean empty) {
+                super.updateItem(lineNumber, empty);
 
-                if (empty || fileName == null) {
+                if (empty || lineNumber == null) {
                     setText(null);
                     setTooltip(null);
                 } else {
                     // 显示文件名
-                    setText(fileName);
+                    setText(lineNumber.toString());
 
                     // 获取当前行的完整数据对象
                     DictionaryEntry entry = getTableRow().getItem();
                     if (entry != null) {
                         String fullPath = entry.getFullPath();  // 获取完整路径
                         // 创建 Tooltip 并设置
-                        Tooltip tooltip = new Tooltip(fullPath);
+                        Tooltip tooltip = new Tooltip(fullPath + ": 第" + lineNumber + "行");
                         tooltip.setShowDelay(Duration.millis(300));
                         setTooltip(tooltip);
                     }
