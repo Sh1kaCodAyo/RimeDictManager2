@@ -41,9 +41,9 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // 加载 FXML（控制器会自动创建并调用 initialize）
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConst.Path.FXML_MAIN));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(AppConst.Path.FXML_MAIN));
         BorderPane root = loader.load();
-        AppContext.getInstance().set("root", root);
+        AppContext.getInstance().set(AppConst.AppContextConst.NODE_ROOT, root);
 
         root.setTop(TopNodeGenerator.getInstance().getNode(primaryStage));
         VBox left = new VBox();
@@ -62,9 +62,9 @@ public class MainApplication extends Application {
         root.setBottom(BottomNodeGenerator.getInstance().getNode(primaryStage));
 
         Scene scene = new Scene(root, 900, 700);
-        scene.getStylesheets().add(getClass().getResource(AppConst.Path.CSS_MAIN).toExternalForm());
+        scene.getStylesheets().add(this.getClass().getResource(AppConst.Path.CSS_MAIN).toExternalForm());
 
-        Image icon = new Image(getClass().getResourceAsStream(AppConst.Path.ICON_MAIN));
+        Image icon = new Image(this.getClass().getResourceAsStream(AppConst.Path.ICON_MAIN));
         primaryStage.getIcons().add(icon);
         primaryStage.setScene(scene);
         primaryStage.setTitle(AppConst.APP_NAME);

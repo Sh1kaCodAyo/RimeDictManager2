@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Test {
+    // todo 顶部菜单栏文字-悬浮时始终为白色示应用样式
+    // todo hyperlink:visited 问题处理
     public static void showMemory() {
         AppContext instance = AppContext.getInstance();
         log.debug("debug:{}", instance);

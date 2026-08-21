@@ -77,7 +77,7 @@ public class LeftNodeGenerator implements NodeGenerator {
 
     private void openThemeSettings(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConst.Path.FXML_SETTINGS));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource(AppConst.Path.FXML_SETTINGS));
             Parent root = loader.load();
 
             // 传入主界面的根节点，以便实时预览

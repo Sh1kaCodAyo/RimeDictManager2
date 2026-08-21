@@ -41,7 +41,7 @@ public class AppConfig {
      * 从 classpath 加载默认配置（打包在 jar 内）
      */
     private void loadDefaultConfig() {
-        try (InputStream input = getClass().getClassLoader()
+        try (InputStream input = this.getClass().getClassLoader()
                 .getResourceAsStream(AppConst.AppConfigConst.CONFIG_FILENAME)) {
             if (input != null) {
                 props.load(input);
@@ -83,7 +83,7 @@ public class AppConfig {
                 }
 
                 // 从 JAR 内部的默认配置复制
-                try (InputStream defaultInput = getClass().getClassLoader()
+                try (InputStream defaultInput = this.getClass().getClassLoader()
                         .getResourceAsStream(AppConst.AppConfigConst.CONFIG_FILENAME)) {
                     if (defaultInput != null) {
                         Files.copy(defaultInput, userConfigPath);

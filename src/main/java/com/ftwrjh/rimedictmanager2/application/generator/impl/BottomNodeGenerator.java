@@ -38,13 +38,13 @@ public class BottomNodeGenerator implements NodeGenerator {
     }
 
     public void setStatusLeft(String msg) {
-        BorderPane root = AppContext.getInstance().getTyped("root", BorderPane.class);
+        BorderPane root = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_ROOT, BorderPane.class);
         HBox statusBar = (HBox) root.getBottom();
         statusBar.getChildren().set(0, new Label(msg));
     }
 
     public void setStatusRight(String msg) {
-        BorderPane root = AppContext.getInstance().getTyped("root", BorderPane.class);
+        BorderPane root = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_ROOT, BorderPane.class);
         HBox statusBar = (HBox) root.getBottom();
         statusBar.getChildren().set(2, new Label(msg));
     }
