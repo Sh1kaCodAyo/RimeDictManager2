@@ -25,7 +25,7 @@ public class AppConfig {
         // 1. 确定用户配置目录和文件路径
         String userHome = System.getProperty(AppConst.AppConfigConst.USER_HOME);
         Path appDir = Paths.get(userHome, AppConst.AppConfigConst.USER_CONFIG_HOME);  // 应用配置目录
-        userConfigPath = appDir.resolve(AppConst.AppConfigConst.CONFIG_FILE);
+        userConfigPath = appDir.resolve(AppConst.AppConfigConst.CONFIG_FILENAME);
 
         // 2. 加载默认配置（从 JAR 内部）
         loadDefaultConfig();
@@ -42,12 +42,12 @@ public class AppConfig {
      */
     private void loadDefaultConfig() {
         try (InputStream input = getClass().getClassLoader()
-                .getResourceAsStream(AppConst.AppConfigConst.CONFIG_FILE)) {
+                .getResourceAsStream(AppConst.AppConfigConst.CONFIG_FILENAME)) {
             if (input != null) {
                 props.load(input);
                 log.info("加载默认配置成功");
             } else {
-                log.warn("未找到默认配置文件: {}", AppConst.AppConfigConst.CONFIG_FILE);
+                log.warn("未找到默认配置文件: {}", AppConst.AppConfigConst.CONFIG_FILENAME);
             }
         } catch (Exception e) {
             log.error("加载默认配置失败", e);
@@ -84,7 +84,7 @@ public class AppConfig {
 
                 // 从 JAR 内部的默认配置复制
                 try (InputStream defaultInput = getClass().getClassLoader()
-                        .getResourceAsStream(AppConst.AppConfigConst.CONFIG_FILE)) {
+                        .getResourceAsStream(AppConst.AppConfigConst.CONFIG_FILENAME)) {
                     if (defaultInput != null) {
                         Files.copy(defaultInput, userConfigPath);
                         log.info("已创建用户配置文件: {}", userConfigPath);

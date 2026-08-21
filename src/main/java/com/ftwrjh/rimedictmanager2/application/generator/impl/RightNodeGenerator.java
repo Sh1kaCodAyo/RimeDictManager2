@@ -1,9 +1,8 @@
 package com.ftwrjh.rimedictmanager2.application.generator.impl;
 
-import com.ftwrjh.rimedictmanager2.application.Test;
+import com.ftwrjh.rimedictmanager2.Test;
 import com.ftwrjh.rimedictmanager2.application.generator.NodeGenerator;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
-import com.ftwrjh.rimedictmanager2.service.DirectoryChooser;
 import com.ftwrjh.rimedictmanager2.service.PersistenceService;
 import com.ftwrjh.rimedictmanager2.data.constant.ServiceResult;
 import javafx.geometry.Insets;

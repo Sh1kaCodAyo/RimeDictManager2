@@ -48,7 +48,7 @@ public class WorkspaceService {
         String workspacePath = workspace.getAbsolutePath();
         String msg = "Rime主目录: " + workspacePath;
         AppContext context = AppContext.getInstance();
-        context.set(AppConst.AppContextConst.ENV_RIME_HOME_DIR, workspacePath);
+        context.set(AppConst.AppContextConst.ENV_WORKSPACE, workspacePath);
         log.info(msg);
         BottomNodeGenerator.getInstance().setStatusLeft(msg);
 
@@ -82,11 +82,11 @@ public class WorkspaceService {
             List<InputSchema> collect = Arrays.stream(files)
                     .filter(File::isFile)
                     .map(File::getName)
-                    .filter(filename -> Strings.CS.endsWith(filename, AppConst.Path.DICT_FILENAME_SUFFIX))
-                    .map(str -> Strings.CS.replace(str, AppConst.Path.DICT_FILENAME_SUFFIX, ""))
+                    .filter(filename -> Strings.CS.endsWith(filename, AppConst.Path.DICT_SCHEMA_FILENAME_SUFFIX))
+                    .map(str -> Strings.CS.replace(str, AppConst.Path.DICT_SCHEMA_FILENAME_SUFFIX, ""))
                     .map(InputSchema::new)
                     .map(is -> {
-                        String filePath = workspacePath + File.separator + is.getInputSchemaId() + AppConst.Path.DICT_FILENAME_SUFFIX;
+                        String filePath = workspacePath + File.separator + is.getInputSchemaId() + AppConst.Path.DICT_SCHEMA_FILENAME_SUFFIX;
                         try (FileInputStream fis = new FileInputStream(filePath)) {
                             Map<String, Object> data = AppContext.getYamlInstance().load(fis);
                             JSONObject json = new JSONObject(data);
@@ -106,7 +106,7 @@ public class WorkspaceService {
             context.set(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, list);
 
             // update user config
-            com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().setProperty(AppConst.AppConfigConst.RIME_HOME_DIR, workspacePath);
+            com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().setProperty(AppConst.AppConfigConst.WORKSPACE, workspacePath);
             com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().saveAndReload();
         } else {
             String warnMsg = "所选目录「" + workspacePath + "」中没有「default.custom.yaml」文件";

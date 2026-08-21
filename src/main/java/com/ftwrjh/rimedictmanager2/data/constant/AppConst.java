@@ -4,14 +4,13 @@ public final class AppConst {
     public static final String APP_NAME = "RimeDictManager2";
 
     public static class AppConfigConst {
-        public static final String RIME_HOME_DIR = "rimeHomeDir";
+        public static final String WORKSPACE = "rimeHomeDir";
         public static final String COLOR_BG_HEX = "theme.bg";
         public static final String COLOR_TEXT_HEX = "theme.text";
         public static final String COLOR_BORDER_HEX = "theme.border";
         public static final String USER_HOME = "user.home";
         public static final String USER_CONFIG_HOME = ".rdm2";
-        public static final String CONFIG_FILE = "rdm2.properties";
-
+        public static final String CONFIG_FILENAME = "rdm2.properties";
     }
 
     public static class AppContextConst {
@@ -19,7 +18,7 @@ public final class AppConst {
         public static final String TABLE_DATA_DICTIONARY = "tableData:dictionary";
         public static final String TABLE_DATA_DICTIONARY_ENTRY = "tableData:dictionaryEntry";
         public static final String OBJ_YAML = "obj:yaml";
-        public static final String ENV_RIME_HOME_DIR = "env:rimeHomeDir";
+        public static final String ENV_WORKSPACE = "env:workspace";
         public static final String NODE_CENTER_STACK_PANE = "javafx_node:centerStackPane";
         public static final String NODE_LEFT_SIDEBAR = "javafx_node:leftSidebar";
         public static final String BTN_INPUT_SCHEMA_MANAGE = "btn:inputSchemaManage";
@@ -29,20 +28,23 @@ public final class AppConst {
     }
 
     public static class UserInterface {
+        public static final String GROUP1_MANAGE_TOOLS = "管理工具";
         public static final String LEFT_BTN_INPUT_SCHAMA_MANAGE = "输入法管理";
         public static final String LEFT_BTN_DICTIONARY_MANAGE = "词库管理";
         public static final String LEFT_BTN_DICTIONARY_ENTRY_MANAGE = "词条管理";
+        public static final String GROUP2_SETTINGS = "设置";
         public static final String LEFT_BTN_CUSTOM_THEME = "自定义主题";
         public static final String LEFT_BTN_SELECT_WORKSPACE = "选择主目录";
     }
 
     public static class Path {
         public static final String FXML_MAIN = "main-view.fxml";
+        public static final String FXML_SETTINGS = "/com/ftwrjh/rimedictmanager2/application/settings-view.fxml";
         public static final String CSS_MAIN = "/css/main.css";
         public static final String ICON_MAIN = "/images/RimeDictManager2.png";
         public static final String YAML_DEFAULT_CUSTOM = "default.custom.yaml";
-        public static final String DICT_FILENAME_SUFFIX = ".schema.yaml";
-        public static final String DICT_FILE_PATH_SUFFIX = ".dict.yaml";
+        public static final String DICT_SCHEMA_FILENAME_SUFFIX = ".schema.yaml";
+        public static final String DICT_FILENAME_SUFFIX = ".dict.yaml";
     }
 
     public static class Link {
@@ -71,5 +73,7 @@ public final class AppConst {
         public static final String RIGHT_VBOX = "-fx-background-color: #f8fafc;";
         public static final String BOTTOM_STATUS_BAR = "-fx-background-color: #e9ecef; -fx-border-color: #ced4da; -fx-border-width: 1 0 0 0;";
         public static final String LEFT_MENU_GROUP_TITLE = "section-title";
+        public static final String CENTER_TABLE_VIEW = "dict-table";
+        public static final String LEFT_TOP_CURRENTTAB_TITLE = "tab-title";
     }
 }

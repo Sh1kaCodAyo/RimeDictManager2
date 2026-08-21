@@ -51,7 +51,7 @@ public class MainApplication extends Application {
         root.setLeft(left);
         AppContext.getInstance().set(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, left);
         Label tabTitle = new Label();
-        tabTitle.getStyleClass().add("tab-title");
+        tabTitle.getStyleClass().add(AppConst.Style.LEFT_TOP_CURRENTTAB_TITLE);
 //        sidebarContainer.getChildren().add(tabTitle);
         left.getChildren().addAll(tabTitle, LeftNodeGenerator.getInstance().getNode(primaryStage));
         StackPane center = new StackPane();
@@ -80,7 +80,7 @@ public class MainApplication extends Application {
      */
     private void initSettings(Pane root) {
         // 初始化工作主目录
-        String property = com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().getProperty(AppConst.AppConfigConst.RIME_HOME_DIR);
+        String property = com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().getProperty(AppConst.AppConfigConst.WORKSPACE);
         if (StringUtils.isNotEmpty(property)) {
             WorkspaceService.load(property);
         }

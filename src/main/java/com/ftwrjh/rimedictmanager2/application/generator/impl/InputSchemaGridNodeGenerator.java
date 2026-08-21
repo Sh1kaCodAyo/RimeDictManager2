@@ -74,7 +74,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
 
         tableView.getColumns().addAll(colId, colName, colActive);
 //        tableView.setPadding(new Insets(21, 0, 12, 0));
-        tableView.getStyleClass().add("dict-table");
+        tableView.getStyleClass().add(AppConst.Style.CENTER_TABLE_VIEW);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         // 2. 为每列设置 prefWidth 作为权重比例
         colId.setPrefWidth(100);
@@ -111,7 +111,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         ObservableList<Dictionary> observableList = context.getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY, ObservableList.class);
         observableList.clear();
 
-        String workspacePath = context.getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
+        String workspacePath = context.getTyped(AppConst.AppContextConst.ENV_WORKSPACE, String.class);
         File workspace = new File(workspacePath);
         File[] files = workspace.listFiles();
         List<String> dictionarysByInputSchema = Arrays.stream(files).map(File::getName).filter(name -> name.matches(patternStr)).toList();
@@ -120,7 +120,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         observableList.addAll(dictionarysByInputSchema.stream().map(dictionaryId -> {
             Dictionary dictionary = new Dictionary();
             dictionary.setDictionaryId(dictionaryId);
-            String section = this.removePrefixSuffix(dictionaryId, inputSchemaId, AppConst.Path.DICT_FILE_PATH_SUFFIX);
+            String section = this.removePrefixSuffix(dictionaryId, inputSchemaId, AppConst.Path.DICT_FILENAME_SUFFIX);
             if (StringUtils.isEmpty(section)) {
                 dictionary.setDictionaryName(DictionaryType.BASE_DICT.getDictName());
             } else if (Strings.CI.contains(section, "user")) {
@@ -162,8 +162,8 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         );
         Dictionary baseDict = dictionaryList.get(0);
         baseDict.setActive(true);
-        final String rimeHomeDir = context.getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
-        final String fileFullPath = rimeHomeDir + File.separator + baseDict.getDictionaryId();
+        final String workspace = context.getTyped(AppConst.AppContextConst.ENV_WORKSPACE, String.class);
+        final String fileFullPath = workspace + File.separator + baseDict.getDictionaryId();
         Path baseDictPath = Paths.get(fileFullPath);
 
         // 1.2 处理文件开头处的 BOM 标志
@@ -203,7 +203,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         // 2. 处理其他词库
         for (int i = 1; i < dictionaryList.size(); i++) {
             Dictionary dictionary = dictionaryList.get(i);
-            String dictFileName = this.removePrefixSuffix(dictionary.getDictionaryId(), "", AppConst.Path.DICT_FILE_PATH_SUFFIX);
+            String dictFileName = this.removePrefixSuffix(dictionary.getDictionaryId(), "", AppConst.Path.DICT_FILENAME_SUFFIX);
             dictionary.setActive(jsonArray.contains(dictFileName));
         }
     }

@@ -1,6 +1,5 @@
-package com.ftwrjh.rimedictmanager2.application;
+package com.ftwrjh.rimedictmanager2;
 
-import com.ftwrjh.rimedictmanager2.application.generator.impl.LeftNodeGenerator;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import lombok.extern.slf4j.Slf4j;
 

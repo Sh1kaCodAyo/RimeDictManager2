@@ -35,7 +35,7 @@ public class LeftNodeGenerator implements NodeGenerator {
     @Override
     public Node getNode(Stage primaryStage) {
         // Group1 - Manage Tools
-        Label group1manageTools = new Label("管理工具");
+        Label group1manageTools = new Label(AppConst.UserInterface.GROUP1_MANAGE_TOOLS);
         group1manageTools.getStyleClass().add(AppConst.Style.LEFT_MENU_GROUP_TITLE);
 
         Button btnInputSchemaManage = createNavItem(AppConst.Emoji.KEYBOARD, AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE,
@@ -46,7 +46,7 @@ public class LeftNodeGenerator implements NodeGenerator {
                 () -> DictionaryEntryGridNodeGenerator.getInstance().switchTabBtn(primaryStage));
 
         // Group2 - Settings
-        Label group2settings = new Label("设置");
+        Label group2settings = new Label(AppConst.UserInterface.GROUP2_SETTINGS);
         group2settings.getStyleClass().add(AppConst.Style.LEFT_MENU_GROUP_TITLE);
 
         Button btnSetTheme = createNavItem(AppConst.Emoji.PALETTE, AppConst.UserInterface.LEFT_BTN_CUSTOM_THEME,
@@ -77,7 +77,7 @@ public class LeftNodeGenerator implements NodeGenerator {
 
     private void openThemeSettings(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ftwrjh/rimedictmanager2/application/settings-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConst.Path.FXML_SETTINGS));
             Parent root = loader.load();
 
             // 传入主界面的根节点，以便实时预览
@@ -89,9 +89,9 @@ public class LeftNodeGenerator implements NodeGenerator {
             ObservableList<Node> children = center.getChildren();
             children.clear();
             children.add(root);
-            root.getStyleClass().add("dict-table");
-            Label tabTitle = new Label("自定义主题");
-            tabTitle.getStyleClass().add("tab-title");
+            root.getStyleClass().add(AppConst.Style.CENTER_TABLE_VIEW);
+            Label tabTitle = new Label(AppConst.UserInterface.LEFT_BTN_CUSTOM_THEME);
+            tabTitle.getStyleClass().add(AppConst.Style.LEFT_TOP_CURRENTTAB_TITLE);
             VBox left = context.getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
             left.getChildren().set(0, tabTitle);
         } catch (Exception e) {

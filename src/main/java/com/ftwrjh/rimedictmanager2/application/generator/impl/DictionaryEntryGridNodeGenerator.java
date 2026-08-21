@@ -77,7 +77,7 @@ public class DictionaryEntryGridNodeGenerator extends CenterNodeGenerator {
 
         tableView.getColumns().addAll(tcWord, tcCode, tcWeight, tcLineNumber, actionCol);
 //        tableView.setPadding(new Insets(21, 0, 12, 0));
-        tableView.getStyleClass().add("dict-table");
+        tableView.getStyleClass().add(AppConst.Style.CENTER_TABLE_VIEW);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         // 2. 为每列设置 prefWidth 作为权重比例
         tcWord.setPrefWidth(50);

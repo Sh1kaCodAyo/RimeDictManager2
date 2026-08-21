@@ -63,7 +63,7 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
 
         tableView.getColumns().addAll(colId, colName, colActive);
 //        tableView.setPadding(new Insets(21, 0, 12, 0));
-        tableView.getStyleClass().add("dict-table");
+        tableView.getStyleClass().add(AppConst.Style.CENTER_TABLE_VIEW);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         colId.setPrefWidth(300);
         colName.setPrefWidth(100);
@@ -101,7 +101,7 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
 
         log.info(dictionary.toString()); // id = wubi86_jidian_user.dict.yaml
 
-        String workspacePath = context.getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
+        String workspacePath = context.getTyped(AppConst.AppContextConst.ENV_WORKSPACE, String.class);
         String dictionaryId = dictionary.getDictionaryId();
         String dictionaryFilePathStr = workspacePath + File.separator + dictionaryId;
 

@@ -24,5 +24,7 @@ module com.ftwrjh.rimedictmanager2 {
     opens com.ftwrjh.rimedictmanager2.service to javafx.base, javafx.fxml;
     exports com.ftwrjh.rimedictmanager2.data.constant;
     opens com.ftwrjh.rimedictmanager2.data.constant to javafx.base, javafx.fxml;
+    exports com.ftwrjh.rimedictmanager2;
+    opens com.ftwrjh.rimedictmanager2 to javafx.base, javafx.fxml;
     //    opens com.ftwrjh.rimedictmanager2.service to javafx.fxml;
 }
