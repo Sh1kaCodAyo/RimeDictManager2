@@ -25,13 +25,13 @@ public abstract class CenterNodeGenerator implements NodeGenerator {
         AppContext context = AppContext.getInstance();
         Node node = this.getNode(primaryStage);
         String tabName = this.getTableName();
-        StackPane center = context.getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
+        StackPane center = context.getTyped(AppConst.AppContextConst.NODE_CENTER, StackPane.class);
         ObservableList<Node> children = center.getChildren();
         children.clear();
         children.add(node);
         Label tabTitle = new Label(tabName);
         tabTitle.getStyleClass().add(AppConst.Style.LEFT_TOP_CURRENTTAB_TITLE);
-        VBox left = context.getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
+        VBox left = context.getTyped(AppConst.AppContextConst.NODE_LEFT, VBox.class);
         left.getChildren().set(0, tabTitle);
     }
 

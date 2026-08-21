@@ -85,14 +85,14 @@ public class LeftNodeGenerator implements NodeGenerator {
             controller.setRoot(primaryStage.getScene().getRoot());
 
             AppContext context = AppContext.getInstance();
-            StackPane center = context.getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
+            StackPane center = context.getTyped(AppConst.AppContextConst.NODE_CENTER, StackPane.class);
             ObservableList<Node> children = center.getChildren();
             children.clear();
             children.add(root);
             root.getStyleClass().add(AppConst.Style.CENTER_TABLE_VIEW);
             Label tabTitle = new Label(AppConst.UserInterface.LEFT_BTN_CUSTOM_THEME);
             tabTitle.getStyleClass().add(AppConst.Style.LEFT_TOP_CURRENTTAB_TITLE);
-            VBox left = context.getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
+            VBox left = context.getTyped(AppConst.AppContextConst.NODE_LEFT, VBox.class);
             left.getChildren().set(0, tabTitle);
         } catch (Exception e) {
             log.error("页面加载异常", e);

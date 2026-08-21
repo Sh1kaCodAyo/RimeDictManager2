@@ -1,34 +1,43 @@
 package com.ftwrjh.rimedictmanager2.data.constant;
 
+/**
+ * 常量值
+ */
 public final class AppConst {
     public static final String APP_NAME = "RimeDictManager2";
 
     public static class AppConfigConst {
+        // CONFIG_FILE
+        public static final String USER_HOME = "user.home";
+        public static final String USER_CONFIG_HOME = ".rdm2";
+        public static final String CONFIG_FILENAME = "rdm2.properties";
+        // CONFIG_FILE_CONTENT
         public static final String WORKSPACE = "rimeHomeDir";
         public static final String COLOR_BG_HEX = "theme.bg";
         public static final String COLOR_TEXT_HEX = "theme.text";
         public static final String COLOR_BORDER_HEX = "theme.border";
-        public static final String USER_HOME = "user.home";
-        public static final String USER_CONFIG_HOME = ".rdm2";
-        public static final String CONFIG_FILENAME = "rdm2.properties";
     }
 
     public static class AppContextConst {
-        public static final String TABLE_DATA_INPUT_SCHEMA = "tableData:inputSchema";
-        public static final String TABLE_DATA_DICTIONARY = "tableData:dictionary";
-        public static final String TABLE_DATA_DICTIONARY_ENTRY = "tableData:dictionaryEntry";
-        public static final String OBJ_YAML = "obj:yaml";
         public static final String ENV_WORKSPACE = "env:workspace";
-        public static final String NODE_ROOT = "javafx_node:root";
-        public static final String NODE_CENTER_STACK_PANE = "javafx_node:centerStackPane";
-        public static final String NODE_LEFT_SIDEBAR = "javafx_node:leftSidebar";
+        public static final String OBJ_YAML = "obj:yaml";
+        // NODE
+        public static final String NODE_ROOT = "node:root";
+        public static final String NODE_CENTER = "node:center";
+        public static final String NODE_LEFT = "node:left";
+        public static final String NODE_LEFT_SIDEBAR = "node:leftSidebar";
+        // LEFT_BUTTON
         public static final String BTN_INPUT_SCHEMA_MANAGE = "btn:inputSchemaManage";
         public static final String BTN_DICTIONARY_MANAGE = "btn:dictionaryManage";
         public static final String BTN_DICTIONARY_ENTRY_MANAGE = "btn:dictionaryEntryManage";
-        public static final String NODE_LEFT_TOP_TITLE = "javafx_node:leftTopTitle";
+        // CENTER_TABLE_ObservableList
+        public static final String TABLE_DATA_INPUT_SCHEMA = "tableData:inputSchema";
+        public static final String TABLE_DATA_DICTIONARY = "tableData:dictionary";
+        public static final String TABLE_DATA_DICTIONARY_ENTRY = "tableData:dictionaryEntry";
     }
 
     public static class UserInterface {
+        // LEFT_SIDEBAR
         public static final String GROUP1_MANAGE_TOOLS = "管理工具";
         public static final String LEFT_BTN_INPUT_SCHAMA_MANAGE = "输入法管理";
         public static final String LEFT_BTN_DICTIONARY_MANAGE = "词库管理";
@@ -70,9 +79,11 @@ public final class AppConst {
     }
 
     public static class Style {
+        // STYLE_CONTENT
         public static final String CENTER_TABLE_PLACEHOLDER = "-fx-font-size: 16px; -fx-text-fill: #9ca3af; -fx-font-weight: 500; -fx-padding: 0 0 100 0; -fx-alignment: CENTER;";
         public static final String RIGHT_VBOX = "-fx-background-color: #f8fafc;";
         public static final String BOTTOM_STATUS_BAR = "-fx-background-color: #e9ecef; -fx-border-color: #ced4da; -fx-border-width: 1 0 0 0;";
+        // STYLE_CLASS
         public static final String LEFT_MENU_GROUP_TITLE = "section-title";
         public static final String CENTER_TABLE_VIEW = "dict-table";
         public static final String LEFT_TOP_CURRENTTAB_TITLE = "tab-title";

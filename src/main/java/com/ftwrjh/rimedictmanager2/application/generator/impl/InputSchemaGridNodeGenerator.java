@@ -122,11 +122,11 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
             dictionary.setDictionaryId(dictionaryId);
             String section = this.removePrefixSuffix(dictionaryId, inputSchemaId, AppConst.Path.DICT_FILENAME_SUFFIX);
             if (StringUtils.isEmpty(section)) {
-                dictionary.setDictionaryName(DictionaryType.BASE_DICT.getDictName());
+                dictionary.setDictionaryName(DictionaryType.BASE_DICT.getDictionaryName());
             } else if (Strings.CI.contains(section, "user")) {
-                dictionary.setDictionaryName(DictionaryType.USER_DCIT.getDictName());
+                dictionary.setDictionaryName(DictionaryType.USER_DCIT.getDictionaryName());
             } else if (Strings.CI.contains(section, "extra")) {
-                dictionary.setDictionaryName(DictionaryType.EXTRA_DICT.getDictName());
+                dictionary.setDictionaryName(DictionaryType.EXTRA_DICT.getDictionaryName());
             }
             return dictionary;
         }).toList());
@@ -157,8 +157,8 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         // 1. 单独处理基本词库，并读取其中的活动词库列表
         // 1.1 排序列表，并取出第一个词库即基本词库
         dictionaryList.sort(Comparator
-                .<Dictionary>comparingInt(dictionary -> DictionaryType.fromDisplayName(dictionary.getDictionaryName()).getPriority())
-                .thenComparingInt(dictionary -> DictionaryType.fromDisplayName(dictionary.getDictionaryName()).getPriority())
+                .<Dictionary>comparingInt(dictionary -> DictionaryType.fromDictionaryName(dictionary.getDictionaryName()).getPriority())
+                .thenComparingInt(dictionary -> DictionaryType.fromDictionaryName(dictionary.getDictionaryName()).getPriority())
         );
         Dictionary baseDict = dictionaryList.get(0);
         baseDict.setActive(true);

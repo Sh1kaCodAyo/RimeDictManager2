@@ -43,32 +43,35 @@ public class MainApplication extends Application {
         // 加载 FXML（控制器会自动创建并调用 initialize）
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource(AppConst.Path.FXML_MAIN));
         BorderPane root = loader.load();
-        AppContext.getInstance().set(AppConst.AppContextConst.NODE_ROOT, root);
+        AppContext context = AppContext.getInstance();
 
         root.setTop(TopNodeGenerator.getInstance().getNode(primaryStage));
+
         VBox left = new VBox();
-//        root.setLeft(LeftNodeGenerator.getInstance().getNode(primaryStage));
         root.setLeft(left);
-        AppContext.getInstance().set(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, left);
         Label tabTitle = new Label();
         tabTitle.getStyleClass().add(AppConst.Style.LEFT_TOP_CURRENTTAB_TITLE);
-//        sidebarContainer.getChildren().add(tabTitle);
         left.getChildren().addAll(tabTitle, LeftNodeGenerator.getInstance().getNode(primaryStage));
+
         StackPane center = new StackPane();
         root.setCenter(center);
         center.getChildren().add(InputSchemaGridNodeGenerator.getInstance().getNode(primaryStage));
-        AppContext.getInstance().set(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, center);
+
         root.setRight(RightNodeGenerator.getInstance().getNode(primaryStage));
+
         root.setBottom(BottomNodeGenerator.getInstance().getNode(primaryStage));
 
         Scene scene = new Scene(root, 900, 700);
         scene.getStylesheets().add(this.getClass().getResource(AppConst.Path.CSS_MAIN).toExternalForm());
-
         Image icon = new Image(this.getClass().getResourceAsStream(AppConst.Path.ICON_MAIN));
         primaryStage.getIcons().add(icon);
         primaryStage.setScene(scene);
         primaryStage.setTitle(AppConst.APP_NAME);
         primaryStage.show();
+
+        context.set(AppConst.AppContextConst.NODE_ROOT, root);
+        context.set(AppConst.AppContextConst.NODE_LEFT, left);
+        context.set(AppConst.AppContextConst.NODE_CENTER, center);
 
         this.initSettings(root);
     }
@@ -102,6 +105,8 @@ public class MainApplication extends Application {
             sb.append(String.format("-border-color: %s;", borderHex));
         }
         root.setStyle(sb.toString());
+
+        // 初始化界面：点击按钮1
         AppContext.getInstance().getTyped(AppConst.AppContextConst.BTN_INPUT_SCHEMA_MANAGE, Button.class).fire();
     }
 }
