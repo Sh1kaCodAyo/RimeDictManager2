@@ -83,9 +83,17 @@ public final class AppConst {
         public static final String CENTER_TABLE_PLACEHOLDER = "-fx-font-size: 16px; -fx-text-fill: #9ca3af; -fx-font-weight: 500; -fx-padding: 0 0 100 0; -fx-alignment: CENTER;";
         public static final String RIGHT_VBOX = "-fx-background-color: #f8fafc;";
         public static final String BOTTOM_STATUS_BAR = "-fx-background-color: #e9ecef; -fx-border-color: #ced4da; -fx-border-width: 1 0 0 0;";
+        public static final String THEME_ITEM_BG_HOVER = "-item-bg-hover: %s;";
+        public static final String THEME_TEXT_HOVER = "-text-hover: %s;";
+        public static final String THEME_BORDER_COLOR = "-border-color: %s;";
+        public static final String THEME_PREVIRE = THEME_ITEM_BG_HOVER + THEME_TEXT_HOVER + THEME_BORDER_COLOR;
         // STYLE_CLASS
         public static final String LEFT_MENU_GROUP_TITLE = "section-title";
         public static final String CENTER_TABLE_VIEW = "dict-table";
         public static final String LEFT_TOP_CURRENTTAB_TITLE = "tab-title";
+        // RGB
+        public static final String INIT_RGB_THEME_BG = "#3d6e87";
+        public static final String INIT_RGB_THEME_TEXT = "#ececec";
+        public static final String INIT_RGB_THEME_BORDER = "#294f88";
     }
 }

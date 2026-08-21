@@ -96,13 +96,13 @@ public class MainApplication extends Application {
 
         StringBuilder sb = new StringBuilder();
         if (StringUtils.isNotEmpty(bgHex)) {
-            sb.append(String.format("-item-bg-hover: %s;", bgHex));
+            sb.append(String.format(AppConst.Style.THEME_ITEM_BG_HOVER, bgHex));
         }
         if (StringUtils.isNotEmpty(textHex)) {
-            sb.append(String.format("-text-hover: %s;", textHex));
+            sb.append(String.format(AppConst.Style.THEME_TEXT_HOVER, textHex));
         }
         if (StringUtils.isNotEmpty(borderHex)) {
-            sb.append(String.format("-border-color: %s;", borderHex));
+            sb.append(String.format(AppConst.Style.THEME_BORDER_COLOR, borderHex));
         }
         root.setStyle(sb.toString());
 

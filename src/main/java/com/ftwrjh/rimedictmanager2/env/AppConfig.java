@@ -13,8 +13,6 @@ import java.util.Properties;
 
 @Slf4j
 public class AppConfig {
-
-
     @Getter
     private static final AppConfig instance = new AppConfig();
 
