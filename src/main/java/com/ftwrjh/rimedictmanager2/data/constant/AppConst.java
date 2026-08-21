@@ -32,6 +32,8 @@ public final class AppConst {
         public static final String LEFT_BTN_INPUT_SCHAMA_MANAGE = "输入法管理";
         public static final String LEFT_BTN_DICTIONARY_MANAGE = "词库管理";
         public static final String LEFT_BTN_DICTIONARY_ENTRY_MANAGE = "词条管理";
+        public static final String LEFT_BTN_CUSTOM_THEME = "自定义主题";
+        public static final String LEFT_BTN_SELECT_WORKSPACE = "选择主目录";
     }
 
     public static class Path {
@@ -60,11 +62,14 @@ public final class AppConst {
         public static final String PAPER_PEN = "📝";
         public static final String BOOKS = "📚"; // 📚
         public static final String OPENED_BOOK = "📖";
+        public static final String PALETTE = "🎨";
+        public static final String FOLDER = "📂";
     }
 
     public static class Style {
         public static final String CENTER_TABLE_PLACEHOLDER = "-fx-font-size: 16px; -fx-text-fill: #9ca3af; -fx-font-weight: 500; -fx-padding: 0 0 100 0; -fx-alignment: CENTER;";
         public static final String RIGHT_VBOX = "-fx-background-color: #f8fafc;";
         public static final String BOTTOM_STATUS_BAR = "-fx-background-color: #e9ecef; -fx-border-color: #ced4da; -fx-border-width: 1 0 0 0;";
+        public static final String LEFT_MENU_GROUP_TITLE = "section-title";
     }
 }

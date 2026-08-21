@@ -34,64 +34,49 @@ public class LeftNodeGenerator implements NodeGenerator {
 
     @Override
     public Node getNode(Stage primaryStage) {
+        // Group1 - Manage Tools
+        Label group1manageTools = new Label("管理工具");
+        group1manageTools.getStyleClass().add(AppConst.Style.LEFT_MENU_GROUP_TITLE);
+
+        Button btnInputSchemaManage = createNavItem(AppConst.Emoji.KEYBOARD, AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE,
+                () -> InputSchemaGridNodeGenerator.getInstance().switchTabBtn(primaryStage));
+        Button btnDictionaryManage = createNavItem(AppConst.Emoji.BOOKS, AppConst.UserInterface.LEFT_BTN_DICTIONARY_MANAGE,
+                () -> DictionaryGridNodeGenerator.getInstance().switchTabBtn(primaryStage));
+        Button btnDictionaryEntryManage = createNavItem(AppConst.Emoji.OPENED_BOOK, AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE,
+                () -> DictionaryEntryGridNodeGenerator.getInstance().switchTabBtn(primaryStage));
+
+        // Group2 - Settings
+        Label group2settings = new Label("设置");
+        group2settings.getStyleClass().add(AppConst.Style.LEFT_MENU_GROUP_TITLE);
+
+        Button btnSetTheme = createNavItem(AppConst.Emoji.PALETTE, AppConst.UserInterface.LEFT_BTN_CUSTOM_THEME,
+                () -> this.openThemeSettings(primaryStage));
+        Button btnChooseWorkspace = createNavItem(AppConst.Emoji.FOLDER, AppConst.UserInterface.LEFT_BTN_SELECT_WORKSPACE, null);
+        btnChooseWorkspace.setOnAction(DirectoryChooser.getActionEventEventHandler(primaryStage));
+
+        // 创建容器，并将所有组件放入
         VBox sidebarContainer = new VBox();
-//        Label tabTitle = new Label("RimeDictManager2");
-//        tabTitle.getStyleClass().add("tab-title");
-//        sidebarContainer.getChildren().add(tabTitle);
-
-        // 分组标题
-        Label labelManage = new Label("管理工具");
-        labelManage.getStyleClass().add("section-title");
-        sidebarContainer.getChildren().add(labelManage);
-
-        Button btnISManage = createNavItem(AppConst.Emoji.KEYBOARD, AppConst.UserInterface.LEFT_BTN_INPUT_SCHAMA_MANAGE,
-                () -> switchTabBtn(primaryStage, InputSchemaGridNodeGenerator.getInstance()));
-        Button btnDictManage = createNavItem(AppConst.Emoji.BOOKS, AppConst.UserInterface.LEFT_BTN_DICTIONARY_MANAGE,
-                () -> switchTabBtn(primaryStage, DictionaryGridNodeGenerator.getInstance()));
-        Button btnDEManage = createNavItem(AppConst.Emoji.OPENED_BOOK, AppConst.UserInterface.LEFT_BTN_DICTIONARY_ENTRY_MANAGE,
-                () -> switchTabBtn(primaryStage, DictionaryEntryGridNodeGenerator.getInstance()));
-
-        AppContext.getInstance().set(AppConst.AppContextConst.BTN_INPUT_SCHEMA_MANAGE, btnISManage);
-        AppContext.getInstance().set(AppConst.AppContextConst.BTN_DICTIONARY_MANAGE, btnDictManage);
-        AppContext.getInstance().set(AppConst.AppContextConst.BTN_DICTIONARY_ENTRY_MANAGE, btnDEManage);
-
-        // ⭐ 调用 createNavItem() 创建按钮
-        sidebarContainer.getChildren().addAll(btnISManage, btnDictManage, btnDEManage);
-
-        // 分组标题
-        Label title2 = new Label("设置");
-        title2.getStyleClass().add("section-title");
-        sidebarContainer.getChildren().add(title2);
-
-        // 底部设置
-        Button themeBtn = createNavItem("🎨", "自定义主题", () -> openThemeSettings(primaryStage));
-        Button btnChooseRimeHomeDir = createNavItem("📂", "选择主目录", () -> DirectoryChooser.getActionEventEventHandler(primaryStage));
-        btnChooseRimeHomeDir.setOnAction(DirectoryChooser.getActionEventEventHandler(primaryStage));
-        sidebarContainer.getChildren().addAll(btnChooseRimeHomeDir, themeBtn);
-//        sidebarContainer.getChildren().addAll(themeBtn, createNavItem("⚙", "设置", null)); // ⚙️
+        sidebarContainer.getChildren().addAll(group1manageTools,
+                btnInputSchemaManage, btnDictionaryManage, btnDictionaryEntryManage,
+                group2settings,
+                btnChooseWorkspace, btnSetTheme);
+//        sidebarContainer.getChildren().addAll(btnSetTheme, createNavItem("⚙", "设置", null)); // ⚙️
         sidebarContainer.setPrefWidth(220);
         sidebarContainer.setSpacing(2);
         sidebarContainer.setPadding(new Insets(0, 12, 12, 12));
-        AppContext.getInstance().set(AppConst.AppContextConst.NODE_LEFT_SIDEBAR, sidebarContainer);
-        return sidebarContainer;
-    }
 
-    private void switchTabBtn(Stage primaryStage, CenterNodeGenerator generator) {
-        Node node = generator.getNode(primaryStage);
-        String tabName = generator.getTableName();
-        StackPane center = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
-        ObservableList<Node> children = center.getChildren();
-        children.clear();
-        children.add(node);
-        Label tabTitle = new Label(tabName);
-        tabTitle.getStyleClass().add("tab-title");
-        VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
-        left.getChildren().set(0, tabTitle);
+        // 将相关组件置入缓存，方便其他位置使用
+        AppContext context = AppContext.getInstance();
+        context.set(AppConst.AppContextConst.NODE_LEFT_SIDEBAR, sidebarContainer);
+        context.set(AppConst.AppContextConst.BTN_INPUT_SCHEMA_MANAGE, btnInputSchemaManage);
+        context.set(AppConst.AppContextConst.BTN_DICTIONARY_MANAGE, btnDictionaryManage);
+        context.set(AppConst.AppContextConst.BTN_DICTIONARY_ENTRY_MANAGE, btnDictionaryEntryManage);
+
+        return sidebarContainer;
     }
 
     private void openThemeSettings(Stage primaryStage) {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ftwrjh/rimedictmanager2/application/settings-view.fxml"));
             Parent root = loader.load();
 
@@ -99,14 +84,15 @@ public class LeftNodeGenerator implements NodeGenerator {
             SettingsController controller = loader.getController();
             controller.setRoot(primaryStage.getScene().getRoot());
 
-            StackPane center = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
+            AppContext context = AppContext.getInstance();
+            StackPane center = context.getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
             ObservableList<Node> children = center.getChildren();
             children.clear();
             children.add(root);
             root.getStyleClass().add("dict-table");
             Label tabTitle = new Label("自定义主题");
             tabTitle.getStyleClass().add("tab-title");
-            VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
+            VBox left = context.getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
             left.getChildren().set(0, tabTitle);
         } catch (Exception e) {
             log.error("页面加载异常", e);

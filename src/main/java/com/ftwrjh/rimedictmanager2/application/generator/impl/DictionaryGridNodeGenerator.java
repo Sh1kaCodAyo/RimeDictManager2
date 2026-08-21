@@ -93,14 +93,15 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
     }
 
     private void loadDictionaryEntryListByDictionary(TableRow<Dictionary> row) throws IOException {
+        AppContext context = AppContext.getInstance();
         Dictionary dictionary = row.getItem();
-        ObservableList<DictionaryEntry> observableList = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
+        ObservableList<DictionaryEntry> observableList = context.getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY_ENTRY, ObservableList.class);
         observableList.clear();
 
 
         log.info(dictionary.toString()); // id = wubi86_jidian_user.dict.yaml
 
-        String workspacePath = AppContext.getInstance().getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
+        String workspacePath = context.getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
         String dictionaryId = dictionary.getDictionaryId();
         String dictionaryFilePathStr = workspacePath + File.separator + dictionaryId;
 
@@ -134,7 +135,7 @@ public class DictionaryGridNodeGenerator extends CenterNodeGenerator {
         }
 
         // fire按钮3
-        AppContext.getInstance().getTyped(AppConst.AppContextConst.BTN_DICTIONARY_ENTRY_MANAGE, Button.class).fire();
+        context.getTyped(AppConst.AppContextConst.BTN_DICTIONARY_ENTRY_MANAGE, Button.class).fire();
     }
 
     @Override

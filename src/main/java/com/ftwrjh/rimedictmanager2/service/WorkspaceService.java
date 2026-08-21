@@ -47,7 +47,8 @@ public class WorkspaceService {
     public static void load(File workspace) {
         String workspacePath = workspace.getAbsolutePath();
         String msg = "Rime主目录: " + workspacePath;
-        AppContext.getInstance().set(AppConst.AppContextConst.ENV_RIME_HOME_DIR, workspacePath);
+        AppContext context = AppContext.getInstance();
+        context.set(AppConst.AppContextConst.ENV_RIME_HOME_DIR, workspacePath);
         log.info(msg);
         BottomNodeGenerator.getInstance().setStatusLeft(msg);
 
@@ -99,10 +100,10 @@ public class WorkspaceService {
                     })
                     .toList();
 
-            ObservableList<InputSchema> list = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
+            ObservableList<InputSchema> list = context.getTyped(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, ObservableList.class);
             list.clear();
             list.addAll(collect);
-            AppContext.getInstance().set(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, list);
+            context.set(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, list);
 
             // update user config
             com.ftwrjh.rimedictmanager2.env.AppConfig.getInstance().setProperty(AppConst.AppConfigConst.RIME_HOME_DIR, workspacePath);

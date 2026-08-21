@@ -31,10 +31,11 @@ public class MainApplication extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        AppContext.getInstance().set(AppConst.AppContextConst.OBJ_YAML, new Yaml());
-        AppContext.getInstance().set(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, new SimpleListProperty<>(FXCollections.observableArrayList()));
-        AppContext.getInstance().set(AppConst.AppContextConst.TABLE_DATA_DICTIONARY, new SimpleListProperty<>(FXCollections.observableArrayList()));
-        AppContext.getInstance().set(AppConst.AppContextConst.TABLE_DATA_DICTIONARY_ENTRY, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        AppContext context = AppContext.getInstance();
+        context.set(AppConst.AppContextConst.OBJ_YAML, new Yaml());
+        context.set(AppConst.AppContextConst.TABLE_DATA_INPUT_SCHEMA, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        context.set(AppConst.AppContextConst.TABLE_DATA_DICTIONARY, new SimpleListProperty<>(FXCollections.observableArrayList()));
+        context.set(AppConst.AppContextConst.TABLE_DATA_DICTIONARY_ENTRY, new SimpleListProperty<>(FXCollections.observableArrayList()));
     }
 
     @Override

@@ -106,11 +106,12 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         InputSchema inputSchema = row.getItem();
         String inputSchemaId = inputSchema.getInputSchemaId();
         String patternStr = "^" + inputSchemaId + ".*\\.dict\\.yaml$";
+        AppContext context = AppContext.getInstance();
 
-        ObservableList<Dictionary> observableList = AppContext.getInstance().getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY, ObservableList.class);
+        ObservableList<Dictionary> observableList = context.getTyped(AppConst.AppContextConst.TABLE_DATA_DICTIONARY, ObservableList.class);
         observableList.clear();
 
-        String workspacePath = AppContext.getInstance().getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
+        String workspacePath = context.getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
         File workspace = new File(workspacePath);
         File[] files = workspace.listFiles();
         List<String> dictionarysByInputSchema = Arrays.stream(files).map(File::getName).filter(name -> name.matches(patternStr)).toList();
@@ -133,7 +134,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         this.checkIsActive(observableList);
 
         // fire按钮2
-        AppContext.getInstance().getTyped(AppConst.AppContextConst.BTN_DICTIONARY_MANAGE, Button.class).fire();
+        context.getTyped(AppConst.AppContextConst.BTN_DICTIONARY_MANAGE, Button.class).fire();
     }
 
     private String removePrefixSuffix(String str, String prefix, String suffix) {
@@ -152,6 +153,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         if (CollectionUtils.isEmpty(dictionaryList)) {
             return;
         }
+        AppContext context = AppContext.getInstance();
         // 1. 单独处理基本词库，并读取其中的活动词库列表
         // 1.1 排序列表，并取出第一个词库即基本词库
         dictionaryList.sort(Comparator
@@ -160,7 +162,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         );
         Dictionary baseDict = dictionaryList.get(0);
         baseDict.setActive(true);
-        final String rimeHomeDir = AppContext.getInstance().getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
+        final String rimeHomeDir = context.getTyped(AppConst.AppContextConst.ENV_RIME_HOME_DIR, String.class);
         final String fileFullPath = rimeHomeDir + File.separator + baseDict.getDictionaryId();
         Path baseDictPath = Paths.get(fileFullPath);
 
@@ -192,7 +194,7 @@ public class InputSchemaGridNodeGenerator extends CenterNodeGenerator {
         String content = Files.lines(baseDictPath).skip(startLine).limit(endLine - startLine - 1).collect(Collectors.joining(System.lineSeparator()));
 
         // 1.5 读取截取到的yaml配置
-        Yaml yaml = AppContext.getInstance().getTyped(AppConst.AppContextConst.OBJ_YAML, Yaml.class);
+        Yaml yaml = context.getTyped(AppConst.AppContextConst.OBJ_YAML, Yaml.class);
         Map<String, Object> load = yaml.load(content);
         JSONObject json = new JSONObject(load);
         JSONArray jsonArray = json.getJSONArray("import_tables");
