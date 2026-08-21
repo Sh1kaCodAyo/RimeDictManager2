@@ -24,9 +24,8 @@
     /* 菜单项背景色-悬浮 */
     /*-item-bg-hover: #294f88;*/
     -item-bg-hover: #3d6e87;
-    /* 文字-悬浮 */
-    /*-text-hover: #d52323;*/
     -text-hover: #ececec;
+    -border-color: #294f88;
 
     -shadow-color: rgba(0, 0, 0, 0.1);
 }

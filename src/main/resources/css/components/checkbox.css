@@ -21,12 +21,12 @@
 }
 
 .check-box .box {
-    -fx-border-color: #888;
+    -fx-border-color: -border-color;
     -fx-border-radius: 3px;
     -fx-background-radius: 3px;
 }
 
 .check-box:selected .box {
-    -fx-border-color: #2196F3;
+    -fx-border-color: -border-color;
     -fx-background-color: #E3F2FD;
 }

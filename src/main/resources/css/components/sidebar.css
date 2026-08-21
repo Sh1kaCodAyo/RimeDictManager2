@@ -48,7 +48,7 @@
 /* ⭐ 选中效果 */
 .button.nav-item:selected {
     /*-fx-background-color: -item-bg-hover;*/
-    -fx-border-color: -item-bg-hover;
+    -fx-border-color: -border-color;
     -fx-border-width: 0 0 0 3;
     -fx-background-radius: 6 0 0 6;
 }
@@ -60,7 +60,7 @@
 
 /* 选中时的左侧色条 */
 .nav-item:selected .left-bar {
-    -fx-background-color: #294f88;
+    -fx-background-color: -item-bg-hover;
     -fx-min-width: 3;
     -fx-max-width: 3;
     -fx-pref-width: 3;
