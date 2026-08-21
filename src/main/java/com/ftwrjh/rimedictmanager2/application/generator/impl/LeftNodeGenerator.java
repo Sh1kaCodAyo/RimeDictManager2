@@ -77,7 +77,16 @@ public class LeftNodeGenerator implements NodeGenerator {
     }
 
     private void switchTabBtn(Stage primaryStage, CenterNodeGenerator generator) {
-        this.switchTab(generator.getNode(primaryStage), generator.getTableName());
+        Node node = generator.getNode(primaryStage);
+        String tabName = generator.getTableName();
+        StackPane center = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
+        ObservableList<Node> children = center.getChildren();
+        children.clear();
+        children.add(node);
+        Label tabTitle = new Label(tabName);
+        tabTitle.getStyleClass().add("tab-title");
+        VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
+        left.getChildren().set(0, tabTitle);
     }
 
     private void openThemeSettings(Stage primaryStage) {
@@ -102,17 +111,6 @@ public class LeftNodeGenerator implements NodeGenerator {
         } catch (Exception e) {
             log.error("页面加载异常", e);
         }
-    }
-
-    private void switchTab(Node node, String tabName) {
-        StackPane center = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_CENTER_STACK_PANE, StackPane.class);
-        ObservableList<Node> children = center.getChildren();
-        children.clear();
-        children.add(node);
-        Label tabTitle = new Label(tabName);
-        tabTitle.getStyleClass().add("tab-title");
-        VBox left = AppContext.getInstance().getTyped(AppConst.AppContextConst.NODE_LEFT_TOP_TITLE, VBox.class);
-        left.getChildren().set(0, tabTitle);
     }
 
     private Button createNavItem(String icon, String text, Runnable onAction) {
