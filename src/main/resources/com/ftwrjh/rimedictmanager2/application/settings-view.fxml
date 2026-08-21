@@ -6,7 +6,7 @@
 
 <VBox alignment="TOP_CENTER" spacing="15"
       xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.ftwrjh.rimedictmanager2.service.SettingsController">
+      fx:controller="com.ftwrjh.rimedictmanager2.service.ThemeController">
 
     <padding>
         <Insets bottom="30" left="30" right="30" top="30"/>
@@ -25,7 +25,7 @@
     <ColorPicker fx:id="borderColorPicker" prefWidth="200"/>
 
     <HBox spacing="10" alignment="CENTER" style="-fx-translate-y: 20px;">
-        <Button fx:id="applyBtn" styleClass="actioncenter-button" text="✅ 应用主题"/>
-        <Button fx:id="resetBtn" styleClass="actioncenter-button" text="↩️ 恢复默认"/>
+        <Button fx:id="applyBtn" styleClass="actioncenter-button" text="✅ 应用"/>
+        <Button fx:id="resetBtn" styleClass="actioncenter-button" text="↩️ 取消"/>
     </HBox>
 </VBox>

@@ -23,6 +23,9 @@
 .menu-bar .menu:hover {
     -fx-background-color: -item-bg-hover;
 }
+.menu-bar:hover .text {
+    /*-fx-fill: -text-hover;*/
+}
 
 .menu-bar .menu:showing {
     -fx-background-color: -item-bg-hover;

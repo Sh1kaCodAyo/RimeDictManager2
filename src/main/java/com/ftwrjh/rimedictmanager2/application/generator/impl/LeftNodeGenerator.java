@@ -4,7 +4,7 @@ import com.ftwrjh.rimedictmanager2.application.generator.NodeGenerator;
 import com.ftwrjh.rimedictmanager2.data.constant.AppConst;
 import com.ftwrjh.rimedictmanager2.env.AppContext;
 import com.ftwrjh.rimedictmanager2.service.DirectoryChooser;
-import com.ftwrjh.rimedictmanager2.service.SettingsController;
+import com.ftwrjh.rimedictmanager2.service.ThemeController;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXMLLoader;
@@ -81,7 +81,7 @@ public class LeftNodeGenerator implements NodeGenerator {
             Parent root = loader.load();
 
             // 传入主界面的根节点，以便实时预览
-            SettingsController controller = loader.getController();
+            ThemeController controller = loader.getController();
             controller.setRoot(primaryStage.getScene().getRoot());
 
             AppContext context = AppContext.getInstance();

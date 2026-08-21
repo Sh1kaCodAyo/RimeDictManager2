@@ -14,7 +14,7 @@ import lombok.Setter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SettingsController implements Initializable {
+public class ThemeController implements Initializable {
     @FXML
     private ColorPicker bgColorPicker;
     @FXML
@@ -40,7 +40,7 @@ public class SettingsController implements Initializable {
         borderColorPicker.setValue(Color.web(config.getProperty(AppConst.AppConfigConst.COLOR_BORDER_HEX, AppConst.Style.INIT_RGB_THEME_BORDER)));
 
         // 应用按钮
-        applyBtn.setOnAction(e -> this.applyTheme());
+        applyBtn.setOnAction(e -> this.applyTheme(1));
 
         // 重置按钮
         resetBtn.setOnAction(e -> this.resetTheme());
@@ -48,12 +48,13 @@ public class SettingsController implements Initializable {
         // 实时预览（可选）
         bgColorPicker.setOnAction(e -> this.previewTheme());
         textColorPicker.setOnAction(e -> this.previewTheme());
+        borderColorPicker.setOnAction(e -> this.previewTheme());
     }
 
-    private void applyTheme() {
-        String bgHex = this.toHex(bgColorPicker.getValue());
-        String textHex = this.toHex(textColorPicker.getValue());
-        String borderHex = this.toHex(borderColorPicker.getValue());
+    private void applyTheme(int i) {
+        String bgHex = ColorUtils.toHex(bgColorPicker.getValue());
+        String textHex = ColorUtils.toHex(textColorPicker.getValue());
+        String borderHex = ColorUtils.toHex(borderColorPicker.getValue());
 
         // 应用样式
         if (root != null) {
@@ -67,34 +68,35 @@ public class SettingsController implements Initializable {
         config.setProperty(AppConst.AppConfigConst.COLOR_BORDER_HEX, borderHex);
         config.save();
 
-        this.showAlert("✅ 主题已保存", "新主题已应用并保存");
+        if (i == 1) {
+            this.showAlert("✅ 主题已保存", "新主题已应用并保存");
+        } else if (i == 0) {
+            this.showAlert("✅ 主题已恢复", "已放弃保存并恢复主题");
+        }
     }
 
     private void resetTheme() {
         // 恢复默认颜色
-        bgColorPicker.setValue(Color.web(AppConst.Style.INIT_RGB_THEME_BG));
-        textColorPicker.setValue(Color.web(AppConst.Style.INIT_RGB_THEME_TEXT));
-        borderColorPicker.setValue(Color.web(AppConst.Style.INIT_RGB_THEME_BORDER));
-        this.applyTheme();
+        AppConfig config = AppConfig.getInstance();
+        bgColorPicker.setValue(Color.web(config.getProperty(AppConst.AppConfigConst.COLOR_BG_HEX, AppConst.Style.INIT_RGB_THEME_BG)));
+        textColorPicker.setValue(Color.web(config.getProperty(AppConst.AppConfigConst.COLOR_TEXT_HEX, AppConst.Style.INIT_RGB_THEME_TEXT)));
+        borderColorPicker.setValue(Color.web(config.getProperty(AppConst.AppConfigConst.COLOR_BORDER_HEX, AppConst.Style.INIT_RGB_THEME_BORDER)));
+
+//        bgColorPicker.setValue(Color.web(AppConst.Style.INIT_RGB_THEME_BG));
+//        textColorPicker.setValue(Color.web(AppConst.Style.INIT_RGB_THEME_TEXT));
+//        borderColorPicker.setValue(Color.web(AppConst.Style.INIT_RGB_THEME_BORDER));
+        this.applyTheme(0);
     }
 
     private void previewTheme() {
         // 实时预览（不保存）
-        String bgHex = this.toHex(bgColorPicker.getValue());
-        String textHex = this.toHex(textColorPicker.getValue());
-        String borderHex = this.toHex(borderColorPicker.getValue());
+        String bgHex = ColorUtils.toHex(bgColorPicker.getValue());
+        String textHex = ColorUtils.toHex(textColorPicker.getValue());
+        String borderHex = ColorUtils.toHex(borderColorPicker.getValue());
 
         if (root != null) {
             root.setStyle(String.format(AppConst.Style.THEME_PREVIRE, bgHex, textHex, borderHex));
         }
-    }
-
-    private String toHex(Color color) {
-        return String.format("#%02X%02X%02X",
-                (int) (color.getRed() * 255),
-                (int) (color.getGreen() * 255),
-                (int) (color.getBlue() * 255)
-        );
     }
 
     private void showAlert(String title, String content) {
